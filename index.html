@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cabaran Sifir Hebat!</title>
+    <!-- Pautan ke fail CSS luaran -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="container">
+        <!-- PAGE PENDAFTARAN -->
+        <div id="register-page">
+            <h1>🚀 Cabaran Sifir Hebat</h1>
+            <p>Masukkan nama dan e-mel anda untuk mula merekod pencapaian sifir!</p>
+            <form id="register-form" onsubmit="startApp(event)">
+                <div class="form-group">
+                    <label for="nama">Nama Pelajar:</label>
+                    <input type="text" id="nama" required placeholder="Cth: Ali bin Abu">
+                </div>
+                <div class="form-group">
+                    <label for="email">E-mel:</label>
+                    <input type="email" id="email" required placeholder="Cth: ali@email.com">
+                </div>
+                <button type="submit">Mula Sekarang!</button>
+            </form>
+        </div>
+
+        <!-- PAGE PEMILIHAN LEVEL -->
+        <div id="level-page" class="hidden">
+            <h2 id="welcome-msg">Pilih Level Anda</h2>
+            <p>Sila pilih tahap kesukaran sifir:</p>
+            <div class="level-grid">
+                <button class="level-btn" onclick="selectLevel(1)">Level 1 (Sifir 1 - 4)</button>
+                <button class="level-btn" onclick="selectLevel(2)">Level 2 (Sifir 5 - 8)</button>
+                <button class="level-btn" onclick="selectLevel(3)">Level 3 (Sifir 9 - 12)</button>
+            </div>
+        </div>
+
+        <!-- PAGE PERMAINAN / KUIZ -->
+        <div id="game-page" class="hidden">
+            <div class="game-header">
+                <span id="current-stage-title">Sifir X</span>
+                <span class="timer">⏳ <span id="time-left">60</span>s</span>
+            </div>
+            <p id="attempt-info">Percubaan ke-1</p>
+            <div class="question-box" id="question-text">2 × 3 = ?</div>
+            <form id="answer-form" onsubmit="checkAnswer(event)">
+                <div class="form-group">
+                    <input type="number" id="user-answer" required autocomplete="off" placeholder="Jawapan...">
+                </div>
+                <button type="submit">Hantar Jawapan</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- MODAL POPUP KEPUTUSAN -->
+    <div id="result-modal" class="modal hidden">
+        <div class="modal-content">
+            <h2>Tahniah! 🎉</h2>
+            <p>Anda telah selesai menjawab semua sifir dalam level ini.</p>
+            <div id="modal-results-list"></div>
+            <button onclick="sendResultToEmail()">📧 Hantar Keputusan ke E-mel</button>
+            <button class="btn-secondary" onclick="closeModalAndReturn()">Pilih Level Lain</button>
+        </div>
+    </div>
+
+    <!-- Pautan ke fail JavaScript luaran -->
+    <script src="script.js"></script>
+</body>
+</html>
