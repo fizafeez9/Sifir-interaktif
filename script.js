@@ -21,45 +21,14 @@ let levelRecords = {};
 let timerInterval = null;
 let timeLeft = 60;
 
-// Fungsi untuk memulakan aplikasi, simpan data, mainkan muzik & papar butang kawalan muzik
 function startApp(e) {
     e.preventDefault();
     studentData.name = document.getElementById('nama').value;
     studentData.email = document.getElementById('email').value;
 
-    // Mula mainkan muzik latar
-    let bgMusic = document.getElementById('bg-music');
-    bgMusic.volume = 0.4; // Tetapkan tahap suara (40%)
-    bgMusic.play().catch(error => {
-        console.log("Autoplay disekat oleh pelayar:", error);
-    });
-
-    // Paparkan butang kawalan muzik di penjuru skrin
-    document.getElementById('music-control').style.display = 'flex';
-
     document.getElementById('welcome-msg').innerText = `Hai, ${studentData.name}!`;
     document.getElementById('register-page').classList.add('hidden');
     document.getElementById('level-page').classList.remove('hidden');
-}
-
-// Fungsi untuk pasang/tutup (Toggle) muzik apabila pelajar tekan butang di penjuru skrin
-let isMusicPlaying = true;
-function toggleMusic() {
-    let bgMusic = document.getElementById('bg-music');
-    let musicIcon = document.getElementById('music-icon');
-    let musicText = document.getElementById('music-text');
-
-    if (isMusicPlaying) {
-        bgMusic.pause();
-        musicIcon.innerText = "🔇";
-        musicText.innerText = "Muzik: Tutup";
-        isMusicPlaying = false;
-    } else {
-        bgMusic.play();
-        musicIcon.innerText = "🎵";
-        musicText.innerText = "Muzik: Pasang";
-        isMusicPlaying = true;
-    }
 }
 
 function selectLevel(lvl) {
@@ -103,6 +72,7 @@ function startTimer() {
         document.getElementById('time-left').innerText = timeLeft;
         if (timeLeft <= 0) {
             clearInterval(timerInterval);
+            playWrongSound();
             handleFailure("Masa tamat! Sifir ini dikira gagal dan perlu dimulakan semula.");
         }
     }, 1000);
@@ -135,11 +105,31 @@ function checkAnswer(e) {
     let correctAns = currentTable * currentMultiplierIndex;
 
     if (userAns === correctAns) {
+        playCorrectSound(); // Mainkan bunyi betul
         currentMultiplierIndex++;
         nextQuestion();
     } else {
         clearInterval(timerInterval);
+        playWrongSound(); // Mainkan bunyi salah
         handleFailure(`Jawapan salah! Jawapan betul ialah ${correctAns}. Sifir ${currentTable} bermula semula.`);
+    }
+}
+
+// Fungsi mainkan bunyi betul
+function playCorrectSound() {
+    let sound = document.getElementById('sound-correct');
+    if (sound) {
+        sound.currentTime = 0;
+        sound.play().catch(e => console.log("Audio disekat:", e));
+    }
+}
+
+// Fungsi mainkan bunyi salah
+function playWrongSound() {
+    let sound = document.getElementById('sound-wrong');
+    if (sound) {
+        sound.currentTime = 0;
+        sound.play().catch(e => console.log("Audio disekat:", e));
     }
 }
 
@@ -166,7 +156,7 @@ function showLevelResultModal() {
     document.getElementById('result-modal').classList.remove('hidden');
 }
 
-// Fungsi Simulasi Penghantaran E-mel
+// Simulasi Hantar E-mel
 function sendResultToEmail() {
     let summaryText = `Keputusan Sifir Level ${currentLevel} untuk ${studentData.name} (${studentData.email}):\n`;
     activeLevelTables.forEach(tbl => {
