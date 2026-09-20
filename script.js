@@ -21,14 +21,45 @@ let levelRecords = {};
 let timerInterval = null;
 let timeLeft = 60;
 
+// Fungsi untuk memulakan aplikasi, simpan data, mainkan muzik & papar butang kawalan muzik
 function startApp(e) {
     e.preventDefault();
     studentData.name = document.getElementById('nama').value;
     studentData.email = document.getElementById('email').value;
 
+    // Mula mainkan muzik latar
+    let bgMusic = document.getElementById('bg-music');
+    bgMusic.volume = 0.4; // Tetapkan tahap suara (40%)
+    bgMusic.play().catch(error => {
+        console.log("Autoplay disekat oleh pelayar:", error);
+    });
+
+    // Paparkan butang kawalan muzik di penjuru skrin
+    document.getElementById('music-control').style.display = 'flex';
+
     document.getElementById('welcome-msg').innerText = `Hai, ${studentData.name}!`;
     document.getElementById('register-page').classList.add('hidden');
     document.getElementById('level-page').classList.remove('hidden');
+}
+
+// Fungsi untuk pasang/tutup (Toggle) muzik apabila pelajar tekan butang di penjuru skrin
+let isMusicPlaying = true;
+function toggleMusic() {
+    let bgMusic = document.getElementById('bg-music');
+    let musicIcon = document.getElementById('music-icon');
+    let musicText = document.getElementById('music-text');
+
+    if (isMusicPlaying) {
+        bgMusic.pause();
+        musicIcon.innerText = "🔇";
+        musicText.innerText = "Muzik: Tutup";
+        isMusicPlaying = false;
+    } else {
+        bgMusic.play();
+        musicIcon.innerText = "🎵";
+        musicText.innerText = "Muzik: Pasang";
+        isMusicPlaying = true;
+    }
 }
 
 function selectLevel(lvl) {
@@ -135,15 +166,18 @@ function showLevelResultModal() {
     document.getElementById('result-modal').classList.remove('hidden');
 }
 
+// Fungsi hantar keputusan sebenar menggunakan aplikasi e-mel peranti (mailto:)
 function sendResultToEmail() {
-    let summaryText = `Keputusan Sifir Level ${currentLevel} untuk ${studentData.name} (${studentData.email}):\n`;
+    let summaryText = `Keputusan Sifir Level ${currentLevel} untuk ${studentData.name}:%0A`;
     activeLevelTables.forEach(tbl => {
         let rec = levelRecords[tbl];
-        summaryText += `- Sifir ${tbl}: ${rec.status}, Percubaan: ${rec.attempts}\n`;
+        summaryText += `- Sifir ${tbl}: ${rec.status}, Percubaan: ${rec.attempts} kali%0A`;
     });
 
-    console.log(summaryText);
-    alert(`Keputusan berjaya dihantar ke e-mel ${studentData.email}! (Simulasi berjaya)`);
+    let subject = encodeURIComponent(`Keputusan Sifir Level ${currentLevel} - ${studentData.name}`);
+    let body = encodeURIComponent(`Hai Cikgu,%0A%0ABerikut adalah keputusan kuiz sifir saya:%0A%0ANama: ${studentData.name}%0AE-mel: ${studentData.email}%0A%0A${summaryText}%0ATerima kasih!`);
+
+    window.location.href = `mailto:${studentData.email}?subject=${subject}&body=${body}`;
 }
 
 function closeModalAndReturn() {
