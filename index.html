@@ -14,6 +14,8 @@
         <div id="register-page">
             <h1>🚀 Cabaran Sifir Hebat</h1>
             <p>Masukkan nama dan e-mel anda untuk mula merekod pencapaian sifir!</p>
+            <p style="color: #ff6b6b; font-weight: bold; margin-bottom: 5px;">AMARAN KERAS!</p>
+            <p style="margin-left: 20px;">Setiap sifir perlu dijawab 60saat sahaja.Anda cepat anda hebat!</p>
             <form id="register-form" onsubmit="startApp(event)">
                 <div class="form-group">
                     <label for="nama">Nama Pelajar:</label>
@@ -65,6 +67,17 @@
             <button class="btn-secondary" onclick="closeModalAndReturn()">Pilih Level Lain</button>
         </div>
     </div>
+
+    <!-- KAWALAN MUZIK -->
+    <div id="music-control" style="position: fixed; top: 15px; right: 15px; z-index: 999; background: white; padding: 8px 12px; border-radius: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); display: none; align-items: center; gap: 8px; cursor: pointer;" onclick="toggleMusic()">
+        <span id="music-icon">🎵</span> <span id="music-text" style="font-size: 12px; font-weight: bold;">Muzik: Perlahankan</span>
+    </div>
+
+    <!-- Fail Audio Muzik Latar -->
+    <audio id="bg-music" loop>
+        <source src="https://actions.google.com/sounds/v1/ambiences/play_area.ogg" type="audio/ogg">
+        Your browser does not support the audio element.
+    </audio>
 
     <!-- Pautan ke fail JavaScript luaran -->
     <script src="script.js"></script>
