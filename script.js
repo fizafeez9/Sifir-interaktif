@@ -166,18 +166,16 @@ function showLevelResultModal() {
     document.getElementById('result-modal').classList.remove('hidden');
 }
 
-// Fungsi hantar keputusan sebenar menggunakan aplikasi e-mel peranti (mailto:)
+// Fungsi Simulasi Penghantaran E-mel
 function sendResultToEmail() {
-    let summaryText = `Keputusan Sifir Level ${currentLevel} untuk ${studentData.name}:%0A`;
+    let summaryText = `Keputusan Sifir Level ${currentLevel} untuk ${studentData.name} (${studentData.email}):\n`;
     activeLevelTables.forEach(tbl => {
         let rec = levelRecords[tbl];
-        summaryText += `- Sifir ${tbl}: ${rec.status}, Percubaan: ${rec.attempts} kali%0A`;
+        summaryText += `- Sifir ${tbl}: ${rec.status}, Percubaan: ${rec.attempts}\n`;
     });
 
-    let subject = encodeURIComponent(`Keputusan Sifir Level ${currentLevel} - ${studentData.name}`);
-    let body = encodeURIComponent(`Hai Cikgu,%0A%0ABerikut adalah keputusan kuiz sifir saya:%0A%0ANama: ${studentData.name}%0AE-mel: ${studentData.email}%0A%0A${summaryText}%0ATerima kasih!`);
-
-    window.location.href = `mailto:${studentData.email}?subject=${subject}&body=${body}`;
+    console.log(summaryText);
+    alert(`Keputusan berjaya dihantar ke e-mel ${studentData.email}! (Simulasi berjaya)`);
 }
 
 function closeModalAndReturn() {
