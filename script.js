@@ -13,15 +13,14 @@ const levelsData = {
 let activeLevelTables = [];
 let currentTable = 1;
 
-// Rekod prestasi untuk level semasa: 
-// Simpan senarai rekod: { "Sifir_Multiplier": { attempts: jumlah_cubaan, timeSpent: masa_diambil } }
-let questionRecords = {};
-let levelSummary = {}; // Untuk simpan status sifir dan masa setiap soalan
+// Rekod jumlah masa keseluruhan bagi setiap sifir: { sifirNum: jumlah_saat }
+let tableTotalTime = {};
 
 // Pemasa per soalan
 let questionTimer = null;
 let secondsLeftPerQuestion = 15;
-let elapsedTimeForCurrentQuestion = 0; // Mengira berapa saat masa digunakan
+let elapsedTimeForCurrentQuestion = 0; 
+let currentTableAccumulatedTime = 0; // Mengumpul jumlah masa untuk sifir semasa
 const TIME_LIMIT_PER_QUESTION = 15; 
 
 function startApp(e) {
@@ -38,8 +37,7 @@ function selectLevel(lvl) {
     currentLevel = lvl;
     activeLevelTables = levelsData[lvl];
     currentTableIndex = 0;
-    questionRecords = {};
-    levelSummary = {};
+    tableTotalTime = {};
 
     document.getElementById('level-page').classList.add('hidden');
     document.getElementById('game-page').classList.remove('hidden');
@@ -50,6 +48,7 @@ function selectLevel(lvl) {
 function initTableRound() {
     currentTable = activeLevelTables[currentTableIndex];
     currentMultiplierIndex = 1;
+    currentTableAccumulatedTime = 0; // Reset masa terkumpul untuk sifir baru
 
     document.getElementById('current-stage-title').innerText = `Sifir ${currentTable}`;
     nextQuestion();
@@ -71,7 +70,9 @@ function startQuestionTimer() {
             clearInterval(questionTimer);
             playWrongSound();
             
-            // Amaran masa habis, tambah 15 saat lagi dan kekal di soalan yang sama
+            // Tambah masa yang telah guna ke dalam jumlah terkumpul sifir ini
+            currentTableAccumulatedTime += elapsedTimeForCurrentQuestion;
+            
             alert(`⚠️ AMARAN: Anda telah melebihi 15 saat untuk soalan ini! 15 saat tambahan diberikan. Sila cuba lagi.`);
             startQuestionTimer(); // Sambung semula pemasa
         }
@@ -82,6 +83,9 @@ function nextQuestion() {
     if (currentMultiplierIndex > 12) {
         clearInterval(questionTimer);
         
+        // Simpan jumlah masa terkumpul untuk sifir ini
+        tableTotalTime[currentTable] = currentTableAccumulatedTime;
+
         currentTableIndex++;
         if (currentTableIndex < activeLevelTables.length) {
             alert(`Tahniah! Anda berjaya menghabiskan Sifir ${currentTable}! Seterusnya Sifir ${activeLevelTables[currentTableIndex]}.`);
@@ -96,7 +100,6 @@ function nextQuestion() {
     document.getElementById('user-answer').value = '';
     document.getElementById('user-answer').focus();
     
-    // Mula detik masa untuk soalan baru ini
     startQuestionTimer();
 }
 
@@ -106,22 +109,21 @@ function checkAnswer(e) {
     
     let userAns = parseInt(document.getElementById('user-answer').value);
     let correctAns = currentTable * currentMultiplierIndex;
-    let totalTimeTaken = elapsedTimeForCurrentQuestion + (TIME_LIMIT_PER_QUESTION - secondsLeftPerQuestion > 15 ? (TIME_LIMIT_PER_QUESTION - secondsLeftPerQuestion) : elapsedTimeForCurrentQuestion);
-
-    let key = `Sifir ${currentTable} (${currentTable} × ${currentMultiplierIndex})`;
 
     if (userAns === correctAns) {
         playCorrectSound();
         
-        // Simpan rekod masa soalan berjaya
-        levelSummary[key] = { time: totalTimeTaken, status: 'Betul' };
+        // Tambah masa untuk soalan ini ke jumlah terkumpul sifir semasa
+        currentTableAccumulatedTime += elapsedTimeForCurrentQuestion;
 
         currentMultiplierIndex++;
         nextQuestion();
     } else {
         playWrongSound();
         
-        // Amaran jawapan salah, kekal di soalan sama dan tambah masa 15 saat
+        // Tambah masa yang terbuang sebelum salah ke jumlah terkumpul
+        currentTableAccumulatedTime += elapsedTimeForCurrentQuestion;
+        
         alert(`❌ Jawapan salah! Anda telah melebihi masa/salah. 15 saat ditambah untuk cuba semula soalan ini.`);
         startQuestionTimer(); // Sambung semula pemasa tanpa tukar soalan
     }
@@ -147,15 +149,15 @@ function playWrongSound() {
 
 function showLevelResultModal() {
     let modalList = document.getElementById('modal-results-list');
-    modalList.innerHTML = '<h4>Rekod Masa Setiap Soalan:</h4>';
+    modalList.innerHTML = '<h4>Jumlah Masa Setiap Sifir:</h4>';
 
-    for (let qKey in levelSummary) {
-        let data = levelSummary[qKey];
+    activeLevelTables.forEach(tbl => {
+        let totalSec = tableTotalTime[tbl] || 0;
         let div = document.createElement('div');
         div.className = 'result-item';
-        div.innerHTML = `<strong>${qKey}</strong>: ${data.time} saat`;
+        div.innerHTML = `<strong>Sifir ${tbl}:</strong> ${totalSec} saat keseluruhan`;
         modalList.appendChild(div);
-    }
+    });
 
     document.getElementById('result-modal').classList.remove('hidden');
 }
@@ -163,9 +165,10 @@ function showLevelResultModal() {
 // Simulasi Hantar E-mel
 function sendResultToEmail() {
     let summaryText = `Keputusan Sifir Level ${currentLevel} untuk ${studentData.name} (${studentData.email}):\n`;
-    for (let qKey in levelSummary) {
-        summaryText += `- ${qKey}: ${levelSummary[qKey].time} saat\n`;
-    }
+    activeLevelTables.forEach(tbl => {
+        let totalSec = tableTotalTime[tbl] || 0;
+        summaryText += `- Sifir ${tbl}: ${totalSec} saat keseluruhan\n`;
+    });
 
     console.log(summaryText);
     alert(`Keputusan berjaya dihantar ke e-mel ${studentData.email}! (Simulasi berjaya)`);
