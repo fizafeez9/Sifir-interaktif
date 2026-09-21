@@ -17,9 +17,10 @@ let attemptCount = 1;
 // Rekod penyimpanan prestasi
 let levelRecords = {};
 
-// Pemasa
-let timerInterval = null;
-let timeLeft = 60;
+// Pemasa per soalan (Contoh: 15 saat setiap soalan)
+let questionTimer = null;
+let secondsLeftPerQuestion = 15;
+const TIME_LIMIT_PER_QUESTION = 15; 
 
 function startApp(e) {
     e.preventDefault();
@@ -55,32 +56,33 @@ function initTableRound() {
     document.getElementById('current-stage-title').innerText = `Sifir ${currentTable}`;
     updateAttemptInfo();
     nextQuestion();
-    startTimer();
 }
 
 function updateAttemptInfo() {
     document.getElementById('attempt-info').innerText = `Percubaan ke-${attemptCount} untuk Sifir ${currentTable}`;
 }
 
-function startTimer() {
-    clearInterval(timerInterval);
-    timeLeft = 60;
-    document.getElementById('time-left').innerText = timeLeft;
+// Mulakan pemasa untuk setiap 1 soalan
+function startQuestionTimer() {
+    clearInterval(questionTimer);
+    secondsLeftPerQuestion = TIME_LIMIT_PER_QUESTION;
+    document.getElementById('time-left').innerText = secondsLeftPerQuestion;
 
-    timerInterval = setInterval(() => {
-        timeLeft--;
-        document.getElementById('time-left').innerText = timeLeft;
-        if (timeLeft <= 0) {
-            clearInterval(timerInterval);
+    questionTimer = setInterval(() => {
+        secondsLeftPerQuestion--;
+        document.getElementById('time-left').innerText = secondsLeftPerQuestion;
+        
+        if (secondsLeftPerQuestion <= 0) {
+            clearInterval(questionTimer);
             playWrongSound();
-            handleFailure("Masa tamat! Sifir ini dikira gagal dan perlu dimulakan semula.");
+            handleFailure(`Masa 15 saat habis untuk soalan ini! Sifir ${currentTable} bermula semula.`);
         }
     }, 1000);
 }
 
 function nextQuestion() {
     if (currentMultiplierIndex > 12) {
-        clearInterval(timerInterval);
+        clearInterval(questionTimer);
         levelRecords[currentTable].status = 'Berjaya';
         levelRecords[currentTable].attempts = attemptCount;
 
@@ -97,25 +99,29 @@ function nextQuestion() {
     document.getElementById('question-text').innerText = `${currentTable} × ${currentMultiplierIndex} = ?`;
     document.getElementById('user-answer').value = '';
     document.getElementById('user-answer').focus();
+    
+    // Mula detik masa untuk soalan baru ini
+    startQuestionTimer();
 }
 
 function checkAnswer(e) {
     e.preventDefault();
+    clearInterval(questionTimer); // Hentikan masa sebaik sahaja jawab
+    
     let userAns = parseInt(document.getElementById('user-answer').value);
     let correctAns = currentTable * currentMultiplierIndex;
 
     if (userAns === correctAns) {
-        playCorrectSound(); // Mainkan bunyi betul
+        playCorrectSound();
         currentMultiplierIndex++;
         nextQuestion();
     } else {
-        clearInterval(timerInterval);
-        playWrongSound(); // Mainkan bunyi salah
+        playWrongSound();
         handleFailure(`Jawapan salah! Jawapan betul ialah ${correctAns}. Sifir ${currentTable} bermula semula.`);
     }
 }
 
-// Fungsi mainkan bunyi betul
+// Fungsi bunyi betul
 function playCorrectSound() {
     let sound = document.getElementById('sound-correct');
     if (sound) {
@@ -124,7 +130,7 @@ function playCorrectSound() {
     }
 }
 
-// Fungsi mainkan bunyi salah
+// Fungsi bunyi salah
 function playWrongSound() {
     let sound = document.getElementById('sound-wrong');
     if (sound) {
