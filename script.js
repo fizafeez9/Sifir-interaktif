@@ -20,7 +20,7 @@ let tableTotalTime = {};
 let questionTimer = null;
 let secondsLeftPerQuestion = 15;
 let elapsedTimeForCurrentQuestion = 0; 
-let currentTableAccumulatedTime = 0; // Mengumpul jumlah masa untuk sifir semasa
+let currentTableAccumulatedTime = 0; 
 const TIME_LIMIT_PER_QUESTION = 15; 
 
 function startApp(e) {
@@ -48,13 +48,12 @@ function selectLevel(lvl) {
 function initTableRound() {
     currentTable = activeLevelTables[currentTableIndex];
     currentMultiplierIndex = 1;
-    currentTableAccumulatedTime = 0; // Reset masa terkumpul untuk sifir baru
+    currentTableAccumulatedTime = 0; 
 
     document.getElementById('current-stage-title').innerText = `Sifir ${currentTable}`;
     nextQuestion();
 }
 
-// Mulakan pemasa untuk setiap 1 soalan
 function startQuestionTimer() {
     clearInterval(questionTimer);
     secondsLeftPerQuestion = TIME_LIMIT_PER_QUESTION;
@@ -69,12 +68,9 @@ function startQuestionTimer() {
         if (secondsLeftPerQuestion <= 0) {
             clearInterval(questionTimer);
             playWrongSound();
-            
-            // Tambah masa yang telah guna ke dalam jumlah terkumpul sifir ini
             currentTableAccumulatedTime += elapsedTimeForCurrentQuestion;
-            
             alert(`⚠️ AMARAN: Anda telah melebihi 15 saat untuk soalan ini! 15 saat tambahan diberikan. Sila cuba lagi.`);
-            startQuestionTimer(); // Sambung semula pemasa
+            startQuestionTimer(); 
         }
     }, 1000);
 }
@@ -82,8 +78,6 @@ function startQuestionTimer() {
 function nextQuestion() {
     if (currentMultiplierIndex > 12) {
         clearInterval(questionTimer);
-        
-        // Simpan jumlah masa terkumpul untuk sifir ini
         tableTotalTime[currentTable] = currentTableAccumulatedTime;
 
         currentTableIndex++;
@@ -105,31 +99,24 @@ function nextQuestion() {
 
 function checkAnswer(e) {
     e.preventDefault();
-    clearInterval(questionTimer); // Hentikan masa sebaik sahaja jawab
+    clearInterval(questionTimer); 
     
     let userAns = parseInt(document.getElementById('user-answer').value);
     let correctAns = currentTable * currentMultiplierIndex;
 
     if (userAns === correctAns) {
         playCorrectSound();
-        
-        // Tambah masa untuk soalan ini ke jumlah terkumpul sifir semasa
         currentTableAccumulatedTime += elapsedTimeForCurrentQuestion;
-
         currentMultiplierIndex++;
         nextQuestion();
     } else {
         playWrongSound();
-        
-        // Tambah masa yang terbuang sebelum salah ke jumlah terkumpul
         currentTableAccumulatedTime += elapsedTimeForCurrentQuestion;
-        
         alert(`❌ Jawapan salah! Anda telah melebihi masa/salah. 15 saat ditambah untuk cuba semula soalan ini.`);
-        startQuestionTimer(); // Sambung semula pemasa tanpa tukar soalan
+        startQuestionTimer(); 
     }
 }
 
-// Fungsi bunyi betul
 function playCorrectSound() {
     let sound = document.getElementById('sound-correct');
     if (sound) {
@@ -138,7 +125,6 @@ function playCorrectSound() {
     }
 }
 
-// Fungsi bunyi salah
 function playWrongSound() {
     let sound = document.getElementById('sound-wrong');
     if (sound) {
@@ -151,15 +137,42 @@ function showLevelResultModal() {
     let modalList = document.getElementById('modal-results-list');
     modalList.innerHTML = '<h4>Jumlah Masa Setiap Sifir:</h4>';
 
+    let allUnder60Seconds = true;
+
     activeLevelTables.forEach(tbl => {
         let totalSec = tableTotalTime[tbl] || 0;
+        if (totalSec > 60) {
+            allUnder60Seconds = false; // Jika ada mana-mana sifir lebih 60 saat
+        }
+
         let div = document.createElement('div');
         div.className = 'result-item';
         div.innerHTML = `<strong>Sifir ${tbl}:</strong> ${totalSec} saat keseluruhan`;
         modalList.appendChild(div);
     });
 
+    // Semak sama ada layak dapat reward (Semua sifir <= 60 saat)
+    if (allUnder60Seconds) {
+        let rewardDiv = document.createElement('div');
+        rewardDiv.style.marginTop = "15px";
+        rewardDiv.innerHTML = `
+            <div style="background: #e8f8f5; border: 2px dashed #2ecc71; padding: 12px; border-radius: 10px; text-align: center;">
+                <p style="color: #27ae60; font-weight: bold; margin: 0 0 8px 0;">🎉 HEBAT! Anda layak terima Ganjaran Money Pocket TNG!</p>
+                <button onclick="claimReward()" style="background-color: #27ae60; padding: 10px; font-size: 14px;">🎁 Tuntut Money Pocket Sekarang</button>
+            </div>
+        `;
+        modalList.appendChild(rewardDiv);
+    }
+
     document.getElementById('result-modal').classList.remove('hidden');
+}
+
+// Fungsi apabila pelajar tekan butang tuntut ganjaran
+function claimReward() {
+    let tngPhone = prompt("Tahniah! Sila masukkan Nombor Telefon Touch 'n Go (TnG) anda untuk terima duit raya/reward:");
+    if (tngPhone) {
+        alert(`Terima kasih ${studentData.name}! Nombor ${tngPhone} telah direkodkan. Cikgu akan masukkan duit Money Pocket TNG ke nombor ini!`);
+    }
 }
 
 // Simulasi Hantar E-mel
