@@ -3,7 +3,6 @@ let currentLevel = 1;
 let currentTableIndex = 0; 
 let currentMultiplierIndex = 1; 
 
-// Senarai sifir mengikut level
 const levelsData = {
     1: [1, 2, 3, 4],
     2: [5, 6, 7, 8],
@@ -12,34 +11,97 @@ const levelsData = {
 
 let activeLevelTables = [];
 let currentTable = 1;
-
-// Rekod jumlah masa keseluruhan bagi setiap sifir: { sifirNum: jumlah_saat }
 let tableTotalTime = {};
 
-// Pemasa per soalan
 let questionTimer = null;
 let secondsLeftPerQuestion = 15;
 let elapsedTimeForCurrentQuestion = 0; 
 let currentTableAccumulatedTime = 0; 
 const TIME_LIMIT_PER_QUESTION = 15; 
 
-// Fungsi Mula Pendaftaran & Masuk App
-function startApp(e) {
+// Tukar paparan ke halaman Login
+function showLoginPage(e) {
     e.preventDefault();
-    studentData.name = document.getElementById('nama').value.trim();
-    studentData.email = document.getElementById('email').value.trim();
+    document.getElementById('register-page').classList.add('hidden');
+    document.getElementById('login-page').classList.remove('hidden');
+}
 
-    if (!studentData.name || !studentData.email) {
-        alert("⚠️ Sila masukkan Nama dan E-mel terlebih dahulu!");
+// Tukar paparan ke halaman Register
+function showRegisterPage(e) {
+    e.preventDefault();
+    document.getElementById('login-page').classList.add('hidden');
+    document.getElementById('register-page').classList.remove('hidden');
+}
+
+// 1. Proses Pendaftaran Akaun Baru
+function handleRegister(e) {
+    e.preventDefault();
+    let name = document.getElementById('reg-nama').value.trim();
+    let email = document.getElementById('reg-email').value.trim();
+    let password = document.getElementById('reg-password').value.trim();
+
+    if (!name || !email || !password) {
+        alert("⚠️ Sila isi semua maklumat pendaftaran!");
         return;
     }
 
-    document.getElementById('welcome-msg').innerText = `Hai, ${studentData.name}!`;
-    document.getElementById('register-page').classList.add('hidden');
-    document.getElementById('level-page').classList.remove('hidden');
+    // Simpan akaun dalam memori peranti (LocalStorage)
+    localStorage.setItem('sifir_name', name);
+    localStorage.setItem('sifir_email', email);
+    localStorage.setItem('sifir_password', password);
+
+    alert("✅ Pendaftaran berjaya! Sila log masuk menggunakan e-mel dan kata laluan anda.");
+    
+    // Kosongkan borang pendaftaran dan buka paparan Login
+    document.getElementById('reg-nama').value = '';
+    document.getElementById('reg-email').value = '';
+    document.getElementById('reg-password').value = '';
+    showLoginPage(e);
+}
+
+// 2. Proses Log Masuk
+function handleLogin(e) {
+    e.preventDefault();
+    let emailInput = document.getElementById('login-email').value.trim();
+    let passwordInput = document.getElementById('login-password').value.trim();
+
+    let savedName = localStorage.getItem('sifir_name');
+    let savedEmail = localStorage.getItem('sifir_email');
+    let savedPassword = localStorage.getItem('sifir_password');
+
+    if (!savedEmail) {
+        alert("⚠️ Tiada akaun dijumpai. Sila daftar akaun terlebih dahulu!");
+        return;
+    }
+
+    if (emailInput === savedEmail && passwordInput === savedPassword) {
+        studentData.name = savedName;
+        studentData.email = savedEmail;
+
+        document.getElementById('welcome-msg').innerText = `Hai, ${studentData.name}!`;
+        document.getElementById('login-page').classList.add('hidden');
+        document.getElementById('level-page').classList.remove('hidden');
+    } else {
+        alert("❌ E-mel atau Kata Laluan salah! Sila cuba lagi.");
+    }
+}
+
+// Fungsi Log Keluar
+function logout() {
+    studentData = { name: '', email: '', tngPhone: '' };
+    document.getElementById('level-page').classList.add('hidden');
+    document.getElementById('login-page').classList.remove('hidden');
+    document.getElementById('login-email').value = '';
+    document.getElementById('login-password').value = '';
 }
 
 function selectLevel(lvl) {
+    if (!studentData.name) {
+        alert("⚠️ Sila log masuk terlebih dahulu!");
+        logout();
+        return;
+    }
+
     currentLevel = lvl;
     activeLevelTables = levelsData[lvl];
     currentTableIndex = 0;
@@ -60,7 +122,6 @@ function initTableRound() {
     nextQuestion();
 }
 
-// Pemasa untuk setiap 1 soalan
 function startQuestionTimer() {
     clearInterval(questionTimer);
     secondsLeftPerQuestion = TIME_LIMIT_PER_QUESTION;
@@ -117,14 +178,18 @@ function checkAnswer(e) {
         currentMultiplierIndex++;
         nextQuestion();
     } else {
-        playWrongSound();
+        playWrongSourceAction();
         currentTableAccumulatedTime += elapsedTimeForCurrentQuestion;
         alert(`❌ Jawapan salah! Anda telah melebihi masa/salah. 15 saat ditambah untuk cuba semula soalan ini.`);
         startQuestionTimer(); 
     }
 }
 
-// Kesan Bunyi
+// Fungsi alternatif bunyi salah
+function playWrongSourceAction() {
+    playWrongSound();
+}
+
 function playCorrectSound() {
     let sound = document.getElementById('sound-correct');
     if (sound) {
@@ -141,7 +206,6 @@ function playWrongSound() {
     }
 }
 
-// Paparan Popup Keputusan & Ganjaran TNG
 function showLevelResultModal() {
     let modalList = document.getElementById('modal-results-list');
     modalList.innerHTML = '<h4>Jumlah Masa Setiap Sifir:</h4>';
@@ -160,7 +224,6 @@ function showLevelResultModal() {
         modalList.appendChild(div);
     });
 
-    // Syarat Ganjaran (Semua sifir <= 60 saat)
     if (allUnder60Seconds) {
         let rewardDiv = document.createElement('div');
         rewardDiv.style.marginTop = "15px";
@@ -176,7 +239,6 @@ function showLevelResultModal() {
     document.getElementById('result-modal').classList.remove('hidden');
 }
 
-// Fungsi Tuntut Ganjaran TNG
 function claimReward() {
     let tngPhone = prompt("Tahniah! Sila masukkan Nombor Telefon Touch 'n Go (TnG) anda untuk terima duit raya/reward:");
     if (tngPhone) {
@@ -185,7 +247,6 @@ function claimReward() {
     }
 }
 
-// Simulasi Hantar E-mel
 function sendResultToEmail() {
     let summaryText = `--- KEPUTUSAN KUIZ SIFIR ---\n`;
     summaryText += `Nama Pelajar: ${studentData.name}\n`;
