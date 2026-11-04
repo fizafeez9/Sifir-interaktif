@@ -63,7 +63,11 @@
                 <button class="level-btn" onclick="selectLevel(2)">Level 2 (Sifir 5 - 8)</button>
                 <button class="level-btn" onclick="selectLevel(3)">Level 3 (Sifir 9 - 12)</button>
             </div>
-            <button class="btn-secondary" onclick="logout()" style="margin-top: 20px; background-color: #e74c3c; color: white; border: none; padding: 10px; border-radius: 8px;">Log Keluar</button>
+            
+            <!-- Butang Rekod Aktiviti -->
+            <button class="btn-secondary" onclick="showHistoryModal()" style="margin-top: 15px; background-color: #3498db; color: white; border: none; padding: 10px; border-radius: 8px; width: 100%;">📊 Rekod Aktiviti Saya</button>
+            
+            <button class="btn-secondary" onclick="logout()" style="margin-top: 10px; background-color: #e74c3c; color: white; border: none; padding: 10px; border-radius: 8px; width: 100%;">Log Keluar</button>
         </div>
 
         <!-- 4. PAGE PERMAINAN / KUIZ -->
@@ -91,6 +95,15 @@
             <div id="modal-results-list"></div>
             <button onclick="sendResultToEmail()">📧 Hantar Keputusan ke E-mel</button>
             <button class="btn-secondary" onclick="closeModalAndReturn()">Pilih Level Lain</button>
+        </div>
+    </div>
+
+    <!-- MODAL POPUP REKOD AKTIVITI SEJARAH -->
+    <div id="history-modal" class="modal hidden">
+        <div class="modal-content">
+            <h2>📊 Sejarah Keputusan Anda</h2>
+            <div id="history-list" style="max-height: 250px; overflow-y: auto; text-align: left; margin: 15px 0; padding: 5px;"></div>
+            <button class="btn-secondary" onclick="closeHistoryModal()">Tutup</button>
         </div>
     </div>
 
