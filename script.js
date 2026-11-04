@@ -52,7 +52,6 @@ function handleRegister(e) {
 
     alert("✅ Pendaftaran berjaya! Sila log masuk menggunakan e-mel dan kata laluan anda.");
     
-    // Kosongkan borang pendaftaran dan buka paparan Login
     document.getElementById('reg-nama').value = '';
     document.getElementById('reg-email').value = '';
     document.getElementById('reg-password').value = '';
@@ -178,16 +177,11 @@ function checkAnswer(e) {
         currentMultiplierIndex++;
         nextQuestion();
     } else {
-        playWrongSourceAction();
+        playWrongSound();
         currentTableAccumulatedTime += elapsedTimeForCurrentQuestion;
         alert(`❌ Jawapan salah! Anda telah melebihi masa/salah. 15 saat ditambah untuk cuba semula soalan ini.`);
         startQuestionTimer(); 
     }
-}
-
-// Fungsi alternatif bunyi salah
-function playWrongSourceAction() {
-    playWrongSound();
 }
 
 function playCorrectSound() {
@@ -211,6 +205,7 @@ function showLevelResultModal() {
     modalList.innerHTML = '<h4>Jumlah Masa Setiap Sifir:</h4>';
 
     let allUnder60Seconds = true;
+    let levelSummaryText = "";
 
     activeLevelTables.forEach(tbl => {
         let totalSec = tableTotalTime[tbl] || 0;
@@ -222,7 +217,12 @@ function showLevelResultModal() {
         div.className = 'result-item';
         div.innerHTML = `<strong>Sifir ${tbl}:</strong> ${totalSec} saat keseluruhan`;
         modalList.appendChild(div);
+
+        levelSummaryText += `Sifir ${tbl}: ${totalSec}s | `;
     });
+
+    // Simpan rekod ke sejarah aktiviti peranti
+    saveStudentHistory(currentLevel, levelSummaryText);
 
     if (allUnder60Seconds) {
         let rewardDiv = document.createElement('div');
@@ -245,6 +245,57 @@ function claimReward() {
         studentData.tngPhone = tngPhone;
         alert(`Terima kasih ${studentData.name}! Nombor ${tngPhone} telah direkodkan.`);
     }
+}
+
+// Fungsi Simpan Sejarah Aktiviti
+function saveStudentHistory(level, summary) {
+    let userEmail = studentData.email;
+    if (!userEmail) return;
+
+    let now = new Date();
+    let dateStr = now.toLocaleDateString() + ' ' + now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+
+    let historyKey = `sifir_history_${userEmail}`;
+    let existingHistory = JSON.parse(localStorage.getItem(historyKey)) || [];
+
+    existingHistory.unshift({
+        date: dateStr,
+        level: level,
+        details: summary
+    });
+
+    localStorage.setItem(historyKey, JSON.stringify(existingHistory));
+}
+
+// Fungsi Papar Kotak Sejarah Rekod Aktiviti
+function showHistoryModal() {
+    let userEmail = studentData.email;
+    let historyKey = `sifir_history_${userEmail}`;
+    let existingHistory = JSON.parse(localStorage.getItem(historyKey)) || [];
+
+    let historyListDiv = document.getElementById('history-list');
+    historyListDiv.innerHTML = '';
+
+    if (existingHistory.length === 0) {
+        historyListDiv.innerHTML = '<p style="text-align: center; color: #666;">Tiada rekod aktiviti lagi. Jom mula main!</p>';
+    } else {
+        existingHistory.forEach((item) => {
+            let itemDiv = document.createElement('div');
+            itemDiv.style.cssText = "background: #f8f9fa; border-left: 4px solid #4e54c8; padding: 8px 12px; margin-bottom: 8px; border-radius: 4px; font-size: 13px;";
+            itemDiv.innerHTML = `
+                <strong>🗓️ ${item.date}</strong><br>
+                <span>🏆 Level ${item.level}</span><br>
+                <small style="color: #555;">${item.details}</small>
+            `;
+            historyListDiv.appendChild(itemDiv);
+        });
+    }
+
+    document.getElementById('history-modal').classList.remove('hidden');
+}
+
+function closeHistoryModal() {
+    document.getElementById('history-modal').classList.add('hidden');
 }
 
 function sendResultToEmail() {
