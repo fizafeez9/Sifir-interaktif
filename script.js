@@ -1,4 +1,4 @@
-let studentData = { name: '', email: '' };
+let studentData = { name: '', email: '', tngPhone: '' };
 let currentLevel = 1;
 let currentTableIndex = 0; 
 let currentMultiplierIndex = 1; 
@@ -23,10 +23,16 @@ let elapsedTimeForCurrentQuestion = 0;
 let currentTableAccumulatedTime = 0; 
 const TIME_LIMIT_PER_QUESTION = 15; 
 
+// Fungsi Mula Pendaftaran & Masuk App
 function startApp(e) {
     e.preventDefault();
-    studentData.name = document.getElementById('nama').value;
-    studentData.email = document.getElementById('email').value;
+    studentData.name = document.getElementById('nama').value.trim();
+    studentData.email = document.getElementById('email').value.trim();
+
+    if (!studentData.name || !studentData.email) {
+        alert("⚠️ Sila masukkan Nama dan E-mel terlebih dahulu!");
+        return;
+    }
 
     document.getElementById('welcome-msg').innerText = `Hai, ${studentData.name}!`;
     document.getElementById('register-page').classList.add('hidden');
@@ -54,6 +60,7 @@ function initTableRound() {
     nextQuestion();
 }
 
+// Pemasa untuk setiap 1 soalan
 function startQuestionTimer() {
     clearInterval(questionTimer);
     secondsLeftPerQuestion = TIME_LIMIT_PER_QUESTION;
@@ -117,6 +124,7 @@ function checkAnswer(e) {
     }
 }
 
+// Kesan Bunyi
 function playCorrectSound() {
     let sound = document.getElementById('sound-correct');
     if (sound) {
@@ -133,6 +141,7 @@ function playWrongSound() {
     }
 }
 
+// Paparan Popup Keputusan & Ganjaran TNG
 function showLevelResultModal() {
     let modalList = document.getElementById('modal-results-list');
     modalList.innerHTML = '<h4>Jumlah Masa Setiap Sifir:</h4>';
@@ -142,7 +151,7 @@ function showLevelResultModal() {
     activeLevelTables.forEach(tbl => {
         let totalSec = tableTotalTime[tbl] || 0;
         if (totalSec > 60) {
-            allUnder60Seconds = false; // Jika ada mana-mana sifir lebih 60 saat
+            allUnder60Seconds = false; 
         }
 
         let div = document.createElement('div');
@@ -151,14 +160,14 @@ function showLevelResultModal() {
         modalList.appendChild(div);
     });
 
-    // Semak sama ada layak dapat reward (Semua sifir <= 60 saat)
+    // Syarat Ganjaran (Semua sifir <= 60 saat)
     if (allUnder60Seconds) {
         let rewardDiv = document.createElement('div');
         rewardDiv.style.marginTop = "15px";
         rewardDiv.innerHTML = `
             <div style="background: #e8f8f5; border: 2px dashed #2ecc71; padding: 12px; border-radius: 10px; text-align: center;">
                 <p style="color: #27ae60; font-weight: bold; margin: 0 0 8px 0;">🎉 HEBAT! Anda layak terima Ganjaran Money Pocket TNG!</p>
-                <button onclick="claimReward()" style="background-color: #27ae60; padding: 10px; font-size: 14px;">🎁 Tuntut Money Pocket Sekarang</button>
+                <button onclick="claimReward()" style="background-color: #27ae60; padding: 10px; font-size: 14px; border:none; color:white; border-radius:8px; cursor:pointer;">🎁 Tuntut Money Pocket Sekarang</button>
             </div>
         `;
         modalList.appendChild(rewardDiv);
@@ -167,17 +176,23 @@ function showLevelResultModal() {
     document.getElementById('result-modal').classList.remove('hidden');
 }
 
-// Fungsi apabila pelajar tekan butang tuntut ganjaran
+// Fungsi Tuntut Ganjaran TNG
 function claimReward() {
     let tngPhone = prompt("Tahniah! Sila masukkan Nombor Telefon Touch 'n Go (TnG) anda untuk terima duit raya/reward:");
     if (tngPhone) {
-        alert(`Terima kasih ${studentData.name}! Nombor ${tngPhone} telah direkodkan. Cikgu akan masukkan duit Money Pocket TNG ke nombor ini!`);
+        studentData.tngPhone = tngPhone;
+        alert(`Terima kasih ${studentData.name}! Nombor ${tngPhone} telah direkodkan.`);
     }
 }
 
 // Simulasi Hantar E-mel
 function sendResultToEmail() {
-    let summaryText = `Keputusan Sifir Level ${currentLevel} untuk ${studentData.name} (${studentData.email}):\n`;
+    let summaryText = `--- KEPUTUSAN KUIZ SIFIR ---\n`;
+    summaryText += `Nama Pelajar: ${studentData.name}\n`;
+    summaryText += `E-mel: ${studentData.email}\n`;
+    summaryText += `No. Telefon TNG: ${studentData.tngPhone ? studentData.tngPhone : 'Tiada'}\n\n`;
+    summaryText += `Pencapaian Level ${currentLevel}:\n`;
+    
     activeLevelTables.forEach(tbl => {
         let totalSec = tableTotalTime[tbl] || 0;
         summaryText += `- Sifir ${tbl}: ${totalSec} saat keseluruhan\n`;
