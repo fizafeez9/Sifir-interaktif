@@ -9,7 +9,7 @@
 <body>
 
     <div class="container">
-        <!-- 1. PAGE PENDAFTARAN (SIGN UP) - PAPARAN UTAMA PERTAMA -->
+        <!-- 1. PAGE PENDAFTARAN (SIGN UP) -->
         <div id="register-page">
             <h1>🚀 Daftar Akaun Pelajar</h1>
             <p>Sila daftar nama, e-mel dan kata laluan anda terlebih dahulu!</p>
@@ -64,9 +64,7 @@
                 <button class="level-btn" onclick="selectLevel(3)">Level 3 (Sifir 9 - 12)</button>
             </div>
             
-            <!-- Butang Rekod Aktiviti -->
             <button class="btn-secondary" onclick="showHistoryModal()" style="margin-top: 15px; background-color: #3498db; color: white; border: none; padding: 10px; border-radius: 8px; width: 100%;">📊 Rekod Aktiviti Saya</button>
-            
             <button class="btn-secondary" onclick="logout()" style="margin-top: 10px; background-color: #e74c3c; color: white; border: none; padding: 10px; border-radius: 8px; width: 100%;">Log Keluar</button>
         </div>
 
@@ -107,13 +105,40 @@
         </div>
     </div>
 
-    <!-- Kesan Bunyi (Sound Effects) -->
+    <!-- Kesan Bunyi -->
     <audio id="sound-correct" preload="auto">
         <source src="https://actions.google.com/sounds/v1/cartoon/clang_and_wobble.ogg" type="audio/ogg">
     </audio>
     <audio id="sound-wrong" preload="auto">
         <source src="https://actions.google.com/sounds/v1/cartoon/slide_whistle.ogg" type="audio/ogg">
     </audio>
+
+    <!-- FIREBASE SDK & KOD UTAMA -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/13.2.0/firebase-app.js";
+        import { getFirestore, collection, addDoc, getDocs, query, where } from "https://www.gstatic.com/firebasejs/13.2.0/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyC1wfnCzIajnBDUbVvnGNv-f1rISiHXPdk",
+            authDomain: "mathematics-interactive.firebaseapp.com",
+            projectId: "mathematics-interactive",
+            storageBucket: "mathematics-interactive.firebasestorage.app",
+            messagingSenderId: "197856319533",
+            appId: "1:197856319533:web:717f67c8a64a46bc0880a4",
+            measurementId: "G-MM6TVCRLPH"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        // Dedahkan fungsi Firebase ke fail script.js global
+        window.db = db;
+        window.collection = collection;
+        window.addDoc = addDoc;
+        window.getDocs = getDocs;
+        window.query = query;
+        window.where = where;
+    </script>
 
     <script src="script.js"></script>
 </body>
