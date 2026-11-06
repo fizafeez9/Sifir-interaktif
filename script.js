@@ -19,22 +19,20 @@ let elapsedTimeForCurrentQuestion = 0;
 let currentTableAccumulatedTime = 0; 
 const TIME_LIMIT_PER_QUESTION = 15; 
 
-// Tukar paparan ke halaman Login
 function showLoginPage(e) {
     e.preventDefault();
     document.getElementById('register-page').classList.add('hidden');
     document.getElementById('login-page').classList.remove('hidden');
 }
 
-// Tukar paparan ke halaman Register
 function showRegisterPage(e) {
     e.preventDefault();
     document.getElementById('login-page').classList.add('hidden');
     document.getElementById('register-page').classList.remove('hidden');
 }
 
-// 1. Proses Pendaftaran Akaun Baru
-function handleRegister(e) {
+// 1. Pendaftaran Akaun ke Firebase Firestore
+async function handleRegister(e) {
     e.preventDefault();
     let name = document.getElementById('reg-nama').value.trim();
     let email = document.getElementById('reg-email').value.trim();
@@ -45,47 +43,69 @@ function handleRegister(e) {
         return;
     }
 
-    // Simpan akaun dalam memori peranti (LocalStorage)
-    localStorage.setItem('sifir_name', name);
-    localStorage.setItem('sifir_email', email);
-    localStorage.setItem('sifir_password', password);
+    try {
+        // Semak sama ada e-mel sudah berdaftar dalam Firestore
+        const q = window.query(window.collection(window.db, "students"), window.where("email", "==", email));
+        const querySnapshot = await window.getDocs(q);
 
-    alert("✅ Pendaftaran berjaya! Sila log masuk menggunakan e-mel dan kata laluan anda.");
-    
-    document.getElementById('reg-nama').value = '';
-    document.getElementById('reg-email').value = '';
-    document.getElementById('reg-password').value = '';
-    showLoginPage(e);
+        if (!querySnapshot.empty) {
+            alert("⚠️ E-mel ini sudah berdaftar! Sila log masuk.");
+            showLoginPage(e);
+            return;
+        }
+
+        // Simpan akaun baru ke Firebase Firestore
+        await window.addDoc(window.collection(window.db, "students"), {
+            name: name,
+            email: email,
+            password: password,
+            createdAt: new Date().toISOString()
+        });
+
+        alert("✅ Pendaftaran berjaya! Sila log masuk.");
+        document.getElementById('reg-nama').value = '';
+        document.getElementById('reg-email').value = '';
+        document.getElementById('reg-password').value = '';
+        showLoginPage(e);
+    } catch (error) {
+        console.error("Ralat pendaftaran:", error);
+        alert("❌ Pendaftaran gagal. Sila cuba lagi.");
+    }
 }
 
-// 2. Proses Log Masuk
-function handleLogin(e) {
+// 2. Log Masuk dari Firebase Firestore
+async function handleLogin(e) {
     e.preventDefault();
     let emailInput = document.getElementById('login-email').value.trim();
     let passwordInput = document.getElementById('login-password').value.trim();
 
-    let savedName = localStorage.getItem('sifir_name');
-    let savedEmail = localStorage.getItem('sifir_email');
-    let savedPassword = localStorage.getItem('sifir_password');
+    try {
+        const q = window.query(window.collection(window.db, "students"), window.where("email", "==", emailInput));
+        const querySnapshot = await window.getDocs(q);
 
-    if (!savedEmail) {
-        alert("⚠️ Tiada akaun dijumpai. Sila daftar akaun terlebih dahulu!");
-        return;
-    }
+        if (querySnapshot.empty) {
+            alert("⚠️ Tiada akaun dijumpai dengan e-mel ini. Sila daftar terlebih dahulu!");
+            return;
+        }
 
-    if (emailInput === savedEmail && passwordInput === savedPassword) {
-        studentData.name = savedName;
-        studentData.email = savedEmail;
+        let studentDoc = querySnapshot.docs[0].data();
 
-        document.getElementById('welcome-msg').innerText = `Hai, ${studentData.name}!`;
-        document.getElementById('login-page').classList.add('hidden');
-        document.getElementById('level-page').classList.remove('hidden');
-    } else {
-        alert("❌ E-mel atau Kata Laluan salah! Sila cuba lagi.");
+        if (studentDoc.password === passwordInput) {
+            studentData.name = studentDoc.name;
+            studentData.email = studentDoc.email;
+
+            document.getElementById('welcome-msg').innerText = `Hai, ${studentData.name}!`;
+            document.getElementById('login-page').classList.add('hidden');
+            document.getElementById('level-page').classList.remove('hidden');
+        } else {
+            alert("❌ Kata laluan salah! Sila cuba lagi.");
+        }
+    } catch (error) {
+        console.error("Ralat log masuk:", error);
+        alert("❌ Ralat sambungan ke pangkalan data.");
     }
 }
 
-// Fungsi Log Keluar
 function logout() {
     studentData = { name: '', email: '', tngPhone: '' };
     document.getElementById('level-page').classList.add('hidden');
@@ -221,7 +241,7 @@ function showLevelResultModal() {
         levelSummaryText += `Sifir ${tbl}: ${totalSec}s | `;
     });
 
-    // Simpan rekod ke sejarah aktiviti peranti
+    // Simpan rekod sejarah ke Cloud Firebase
     saveStudentHistory(currentLevel, levelSummaryText);
 
     if (allUnder60Seconds) {
@@ -247,39 +267,54 @@ function claimReward() {
     }
 }
 
-// Fungsi Simpan Sejarah Aktiviti
-function saveStudentHistory(level, summary) {
-    let userEmail = studentData.email;
-    if (!userEmail) return;
+// Simpan Sejarah ke Firebase Firestore
+async function saveStudentHistory(level, summary) {
+    if (!studentData.email) return;
 
     let now = new Date();
     let dateStr = now.toLocaleDateString() + ' ' + now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
 
-    let historyKey = `sifir_history_${userEmail}`;
-    let existingHistory = JSON.parse(localStorage.getItem(historyKey)) || [];
-
-    existingHistory.unshift({
-        date: dateStr,
-        level: level,
-        details: summary
-    });
-
-    localStorage.setItem(historyKey, JSON.stringify(existingHistory));
+    try {
+        await window.addDoc(window.collection(window.db, "history"), {
+            email: studentData.email,
+            date: dateStr,
+            level: level,
+            details: summary,
+            timestamp: Date.now()
+        });
+    } catch (error) {
+        console.error("Gagal simpan sejarah:", error);
+    }
 }
 
-// Fungsi Papar Kotak Sejarah Rekod Aktiviti
-function showHistoryModal() {
-    let userEmail = studentData.email;
-    let historyKey = `sifir_history_${userEmail}`;
-    let existingHistory = JSON.parse(localStorage.getItem(historyKey)) || [];
+// Papar Sejarah daripada Firebase Firestore
+async function showHistoryModal() {
+    if (!studentData.email) return;
 
     let historyListDiv = document.getElementById('history-list');
-    historyListDiv.innerHTML = '';
+    historyListDiv.innerHTML = '<p style="text-align: center;">Memuatkan rekod...</p>';
+    document.getElementById('history-modal').classList.remove('hidden');
 
-    if (existingHistory.length === 0) {
-        historyListDiv.innerHTML = '<p style="text-align: center; color: #666;">Tiada rekod aktiviti lagi. Jom mula main!</p>';
-    } else {
-        existingHistory.forEach((item) => {
+    try {
+        const q = window.query(window.collection(window.db, "history"), window.where("email", "==", studentData.email));
+        const querySnapshot = await window.getDocs(q);
+
+        historyListDiv.innerHTML = '';
+
+        if (querySnapshot.empty) {
+            historyListDiv.innerHTML = '<p style="text-align: center; color: #666;">Tiada rekod aktiviti lagi. Jom mula main!</p>';
+            return;
+        }
+
+        let historyData = [];
+        querySnapshot.forEach((doc) => {
+            historyData.push(doc.data());
+        });
+
+        // Susun ikut yang terkini di atas
+        historyData.sort((a, b) => b.timestamp - a.timestamp);
+
+        historyData.forEach((item) => {
             let itemDiv = document.createElement('div');
             itemDiv.style.cssText = "background: #f8f9fa; border-left: 4px solid #4e54c8; padding: 8px 12px; margin-bottom: 8px; border-radius: 4px; font-size: 13px;";
             itemDiv.innerHTML = `
@@ -289,9 +324,11 @@ function showHistoryModal() {
             `;
             historyListDiv.appendChild(itemDiv);
         });
-    }
 
-    document.getElementById('history-modal').classList.remove('hidden');
+    } catch (error) {
+        console.error("Gagal ambil sejarah:", error);
+        historyListDiv.innerHTML = '<p style="text-align: center; color: red;">Gagal memuatkan rekod dari pelayan.</p>';
+    }
 }
 
 function closeHistoryModal() {
