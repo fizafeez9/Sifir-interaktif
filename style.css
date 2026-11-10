@@ -24,33 +24,35 @@ body.menu-active-bg {
     overflow-y: auto;
     display: flex;
     justify-content: center;
-    align-items: flex-start;
+    align-items: center; /* Letakkan keseluruhan kandungan di tengah skrin */
+    position: relative;
 }
 
 .container {
     width: 100%;
     max-width: 450px;
-    padding: 10px 15px;
+    padding: 15px;
     box-sizing: border-box;
+    position: relative;
 }
 
-/* Wrapper Menu Utama - Jarak Sederhana (Turun sedikit daripada atas) */
+/* Wrapper Menu Utama - Turun ke tengah secara seimbang */
 .menu-main-wrapper {
     background: transparent !important;
     padding: 0 !important;
     box-shadow: none !important;
     text-align: center;
     width: 100%;
-    margin-top: 15px; 
+    margin-top: 60px; /* Turunkan ke kawasan tengah */
 }
 
-/* Header Atas di dalam Menu Utama */
+/* Header Atas di dalam Menu Utama (Hanya ada logo MathKids) */
 .menu-main-wrapper .app-header {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
     align-items: center;
     width: 100%;
-    margin-bottom: 22px;
+    margin-bottom: 15px;
     padding: 0;
     background: transparent !important;
     box-shadow: none !important;
@@ -63,8 +65,11 @@ body.menu-active-bg {
     object-fit: contain;
 }
 
-/* Butang Tebus Kredit Dinamik */
-.credit-btn {
+/* Butang Tebus Kredit Kekal di Atas Kanan secara Tetap (Absolute) */
+.credit-btn-fixed {
+    position: absolute;
+    top: 20px;
+    right: 20px;
     background: #9b59b6;
     color: white;
     border: 3px solid #222;
@@ -75,9 +80,10 @@ body.menu-active-bg {
     box-shadow: 0 4px 0 #222;
     cursor: pointer;
     transition: 0.1s;
+    z-index: 10;
 }
 
-.credit-btn:active {
+.credit-btn-fixed:active {
     transform: translateY(3px);
     box-shadow: 0 1px 0 #222;
 }
@@ -85,7 +91,7 @@ body.menu-active-bg {
 /* Bahagian Tajuk Ucapan */
 .menu-title-area {
     text-align: center;
-    margin-bottom: 16px;
+    margin-bottom: 18px;
 }
 
 .menu-title-area h2 {
