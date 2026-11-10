@@ -15,7 +15,7 @@ body.monster-bg {
     align-items: center;
 }
 
-/* Background Khas Menu Utama (Menggunakan fail baharu IMG_8390.png) */
+/* Background Khas Menu Utama (IMG_8390.png) */
 body.menu-active-bg {
     background: url('background/IMG_8390.png') no-repeat center center fixed !important;
     background-size: cover !important;
@@ -24,17 +24,18 @@ body.menu-active-bg {
 .container {
     width: 100%;
     max-width: 450px;
-    padding: 15px;
+    padding: 10px 15px; /* Kurangkan padding atas kontena */
     box-sizing: border-box;
 }
 
-/* Wrapper Menu Utama */
+/* Wrapper Menu Utama - Tarik ke atas dan kurangkan jarak */
 .menu-main-wrapper {
     background: transparent !important;
     padding: 0 !important;
     box-shadow: none !important;
     text-align: center;
     width: 100%;
+    margin-top: -20px; /* Tarik keseluruhan menu ke atas */
 }
 
 /* Header Atas di dalam Menu Utama */
@@ -43,7 +44,7 @@ body.menu-active-bg {
     justify-content: space-between;
     align-items: center;
     width: 100%;
-    margin-bottom: 20px;
+    margin-bottom: 25px; /* Jarakkan lebih jauh ke bawah daripada baris logo/kredit ke tulisan Hai */
     padding: 0;
     background: transparent !important;
     box-shadow: none !important;
@@ -78,7 +79,7 @@ body.menu-active-bg {
 /* Bahagian Tajuk Ucapan */
 .menu-title-area {
     text-align: center;
-    margin-bottom: 18px;
+    margin-bottom: 15px;
 }
 
 .menu-title-area h2 {
