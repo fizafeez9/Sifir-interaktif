@@ -1,9 +1,7 @@
-/* PENTING: Untuk menyembunyikan seksyen yang tidak berkenaan */
 .hidden {
     display: none !important;
 }
 
-/* Gaya Asas & Latar Belakang Monster */
 body.monster-bg {
     margin: 0;
     padding: 0;
@@ -23,14 +21,13 @@ body.monster-bg {
     box-sizing: border-box;
 }
 
-/* Header Atas Menu Utama */
+/* Header Atas */
 .app-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     width: 100%;
-    max-width: 450px;
-    margin-bottom: 15px;
+    margin-bottom: 12px;
     box-sizing: border-box;
     padding: 0 5px;
 }
@@ -56,7 +53,79 @@ body.monster-bg {
     cursor: pointer;
 }
 
-/* Kad Borang Putih Berpusat */
+/* Susunan Menu Utama (Gaya Gambar 2) */
+.menu-main-wrapper {
+    text-align: center;
+    width: 100%;
+}
+
+.menu-grid-styled {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 12px;
+    margin-top: 10px;
+}
+
+.menu-item-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 18px;
+    border: 3px solid #222;
+    border-radius: 25px;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 4px 0 #222;
+    transition: 0.1s;
+    text-align: left;
+}
+
+.menu-item-card:active {
+    transform: translateY(3px);
+    box-shadow: 0 1px 0 #222;
+}
+
+.menu-item-card .item-content {
+    display: flex;
+    flex-direction: column;
+}
+
+.menu-item-card .icon {
+    font-size: 22px;
+    margin-bottom: 2px;
+}
+
+.menu-item-card strong {
+    font-size: 14px;
+    line-height: 1.2;
+}
+
+.menu-item-card small {
+    font-size: 11px;
+    opacity: 0.9;
+}
+
+.monster-icon-side {
+    font-size: 32px;
+}
+
+/* Warna Butang Menu Serupa Rujukan */
+.btn-item-green {
+    background-color: #2ed573;
+}
+.btn-item-blue {
+    background-color: #3498db;
+}
+.btn-item-yellow {
+    background-color: #f1c40f;
+    color: #333;
+}
+.btn-item-red {
+    background-color: #ff4757;
+}
+
+/* Kad Borang Biasa (Login/Register) */
 .form-card, #level-page, #game-page {
     background: rgba(255, 255, 255, 0.95);
     padding: 25px;
@@ -85,13 +154,6 @@ body.monster-bg {
     border-radius: 10px;
     box-sizing: border-box;
     font-size: 14px;
-    transition: 0.3s;
-}
-
-.form-group input:focus {
-    border-color: #4e54c8;
-    outline: none;
-    box-shadow: 0 0 5px rgba(78, 84, 200, 0.3);
 }
 
 .info-modul {
@@ -100,72 +162,9 @@ body.monster-bg {
     padding: 8px 12px;
     border-radius: 6px;
     margin-bottom: 15px;
+    text-align: left;
 }
 
-/* Susunan Grid 4 Butang Menu Utama */
-.menu-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 12px;
-    margin-top: 15px;
-}
-
-.menu-card-btn {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 15px 10px;
-    border: none;
-    border-radius: 15px;
-    color: white;
-    font-weight: bold;
-    cursor: pointer;
-    box-shadow: 0 5px 0 rgba(0,0,0,0.2);
-    transition: all 0.1s ease;
-    text-align: center;
-    min-height: 100px;
-}
-
-.menu-card-btn:active {
-    transform: translateY(4px);
-    box-shadow: 0 1px 0 rgba(0,0,0,0.2);
-}
-
-.menu-card-btn .icon {
-    font-size: 28px;
-    margin-bottom: 5px;
-}
-
-.menu-card-btn .card-text strong {
-    display: block;
-    font-size: 13px;
-    line-height: 1.2;
-}
-
-.menu-card-btn .card-text small {
-    font-size: 11px;
-    opacity: 0.9;
-}
-
-/* Warna Ceria Butang Grid */
-.btn-card-green {
-    background: linear-gradient(135deg, #2ed573, #26af5f);
-}
-
-.btn-card-orange {
-    background: linear-gradient(135deg, #ffa502, #e67e22);
-}
-
-.btn-card-yellow {
-    background: linear-gradient(135deg, #f1c40f, #f39c12);
-}
-
-.btn-card-red {
-    background: linear-gradient(135deg, #ff4757, #ff6b81);
-}
-
-/* Butang Biasa / Borang */
 .monster-btn {
     width: 100%;
     padding: 12px;
@@ -175,23 +174,12 @@ body.monster-bg {
     font-weight: bold;
     color: white;
     cursor: pointer;
-    box-shadow: 0 5px 0 rgba(0,0,0,0.15);
-    transition: all 0.1s ease;
+    box-shadow: 0 4px 0 rgba(0,0,0,0.15);
     margin-top: 10px;
 }
 
-.monster-btn:active {
-    transform: translateY(4px);
-    box-shadow: 0 1px 0 rgba(0,0,0,0.15);
-}
-
-.btn-green {
-    background: linear-gradient(135deg, #2ed573, #26af5f);
-}
-
-.btn-blue {
-    background: linear-gradient(135deg, #3498db, #2980b9);
-}
+.btn-green { background: #2ed573; }
+.btn-blue { background: #3498db; }
 
 .level-btn {
     display: block;
@@ -205,8 +193,4 @@ body.monster-bg {
     font-size: 14px;
     text-align: left;
     cursor: pointer;
-}
-
-.level-btn:hover {
-    background-color: #e2e6ea;
 }
