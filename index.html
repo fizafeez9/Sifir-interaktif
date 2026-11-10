@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cabaran Sifir Hebat!</title>
+    <title>Modul Interaktif Matematik Darjah 3</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -14,8 +14,8 @@
             <h1>🚀 Daftar Akaun Pelajar</h1>
             <p>Sila daftar nama, e-mel dan kata laluan anda terlebih dahulu!</p>
             
-            <p style="color: #ff6b6b; font-weight: bold; margin-bottom: 5px;">AMARAN KERAS!</p>
-            <p style="margin-left: 20px; font-size: 13px; text-align: left;">Setiap sifir perlu dijawab 60saat sahaja. Anda cepat anda hebat!</p>
+            <p style="color: #ff6b6b; font-weight: bold; margin-bottom: 5px;">INFO MODUL!</p>
+            <p style="margin-left: 20px; font-size: 13px; text-align: left;">Sistem ini merangkungi 20 Level latihan Matematik lengkap dengan penerangan jawapan!</p>
             
             <form onsubmit="handleRegister(event)">
                 <div class="form-group">
@@ -54,45 +54,72 @@
             <p style="margin-top: 15px; font-size: 14px;">Belum ada akaun? <a href="#" onclick="showRegisterPage(event)" style="color: #4e54c8; font-weight: bold;">Daftar di sini</a></p>
         </div>
 
-        <!-- 3. PAGE PEMILIHAN LEVEL -->
+        <!-- 3. PAGE PEMILIHAN LEVEL (1 - 20) -->
         <div id="level-page" class="hidden">
             <h2 id="welcome-msg">Pilih Level Anda</h2>
-            <p>Sila pilih tahap kesukaran sifir:</p>
-            <div class="level-grid">
-                <button class="level-btn" onclick="selectLevel(1)">Level 1 (Sifir 1 - 4)</button>
-                <button class="level-btn" onclick="selectLevel(2)">Level 2 (Sifir 5 - 8)</button>
-                <button class="level-btn" onclick="selectLevel(3)">Level 3 (Sifir 9 - 12)</button>
+            <p>Sila pilih tahap kesukaran (Level 1 hingga 20):</p>
+            
+            <!-- Grid Pilihan Level 1 hingga 20 -->
+            <div class="level-grid" id="level-buttons-container" style="max-height: 280px; overflow-y: auto; padding: 5px; margin-bottom: 15px;">
+                <!-- Dijana secara automatik atau manual melalui HTML -->
+                <button class="level-btn" onclick="selectLevel(1)">Level 1: Nilai Nombor</button>
+                <button class="level-btn" onclick="selectLevel(2)">Level 2: Tertib & Banding</button>
+                <button class="level-btn" onclick="selectLevel(3)">Level 3 (Akan Datang)</button>
+                <button class="level-btn" onclick="selectLevel(4)">Level 4 (Akan Datang)</button>
+                <button class="level-btn" onclick="selectLevel(5)">Level 5 (Akan Datang)</button>
+                <button class="level-btn" onclick="selectLevel(6)">Level 6 (Akan Datang)</button>
+                <button class="level-btn" onclick="selectLevel(7)">Level 7 (Akan Datang)</button>
+                <button class="level-btn" onclick="selectLevel(8)">Level 8 (Akan Datang)</button>
+                <button class="level-btn" onclick="selectLevel(9)">Level 9 (Akan Datang)</button>
+                <button class="level-btn" onclick="selectLevel(10)">Level 10 (Akan Datang)</button>
+                <button class="level-btn" onclick="selectLevel(11)">Level 11 (Akan Datang)</button>
+                <button class="level-btn" onclick="selectLevel(12)">Level 12 (Akan Datang)</button>
+                <button class="level-btn" onclick="selectLevel(13)">Level 13 (Akan Datang)</button>
+                <button class="level-btn" onclick="selectLevel(14)">Level 14 (Akan Datang)</button>
+                <button class="level-btn" onclick="selectLevel(15)">Level 15 (Akan Datang)</button>
+                <button class="level-btn" onclick="selectLevel(16)">Level 16 (Akan Datang)</button>
+                <button class="level-btn" onclick="selectLevel(17)">Level 17 (Akan Datang)</button>
+                <button class="level-btn" onclick="selectLevel(18)">Level 18 (Akan Datang)</button>
+                <button class="level-btn" onclick="selectLevel(19)">Level 19 (Akan Datang)</button>
+                <button class="level-btn" onclick="selectLevel(20)">Level 20 (Akan Datang)</button>
             </div>
             
-            <button class="btn-secondary" onclick="showHistoryModal()" style="margin-top: 15px; background-color: #3498db; color: white; border: none; padding: 10px; border-radius: 8px; width: 100%;">📊 Rekod Aktiviti Saya</button>
-            <button class="btn-secondary" onclick="logout()" style="margin-top: 10px; background-color: #e74c3c; color: white; border: none; padding: 10px; border-radius: 8px; width: 100%;">Log Keluar</button>
+            <button class="btn-secondary" onclick="showHistoryModal()" style="background-color: #3498db; color: white; border: none; padding: 10px; border-radius: 8px; width: 100%; margin-bottom: 8px;">📊 Rekod Aktiviti Saya</button>
+            <button class="btn-secondary" onclick="logout()" style="background-color: #e74c3c; color: white; border: none; padding: 10px; border-radius: 8px; width: 100%;">Log Keluar</button>
         </div>
 
-        <!-- 4. PAGE PERMAINAN / KUIZ -->
+        <!-- 4. PAGE PERMAINAN / KUIZ & PENERANGAN AI -->
         <div id="game-page" class="hidden">
             <div class="game-header">
-                <span id="current-stage-title">Sifir X</span>
-                <span class="timer">⏳ <span id="time-left">15</span>s</span>
+                <span id="current-stage-title">Level X</span>
+                <span id="question-counter">Soalan 1/10</span>
             </div>
-            <p id="attempt-info">Percubaan ke-1</p>
-            <div class="question-box" id="question-text">2 × 3 = ?</div>
+            
+            <div class="question-box" id="question-text" style="font-size: 18px; margin-bottom: 15px;">Soalan Matematik...</div>
+            
             <form id="answer-form" onsubmit="checkAnswer(event)">
                 <div class="form-group">
-                    <input type="number" id="user-answer" required autocomplete="off" placeholder="Jawapan...">
+                    <input type="text" id="user-answer" required autocomplete="off" placeholder="Masukkan jawapan anda...">
                 </div>
-                <button type="submit">Hantar Jawapan</button>
+                <button type="submit" id="submit-ans-btn">Hantar Jawapan</button>
             </form>
+
+            <!-- Kotak Paparan Penerangan (Explanation) Selepas Menjawab -->
+            <div id="explanation-box" class="hidden" style="margin-top: 15px; padding: 12px; background: #f1f2f6; border-left: 5px solid #4e54c8; border-radius: 6px; text-align: left;">
+                <p id="explanation-title" style="font-weight: bold; margin-bottom: 5px;"></p>
+                <p id="explanation-text" style="font-size: 14px; color: #333; margin: 0;"></p>
+                <button onclick="nextQuestion()" style="margin-top: 10px; background-color: #2ed573; color: white; border: none; padding: 8px 12px; border-radius: 6px; cursor: pointer; width: 100%;">Soalan Seterusnya ➡️</button>
+            </div>
         </div>
     </div>
 
-    <!-- MODAL POPUP KEPUTUSAN -->
+    <!-- MODAL POPUP KEPUTUSAN LEVEL -->
     <div id="result-modal" class="modal hidden">
         <div class="modal-content">
             <h2>Tahniah! 🎉</h2>
-            <p>Anda telah selesai menjawab semua sifir dalam level ini.</p>
+            <p>Anda telah selesai menjawab latihan untuk level ini.</p>
             <div id="modal-results-list"></div>
-            <button onclick="sendResultToEmail()">📧 Hantar Keputusan ke E-mel</button>
-            <button class="btn-secondary" onclick="closeModalAndReturn()">Pilih Level Lain</button>
+            <button class="btn-secondary" onclick="closeModalAndReturn()" style="margin-top: 15px;">Pilih Level Lain</button>
         </div>
     </div>
 
@@ -131,7 +158,6 @@
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
 
-        // Dedahkan fungsi Firebase ke fail script.js global
         window.db = db;
         window.collection = collection;
         window.addDoc = addDoc;
