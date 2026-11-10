@@ -9,12 +9,6 @@
 <body class="monster-bg">
     <div class="container">
         
-        <!-- HEADER UTAMA (Di luar kad putih, muncul selepas login/masuk menu) -->
-        <div id="main-header" class="app-header hidden">
-            <img src="background/buttons/IMG_8337.jpeg" alt="MathKids" class="header-logo">
-            <img src="background/buttons/IMG_8336.jpeg" alt="Tebus Kredit" class="header-credit-btn" onclick="openCreditModal()">
-        </div>
-
         <!-- 1. PAGE PENDAFTARAN (SIGN UP) -->
         <div id="register-page" class="form-card">
             <h1>🚀 Daftar Akaun Pelajar</h1>
@@ -59,13 +53,21 @@
             <p style="margin-top: 15px; font-size: 14px;">Belum ada akaun? <a href="#" onclick="showRegisterPage(event)" style="color: #4e54c8; font-weight: bold;">Daftar di sini</a></p>
         </div>
 
-        <!-- 3. MENU UTAMA (Menggunakan background IMG_8339.jpeg & imej fizikal butang 2x2) -->
+        <!-- 3. MENU UTAMA (Muncul selepas login, menggunakan imej fizikal 2x2 & background IMG_8339.jpeg) -->
         <div id="main-menu-page" class="hidden menu-main-wrapper">
+            <!-- Header Atas: Logo MathKids & Butang Tebus Kredit -->
+            <div class="app-header">
+                <img src="background/buttons/IMG_8337.jpeg" alt="MathKids" class="header-logo">
+                <img src="background/buttons/IMG_8336.jpeg" alt="Tebus Kredit" class="header-credit-btn" onclick="openCreditModal()">
+            </div>
+
+            <!-- Tajuk Aluan -->
             <div class="menu-title-area">
-                <h2 id="welcome-msg" style="margin-bottom: 2px; font-size: 22px;">Hai, Fiza!</h2>
-                <p style="font-size: 13px; color: #333; margin-bottom: 15px; font-weight: 500;">Pilih aktiviti hebat anda hari ini:</p>
+                <h2 id="welcome-msg" style="margin-bottom: 2px; font-size: 22px; color: #222;">Hai, Fiza!</h2>
+                <p style="font-size: 13px; color: #222; margin-bottom: 15px; font-weight: 600;">Pilih aktiviti hebat anda hari ini:</p>
             </div>
             
+            <!-- Grid 4 Button Menu Utama (2x2) -->
             <div class="menu-grid-2col">
                 <img src="background/buttons/IMG_8328.jpeg" alt="Latihan & Kefahaman" class="menu-img-btn" onclick="showLevelSelection()">
                 <img src="background/buttons/IMG_8330.jpeg" alt="Ujian Penilaian Minda" class="menu-img-btn" onclick="alert('Mod Ujian akan datang!')">
