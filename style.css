@@ -24,24 +24,24 @@ body.menu-active-bg {
     overflow-y: auto;
     display: flex;
     justify-content: center;
-    align-items: center; /* Letakkan di tengah skrin secara seimbang */
+    align-items: flex-start;
 }
 
 .container {
     width: 100%;
     max-width: 450px;
-    padding: 15px;
+    padding: 10px 15px;
     box-sizing: border-box;
 }
 
-/* Wrapper Menu Utama - Kedudukan sederhana di tengah/turun bawah sedikit */
+/* Wrapper Menu Utama - Jarak Sederhana (Turun sedikit daripada atas) */
 .menu-main-wrapper {
     background: transparent !important;
     padding: 0 !important;
     box-shadow: none !important;
     text-align: center;
     width: 100%;
-    margin-top: 30px; /* Ditarik turun ke bawah pada paras yang sederhana */
+    margin-top: 15px; 
 }
 
 /* Header Atas di dalam Menu Utama */
