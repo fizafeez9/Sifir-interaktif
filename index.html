@@ -88,30 +88,25 @@
             <button class="btn-secondary" onclick="logout()" style="background-color: #e74c3c; color: white; border: none; padding: 10px; border-radius: 8px; width: 100%;">Log Keluar</button>
         </div>
 
-        <!-- 4. PAGE PERMAINAN / KUIZ & PENERANGAN AI -->
+        <!-- 4. PAGE PERMAINAN / KUIZ & PENERANGAN -->
         <div id="game-page" class="hidden">
             <div class="game-header">
                 <span id="current-stage-title">Level X</span>
                 <span id="question-counter">Soalan 1/10</span>
             </div>
             
-            <div class="question-box" id="question-text" style="font-size: 18px; margin-bottom: 15px;">Soalan Matematik...</div>
+            <div class="question-box" id="question-text" style="font-size: 18px; margin-bottom: 15px; text-align: left;">Soalan Matematik...</div>
             
-            <form id="answer-form" onsubmit="checkAnswer(event)">
-                <div class="form-group">
-                    <input type="text" id="user-answer" required autocomplete="off" placeholder="Masukkan jawapan anda...">
-                </div>
-                <button type="submit" id="submit-ans-btn">Hantar Jawapan</button>
-            </form>
+            <!-- Tempat Pilihan Jawapan A, B, C, D Dijana -->
+            <div id="options-container"></div>
 
-            <!-- Kotak Paparan Penerangan (Explanation) Selepas Menjawab -->
+            <!-- Kotak Paparan Penerangan Selepas Menjawab -->
             <div id="explanation-box" class="hidden" style="margin-top: 15px; padding: 12px; background: #f1f2f6; border-left: 5px solid #4e54c8; border-radius: 6px; text-align: left;">
                 <p id="explanation-title" style="font-weight: bold; margin-bottom: 5px;"></p>
                 <p id="explanation-text" style="font-size: 14px; color: #333; margin: 0;"></p>
                 <button onclick="nextQuestion()" style="margin-top: 10px; background-color: #2ed573; color: white; border: none; padding: 8px 12px; border-radius: 6px; cursor: pointer; width: 100%;">Soalan Seterusnya ➡️</button>
             </div>
         </div>
-    </div>
 
     <!-- MODAL POPUP KEPUTUSAN LEVEL -->
     <div id="result-modal" class="modal hidden">
