@@ -106,8 +106,8 @@ body.menu-active-bg {
 
 .menu-img-btn {
     width: 100%;
-    height: 65px; /* Ketinggian seragam yang sama rata untuk semua butang */
-    object-fit: fill; /* Memaksa imej memenuhi kotak saiz yang sama sekata */
+    height: 65px;
+    object-fit: fill;
     border-radius: 16px;
     cursor: pointer;
     transition: transform 0.1s ease;
@@ -117,8 +117,8 @@ body.menu-active-bg {
     transform: scale(0.95);
 }
 
-/* Kad Borang Biasa (Login/Register/Level/Game) */
-.form-card, #level-page, #game-page {
+/* Kad Borang Biasa (Login/Register/Level/Game/History Page) */
+.form-card, #level-page, #game-page, #history-page {
     background: rgba(255, 255, 255, 0.95);
     padding: 25px;
     border-radius: 20px;
