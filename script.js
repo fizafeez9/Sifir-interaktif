@@ -1087,7 +1087,7 @@ function showRegisterPage(e) {
     document.getElementById('register-page').classList.remove('hidden');
 }
 
-// Navigasi Menu Utama
+// Navigasi Menu Utama & Pertukaran Background Body
 function showMainMenu() {
     document.getElementById('register-page').classList.add('hidden');
     document.getElementById('login-page').classList.add('hidden');
@@ -1095,7 +1095,9 @@ function showMainMenu() {
     document.getElementById('game-page').classList.add('hidden');
     
     document.getElementById('main-menu-page').classList.remove('hidden');
-    document.getElementById('main-header').classList.remove('hidden');
+    
+    // Aktifkan background khas menu utama (IMG_8339.jpeg)
+    document.body.classList.add('menu-active-bg');
 }
 
 function showLevelSelection() {
@@ -1105,6 +1107,7 @@ function showLevelSelection() {
 
 function backToMainMenu() {
     document.getElementById('level-page').classList.add('hidden');
+    document.getElementById('game-page').classList.add('hidden');
     document.getElementById('main-menu-page').classList.remove('hidden');
 }
 
@@ -1186,7 +1189,9 @@ function logout() {
     document.getElementById('main-menu-page').classList.add('hidden');
     document.getElementById('level-page').classList.add('hidden');
     document.getElementById('game-page').classList.add('hidden');
-    document.getElementById('main-header').classList.add('hidden');
+    
+    // Buang background menu utama, kembali ke background asal login
+    document.body.classList.remove('menu-active-bg');
     
     document.getElementById('login-page').classList.remove('hidden');
     document.getElementById('login-email').value = '';
@@ -1205,6 +1210,7 @@ function selectLevel(lvl) {
     scoreCount = 0;
     currentLevelQuestions = levelsQuestions[lvl] || levelsQuestions[1];
 
+    document.getElementById('main-menu-page').classList.add('hidden');
     document.getElementById('level-page').classList.add('hidden');
     document.getElementById('game-page').classList.remove('hidden');
     
@@ -1345,6 +1351,10 @@ function closeModalAndReturn() {
     document.getElementById('result-modal').classList.add('hidden');
     document.getElementById('game-page').classList.add('hidden');
     document.getElementById('level-page').classList.remove('hidden');
+}
+
+function openCreditModal() {
+    alert("⭐ Pautan Tebus Kredit akan datang!");
 }
 
 function playCorrectSound() {
