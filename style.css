@@ -2,6 +2,7 @@
     display: none !important;
 }
 
+/* Background Asal untuk Login/Register */
 body.monster-bg {
     margin: 0;
     padding: 0;
@@ -14,6 +15,12 @@ body.monster-bg {
     align-items: center;
 }
 
+/* Background Khas Selepas Login (Menu Utama - IMG_8339.jpeg) */
+body.menu-active-bg {
+    background: url('background/IMG_8339.jpeg') no-repeat center center fixed !important;
+    background-size: cover !important;
+}
+
 .container {
     width: 100%;
     max-width: 450px;
@@ -21,15 +28,25 @@ body.monster-bg {
     box-sizing: border-box;
 }
 
-/* Header Atas (Selepas Login / Menu Utama) */
-.app-header {
+/* Wrapper Menu Utama (Tanpa Kotak Putih, Terus atas Background) */
+.menu-main-wrapper {
+    background: transparent !important;
+    padding: 0 !important;
+    box-shadow: none !important;
+    text-align: center;
+    width: 100%;
+}
+
+/* Header Atas di dalam Menu Utama */
+.menu-main-wrapper .app-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     width: 100%;
-    margin-bottom: 12px;
-    box-sizing: border-box;
-    padding: 0 5px;
+    margin-bottom: 15px;
+    padding: 0;
+    background: transparent !important;
+    box-shadow: none !important;
 }
 
 .header-logo {
@@ -42,32 +59,20 @@ body.monster-bg {
     cursor: pointer;
 }
 
-/* Susunan Menu Utama dengan Background Baru (IMG_8339.jpeg) */
-.menu-main-wrapper {
-    text-align: center;
-    width: 100%;
-    background: url('background/IMG_8339.jpeg') no-repeat center center;
-    background-size: cover;
-    padding: 20px 15px;
-    border-radius: 20px;
-    box-sizing: border-box;
-}
-
-/* Grid 2x2 untuk Butang Imej Fizikal Supaya Sama Besar */
+/* Susunan Grid 2x2 untuk Butang Imej Fizikal */
 .menu-grid-2col {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 12px;
-    margin-top: 10px;
+    width: 100%;
 }
 
 .menu-img-btn {
     width: 100%;
-    height: 85px;
-    object-fit: cover;
-    border-radius: 16px;
+    height: auto;
+    aspect-ratio: 2.2 / 1; /* Kekalkan nisbah bentuk butang asal */
+    object-fit: contain;
     cursor: pointer;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.15);
     transition: transform 0.1s ease;
 }
 
@@ -75,7 +80,7 @@ body.monster-bg {
     transform: scale(0.96);
 }
 
-/* Kad Borang Biasa (Login/Register) */
+/* Kad Borang Biasa (Login/Register/Level/Game) */
 .form-card, #level-page, #game-page {
     background: rgba(255, 255, 255, 0.95);
     padding: 25px;
