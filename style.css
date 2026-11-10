@@ -15,30 +15,33 @@ body.monster-bg {
     align-items: center;
 }
 
-/* Background Khas Menu Utama Supaya Penuh & Cantik Tanpa Ruang Putih */
+/* Background Khas Menu Utama (IMG_8390.png) */
 body.menu-active-bg {
     background: url('background/IMG_8390.png') no-repeat center center fixed !important;
     background-size: cover !important;
     height: 100vh;
     width: 100vw;
     overflow-y: auto;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; /* Letakkan kandungan bermula dari bahagian atas skrin */
 }
 
 .container {
     width: 100%;
     max-width: 450px;
-    padding: 10px 15px; /* Kurangkan padding atas kontena */
+    padding: 5px 15px; /* Minimumkan padding kontena atas */
     box-sizing: border-box;
 }
 
-/* Wrapper Menu Utama - Tarik ke atas dan kurangkan jarak */
+/* Wrapper Menu Utama - Ditarik ke atas sepenuhnya */
 .menu-main-wrapper {
     background: transparent !important;
     padding: 0 !important;
     box-shadow: none !important;
     text-align: center;
     width: 100%;
-    margin-top: -20px; /* Tarik keseluruhan menu ke atas */
+    margin-top: 5px; /* Kurangkan jarak dari atas skrin */
 }
 
 /* Header Atas di dalam Menu Utama */
@@ -47,7 +50,7 @@ body.menu-active-bg {
     justify-content: space-between;
     align-items: center;
     width: 100%;
-    margin-bottom: 25px; /* Jarakkan lebih jauh ke bawah daripada baris logo/kredit ke tulisan Hai */
+    margin-bottom: 20px;
     padding: 0;
     background: transparent !important;
     box-shadow: none !important;
