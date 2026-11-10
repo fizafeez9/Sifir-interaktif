@@ -8,9 +8,11 @@
 </head>
 <body class="monster-bg">
     <div class="container">
-        <!-- HEADER KECIL LOGO -->
-        <div class="app-header">
+        
+        <!-- HEADER UTAMA (Selepas Login: Logo & Tebus Kredit) -->
+        <div id="main-header" class="app-header hidden">
             <span class="logo-text">MathKids 👾</span>
+            <button class="credit-btn">⭐ Tebus Kredit: 0</button>
         </div>
 
         <!-- 1. PAGE PENDAFTARAN (SIGN UP) -->
@@ -57,11 +59,48 @@
             <p style="margin-top: 15px; font-size: 14px;">Belum ada akaun? <a href="#" onclick="showRegisterPage(event)" style="color: #4e54c8; font-weight: bold;">Daftar di sini</a></p>
         </div>
 
-        <!-- 3. PAGE PEMILIHAN LEVEL (1 - 20) -->
-        <div id="level-page" class="hidden">
-            <h2 id="welcome-msg">Pilih Level Anda</h2>
-            <p>Sila pilih tahap kesukaran (Level 1 hingga 20):</p>
-            <div class="level-grid" id="level-buttons-container" style="max-height: 280px; overflow-y: auto; padding: 5px; margin-bottom: 15px;">
+        <!-- 3. MENU UTAMA (Selepas Login: 4 Butang Grid Ceria) -->
+        <div id="main-menu-page" class="hidden form-card">
+            <h2 id="welcome-msg" style="margin-bottom: 5px;">Hai, Fiza!</h2>
+            <p style="font-size: 14px; color: #555; margin-bottom: 20px;">Pilih aktiviti hebat anda hari ini:</p>
+            
+            <div class="menu-grid">
+                <button class="menu-card-btn btn-card-green" onclick="showLevelSelection()">
+                    <span class="icon">🧠</span>
+                    <div class="card-text">
+                        <strong>Latihan & Kefahaman</strong>
+                        <small>(Level 1-20)</small>
+                    </div>
+                </button>
+
+                <button class="menu-card-btn btn-card-orange" onclick="alert('Mod Ujian akan datang!')">
+                    <span class="icon">🎯</span>
+                    <div class="card-text">
+                        <strong>Ujian Penilaian Minda</strong>
+                    </div>
+                </button>
+
+                <button class="menu-card-btn btn-card-yellow" onclick="showHistoryModal()">
+                    <span class="icon">📊</span>
+                    <div class="card-text">
+                        <strong>Rekod Aktiviti Saya</strong>
+                    </div>
+                </button>
+
+                <button class="menu-card-btn btn-card-red" onclick="logout()">
+                    <span class="icon">🚪</span>
+                    <div class="card-text">
+                        <strong>Log Keluar</strong>
+                    </div>
+                </button>
+            </div>
+        </div>
+
+        <!-- 3.1 PAGE PEMILIHAN LEVEL (1 - 20) - Masuk Lepas Tekan Latihan -->
+        <div id="level-page" class="hidden form-card">
+            <h2>Pilih Tahap Kesukaran</h2>
+            <p>Sila pilih Level latihan (1 hingga 20):</p>
+            <div class="level-grid" id="level-buttons-container" style="max-height: 250px; overflow-y: auto; padding: 5px; margin-bottom: 15px;">
                 <button class="level-btn" onclick="selectLevel(1)">Level 1: Nilai Nombor</button>
                 <button class="level-btn" onclick="selectLevel(2)">Level 2: Tertib & Banding</button>
                 <button class="level-btn" onclick="selectLevel(3)">Level 3: Tambah (Tanpa Mengumpul Semula)</button>
@@ -83,12 +122,11 @@
                 <button class="level-btn" onclick="selectLevel(19)">Level 19: Jisim (Berat)</button>
                 <button class="level-btn" onclick="selectLevel(20)">Level 20: Isi Padu Cecair</button>
             </div>
-            <button class="btn-secondary" onclick="showHistoryModal()" style="background-color: #3498db; color: white; border: none; padding: 10px; border-radius: 8px; width: 100%; margin-bottom: 8px;">📊 Rekod Aktiviti Saya</button>
-            <button class="btn-secondary" onclick="logout()" style="background-color: #e74c3c; color: white; border: none; padding: 10px; border-radius: 8px; width: 100%;">Log Keluar</button>
+            <button class="monster-btn btn-blue" onclick="backToMainMenu()">⬅️ Kembali ke Menu Utama</button>
         </div>
 
         <!-- 4. PAGE PERMAINAN / KUIZ & PENERANGAN -->
-        <div id="game-page" class="hidden">
+        <div id="game-page" class="hidden form-card">
             <div class="game-header">
                 <span id="current-stage-title">Level X</span>
                 <span id="question-counter">Soalan 1/10</span>
