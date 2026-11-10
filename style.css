@@ -95,19 +95,20 @@ body.menu-active-bg {
     font-weight: 700;
 }
 
-/* Susunan Grid 2x2 untuk Butang Imej PNG Sama Saiz */
+/* Susunan Grid 2x2 untuk Butang Imej PNG */
 .menu-grid-2col {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 12px;
     width: 100%;
-    align-items: center;
 }
 
+/* Paksa kesemua 4 butang ikut saiz yang seragam 100% sama besar */
 .menu-img-btn {
     width: 100%;
-    height: 75px; /* Ketinggian tetap yang seragam untuk kesemua 4 butang */
-    object-fit: contain; /* Memastikan nisbah bentuk butang terpelihara tanpa lonjong */
+    height: 65px; /* Tetapkan ketinggian seragam yang kemas */
+    object-fit: fill; /* Memaksa imej memenuhi ruang kotak saiz yang sama rata */
+    border-radius: 16px;
     cursor: pointer;
     transition: transform 0.1s ease;
 }
