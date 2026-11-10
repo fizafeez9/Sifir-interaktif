@@ -4,7 +4,7 @@ let currentQuestionIndex = 0;
 let currentLevelQuestions = [];
 let scoreCount = 0;
 
-// Bank Soalan Objektif (A, B, C, D) & Explanation Bersih Tanpa Tag Serabut
+// Bank Soalan Objektif (A, B, C, D) & Explanation Bersih
 const levelsQuestions = {
     1: [
         {
@@ -399,4 +399,152 @@ const levelsQuestions = {
         },
         {
             q: "Apakah nilai bagi y jika 5,400 - y = 2,100?",
-            options
+            options: ["A) 3,300", "B) 3,400", "C) 3,200", "D) 7,500"],
+            answer: "A) 3,300",
+            explanation: "y = 5,400 - 2,100 = 3,300."
+        },
+        {
+            q: "Selesaikan persamaan tambah: 3,120 + 🛈 = 7,000.",
+            options: ["A) 3,880", "B) 3,780", "C) 3,980", "D) 3,870"],
+            answer: "A) 3,880",
+            explanation: "🛈 = 7,000 - 3,120 = 3,880."
+        },
+        {
+            q: "Cari nilai anu bagi: 🛈 - 2,400 = 1,850.",
+            options: ["A) 4,250", "B) 4,150", "C) 4,350", "D) 4,240"],
+            answer: "A) 4,250",
+            explanation: "🛈 = 1,850 + 2,400 = 4,250."
+        },
+        {
+            q: "Apakah nombor misteri bagi x dalam persamaan 8,300 - x = 4,150?",
+            options: ["A) 4,150", "B) 4,250", "C) 4,050", "D) 3,150"],
+            answer: "A) 4,150",
+            explanation: "x = 8,300 - 4,150 = 4,150."
+        },
+        {
+            q: "Selesaikan ayat matematik: 1,600 + 🛈 + 1,400 = 5,000.",
+            options: ["A) 2,000", "B) 3,000", "C) 2,500", "D) 1,500"],
+            answer: "A) 2,000",
+            explanation: "1,600 + 1,400 = 3,000. 🛈 = 5,000 - 3,000 = 2,000."
+        },
+        {
+            q: "Amin ada beberapa biji guli. Dia beri 1,200 biji kepada adiknya dan baki gulinya tinggal 3,500 biji. Berapakah jumlah guli asal Amin (gunakan anu 🛈)?",
+            options: ["A) 4,700", "B) 4,600", "C) 2,300", "D) 4,800"],
+            answer: "A) 4,700",
+            explanation: "🛈 - 1,200 = 3,500 maka 🛈 = 3,500 + 1,200 = 4,700 biji guli."
+        },
+        {
+            q: "Cari nilai anu bagi: 🛈 + 2,150 = 6,000.",
+            options: ["A) 3,850", "B) 3,750", "C) 3,950", "D) 3,840"],
+            answer: "A) 3,850",
+            explanation: "🛈 = 6,000 - 2,150 = 3,850."
+        }
+    ],
+    8: [
+        {
+            q: "Hitung hasil darab bagi 7 × 9.",
+            options: ["A) 63", "B) 56", "C) 72", "D) 49"],
+            answer: "A) 63",
+            explanation: "Sifir 7: 7 × 9 = 63."
+        },
+        {
+            q: "Selesaikan: 8 × 6.",
+            options: ["A) 48", "B) 42", "C) 54", "D) 36"],
+            answer: "A) 48",
+            explanation: "Sifir 8: 8 × 6 = 48."
+        },
+        {
+            q: "Cari hasil darab bagi 40 × 50.",
+            options: ["A) 2,000", "B) 200", "C) 20,000", "D) 1,500"],
+            answer: "A) 2,000",
+            explanation: "4 × 5 = 20 tambah dua sifar jadi 2,000."
+        },
+        {
+            q: "Apakah nilai bagi 9 × 8?",
+            options: ["A) 72", "B) 81", "C) 64", "D) 56"],
+            answer: "A) 72",
+            explanation: "Sifir 9: 9 × 8 = 72."
+        },
+        {
+            q: "Selesaikan pendaraban: 30 × 7",
+            options: ["A) 210", "B) 200", "C) 240", "D) 211"],
+            answer: "A) 210",
+            explanation: "3 × 7 = 21 tambah satu sifar jadi 210."
+        },
+        {
+            q: "Hitung nilai bagi 6 × 12",
+            options: ["A) 72", "B) 68", "C) 78", "D) 66"],
+            answer: "A) 72",
+            explanation: "6 × 12 = 72."
+        },
+        {
+            q: "Selesaikan: 200 × 4.",
+            options: ["A) 800", "B) 600", "C) 400", "D) 1,000"],
+            answer: "A) 800",
+            explanation: "2 × 4 = 8 tambah dua sifar jadi 800."
+        },
+        {
+            q: "Cari hasil darab bagi 70 × 10",
+            options: ["A) 700", "B) 70", "C) 7,000", "D) 710"],
+            answer: "A) 700",
+            explanation: "70 darab 10 menambah satu sifar di belakang menjadi 700."
+        },
+        {
+            q: "Sebuah kelas mempunyai 8 baris kerusi. Setiap baris ada 9 buah kerusi. Berapakah jumlah kerusi semuanya?",
+            options: ["A) 72", "B) 81", "C) 64", "D) 56"],
+            answer: "A) 72",
+            explanation: "8 × 9 = 72 buah kerusi."
+        },
+        {
+            q: "Selesaikan ayat matematik berikut: 0 × 60 = ?",
+            options: ["A) 0", "B) 60", "C) 1", "D) 600"],
+            answer: "A) 0",
+            explanation: "Sebarang nombor yang didarab dengan 0 akan menghasilkan 0."
+        }
+    ],
+    9: [
+        {
+            q: "Cari hasil darab bagi 1,243 × 3",
+            options: ["A) 3,729", "B) 3,629", "C) 3,739", "D) 3,829"],
+            answer: "A) 3,729",
+            explanation: "3×3=9, 4×3=12 (simpan 1), 2×3+1=7, 1×3=3. Jawapan: 3,729."
+        },
+        {
+            q: "Selesaikan: 2,130 × 4",
+            options: ["A) 8,520", "B) 8,420", "C) 8,620", "D) 8,510"],
+            answer: "A) 8,520",
+            explanation: "2,130 × 4 = 8,520."
+        },
+        {
+            q: "Darabkan 3,412 dengan 2.",
+            options: ["A) 6,824", "B) 6,724", "C) 6,924", "D) 6,814"],
+            answer: "A) 6,824",
+            explanation: "3,412 × 2 = 6,824."
+        },
+        {
+            q: "Hitung hasil darab bagi 1,504 × 5.",
+            options: ["A) 7,520", "B) 7,420", "C) 7,620", "D) 7,510"],
+            answer: "A) 7,520",
+            explanation: "1,504 × 5 = 7,520."
+        },
+        {
+            q: "Selesaikan pendaraban: 2,315 × 3.",
+            options: ["A) 6,945", "B) 6,845", "C) 6,935", "D) 6,955"],
+            answer: "A) 6,945",
+            explanation: "2,315 × 3 = 6,945."
+        },
+        {
+            q: "Cari nilai bagi 1,122 × 7.",
+            options: ["A) 7,854", "B) 7,754", "C) 7,954", "D) 7,844"],
+            answer: "A) 7,854",
+            explanation: "1,122 × 7 = 7,854."
+        },
+        {
+            q: "Selesaikan: 1,080 × 6.",
+            options: ["A) 6,480", "B) 6,380", "C) 6,580", "D) 6,470"],
+            answer: "A) 6,480",
+            explanation: "1,080 × 6 = 6,480."
+        },
+        {
+            q: "Hitung hasil darab bagi 1,234 × 8.",
+            options: ["A) 9,
