@@ -24,24 +24,24 @@ body.menu-active-bg {
     overflow-y: auto;
     display: flex;
     justify-content: center;
-    align-items: flex-start; /* Letakkan kandungan bermula dari bahagian atas skrin */
+    align-items: center; /* Letakkan di tengah skrin secara seimbang */
 }
 
 .container {
     width: 100%;
     max-width: 450px;
-    padding: 5px 15px; /* Minimumkan padding kontena atas */
+    padding: 15px;
     box-sizing: border-box;
 }
 
-/* Wrapper Menu Utama - Ditarik ke atas sepenuhnya */
+/* Wrapper Menu Utama - Kedudukan sederhana di tengah/turun bawah sedikit */
 .menu-main-wrapper {
     background: transparent !important;
     padding: 0 !important;
     box-shadow: none !important;
     text-align: center;
     width: 100%;
-    margin-top: 5px; /* Kurangkan jarak dari atas skrin */
+    margin-top: 30px; /* Ditarik turun ke bawah pada paras yang sederhana */
 }
 
 /* Header Atas di dalam Menu Utama */
@@ -50,7 +50,7 @@ body.menu-active-bg {
     justify-content: space-between;
     align-items: center;
     width: 100%;
-    margin-bottom: 20px;
+    margin-bottom: 22px;
     padding: 0;
     background: transparent !important;
     box-shadow: none !important;
@@ -85,7 +85,7 @@ body.menu-active-bg {
 /* Bahagian Tajuk Ucapan */
 .menu-title-area {
     text-align: center;
-    margin-bottom: 15px;
+    margin-bottom: 16px;
 }
 
 .menu-title-area h2 {
