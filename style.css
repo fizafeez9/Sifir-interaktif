@@ -15,7 +15,7 @@ body.monster-bg {
     align-items: center;
 }
 
-/* Background Khas Selepas Login (Menu Utama - IMG_8339.jpeg) */
+/* Background Khas Menu Utama (IMG_8339.jpeg) */
 body.menu-active-bg {
     background: url('background/IMG_8339.jpeg') no-repeat center center fixed !important;
     background-size: cover !important;
@@ -28,7 +28,7 @@ body.menu-active-bg {
     box-sizing: border-box;
 }
 
-/* Wrapper Menu Utama (Tanpa Kotak Putih, Terus atas Background) */
+/* Wrapper Menu Utama */
 .menu-main-wrapper {
     background: transparent !important;
     padding: 0 !important;
@@ -43,23 +43,59 @@ body.menu-active-bg {
     justify-content: space-between;
     align-items: center;
     width: 100%;
-    margin-bottom: 15px;
+    margin-bottom: 20px;
     padding: 0;
     background: transparent !important;
     box-shadow: none !important;
 }
 
+/* Logo MathKids (PNG) */
 .header-logo {
-    height: 38px;
+    height: 42px;
+    width: auto;
     object-fit: contain;
 }
 
-.header-credit-btn {
-    height: 36px;
+/* Butang Tebus Kredit Dinamik */
+.credit-btn {
+    background: #9b59b6;
+    color: white;
+    border: 3px solid #222;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-weight: bold;
+    font-size: 13px;
+    box-shadow: 0 4px 0 #222;
     cursor: pointer;
+    transition: 0.1s;
 }
 
-/* Susunan Grid 2x2 untuk Butang Imej Fizikal */
+.credit-btn:active {
+    transform: translateY(3px);
+    box-shadow: 0 1px 0 #222;
+}
+
+/* Bahagian Tajuk Ucapan */
+.menu-title-area {
+    text-align: center;
+    margin-bottom: 18px;
+}
+
+.menu-title-area h2 {
+    font-size: 24px;
+    color: #222;
+    margin: 0 0 5px 0;
+    font-weight: 800;
+}
+
+.menu-title-area p {
+    font-size: 14px;
+    color: #222;
+    margin: 0;
+    font-weight: 700;
+}
+
+/* Susunan Grid 2x2 untuk Butang Imej PNG */
 .menu-grid-2col {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -70,14 +106,14 @@ body.menu-active-bg {
 .menu-img-btn {
     width: 100%;
     height: auto;
-    aspect-ratio: 2.2 / 1; /* Kekalkan nisbah bentuk butang asal */
+    aspect-ratio: 2.3 / 1; 
     object-fit: contain;
     cursor: pointer;
     transition: transform 0.1s ease;
 }
 
 .menu-img-btn:active {
-    transform: scale(0.96);
+    transform: scale(0.95);
 }
 
 /* Kad Borang Biasa (Login/Register/Level/Game) */
