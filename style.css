@@ -21,7 +21,7 @@ body.monster-bg {
     box-sizing: border-box;
 }
 
-/* Header Atas */
+/* Header Atas (Selepas Login / Menu Utama) */
 .app-header {
     display: flex;
     justify-content: space-between;
@@ -32,97 +32,47 @@ body.monster-bg {
     padding: 0 5px;
 }
 
-.logo-text {
-    background: white;
-    padding: 6px 15px;
-    border-radius: 20px;
-    font-weight: bold;
-    color: #4e54c8;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+.header-logo {
+    height: 38px;
+    object-fit: contain;
 }
 
-.credit-btn {
-    background: #9b59b6;
-    color: white;
-    border: none;
-    padding: 6px 14px;
-    border-radius: 20px;
-    font-weight: bold;
-    font-size: 13px;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+.header-credit-btn {
+    height: 36px;
     cursor: pointer;
 }
 
-/* Susunan Menu Utama (Gaya Gambar 2) */
+/* Susunan Menu Utama dengan Background Baru (IMG_8339.jpeg) */
 .menu-main-wrapper {
     text-align: center;
     width: 100%;
+    background: url('background/IMG_8339.jpeg') no-repeat center center;
+    background-size: cover;
+    padding: 20px 15px;
+    border-radius: 20px;
+    box-sizing: border-box;
 }
 
-.menu-grid-styled {
+/* Grid 2x2 untuk Butang Imej Fizikal Supaya Sama Besar */
+.menu-grid-2col {
     display: grid;
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr 1fr;
     gap: 12px;
     margin-top: 10px;
 }
 
-.menu-item-card {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 12px 18px;
-    border: 3px solid #222;
-    border-radius: 25px;
-    color: white;
-    font-weight: bold;
+.menu-img-btn {
+    width: 100%;
+    height: 85px;
+    object-fit: cover;
+    border-radius: 16px;
     cursor: pointer;
-    box-shadow: 0 4px 0 #222;
-    transition: 0.1s;
-    text-align: left;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.15);
+    transition: transform 0.1s ease;
 }
 
-.menu-item-card:active {
-    transform: translateY(3px);
-    box-shadow: 0 1px 0 #222;
-}
-
-.menu-item-card .item-content {
-    display: flex;
-    flex-direction: column;
-}
-
-.menu-item-card .icon {
-    font-size: 22px;
-    margin-bottom: 2px;
-}
-
-.menu-item-card strong {
-    font-size: 14px;
-    line-height: 1.2;
-}
-
-.menu-item-card small {
-    font-size: 11px;
-    opacity: 0.9;
-}
-
-.monster-icon-side {
-    font-size: 32px;
-}
-
-/* Warna Butang Menu Serupa Rujukan */
-.btn-item-green {
-    background-color: #2ed573;
-}
-.btn-item-blue {
-    background-color: #3498db;
-}
-.btn-item-yellow {
-    background-color: #f1c40f;
-    color: #333;
-}
-.btn-item-red {
-    background-color: #ff4757;
+.menu-img-btn:active {
+    transform: scale(0.96);
 }
 
 /* Kad Borang Biasa (Login/Register) */
