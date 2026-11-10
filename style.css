@@ -24,7 +24,7 @@ body.menu-active-bg {
     overflow-y: auto;
     display: flex;
     justify-content: center;
-    align-items: center; /* Letakkan keseluruhan kandungan di tengah skrin */
+    align-items: center;
 }
 
 .container {
@@ -36,16 +36,17 @@ body.menu-active-bg {
     height: 100vh;
     display: flex;
     flex-direction: column;
-    justify-content: center; /* Pusatkan menu utama secara menegak */
+    justify-content: center;
 }
 
-/* Wrapper Menu Utama - Turun ke tengah */
+/* Wrapper Menu Utama - Dinaikkan ke atas sedikit sebanyak ~2cm (margin-top negatif) */
 .menu-main-wrapper {
     background: transparent !important;
     padding: 0 !important;
     box-shadow: none !important;
     text-align: center;
     width: 100%;
+    margin-top: -60px; /* Dinaikkan ke atas supaya lebih dekat ke bahagian atas */
 }
 
 /* Header Atas di dalam Menu Utama (Khas untuk Logo MathKids & Butang Kredit) */
