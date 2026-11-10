@@ -9,7 +9,7 @@
 <body class="monster-bg">
     <div class="container">
         
-        <!-- HEADER UTAMA (Hanya muncul selepas login/masuk menu) -->
+        <!-- HEADER UTAMA (Di luar kad putih, muncul selepas login/masuk menu) -->
         <div id="main-header" class="app-header hidden">
             <span class="logo-text">MathKids 👾</span>
             <button class="credit-btn">⭐ Tebus Kredit: 0</button>
@@ -41,7 +41,7 @@
             <p style="margin-top: 15px; font-size: 14px;">Sudah ada akaun? <a href="#" onclick="showLoginPage(event)" style="color: #4e54c8; font-weight: bold;">Log Masuk di sini</a></p>
         </div>
 
-        <!-- 2. PAGE LOG MASUK (LOGIN) - Mesti ada class "hidden" di awal -->
+        <!-- 2. PAGE LOG MASUK (LOGIN) -->
         <div id="login-page" class="hidden form-card">
             <h1>🔐 Log Masuk Pelajar</h1>
             <p>Sila masukkan e-mel dan kata laluan yang telah didaftarkan.</p>
@@ -59,44 +59,50 @@
             <p style="margin-top: 15px; font-size: 14px;">Belum ada akaun? <a href="#" onclick="showRegisterPage(event)" style="color: #4e54c8; font-weight: bold;">Daftar di sini</a></p>
         </div>
 
-        <!-- 3. MENU UTAMA (Selepas Login: 4 Butang Grid Ceria) - Mesti ada class "hidden" -->
-        <div id="main-menu-page" class="hidden form-card">
-            <h2 id="welcome-msg" style="margin-bottom: 5px;">Hai, Fiza!</h2>
-            <p style="font-size: 14px; color: #555; margin-bottom: 20px;">Pilih aktiviti hebat anda hari ini:</p>
+        <!-- 3. MENU UTAMA (Tanpa kad putih besar, terus atas background) -->
+        <div id="main-menu-page" class="hidden menu-main-wrapper">
+            <div class="menu-title-area">
+                <h2 id="welcome-msg" style="margin-bottom: 2px; font-size: 22px;">Hai, Fiza!</h2>
+                <p style="font-size: 13px; color: #333; margin-bottom: 15px; font-weight: 500;">Pilih aktiviti hebat anda hari ini:</p>
+            </div>
             
-            <div class="menu-grid">
-                <button class="menu-card-btn btn-card-green" onclick="showLevelSelection()">
-                    <span class="icon">🧠</span>
-                    <div class="card-text">
+            <div class="menu-grid-styled">
+                <button class="menu-item-card btn-item-green" onclick="showLevelSelection()">
+                    <div class="item-content">
+                        <span class="icon">🧠</span>
                         <strong>Latihan & Kefahaman</strong>
                         <small>(Level 1-20)</small>
                     </div>
+                    <span class="monster-icon-side">🦖</span>
                 </button>
 
-                <button class="menu-card-btn btn-card-orange" onclick="alert('Mod Ujian akan datang!')">
-                    <span class="icon">🎯</span>
-                    <div class="card-text">
+                <button class="menu-item-card btn-item-blue" onclick="alert('Mod Ujian akan datang!')">
+                    <div class="item-content">
+                        <span class="icon">🎯</span>
                         <strong>Ujian Penilaian Minda</strong>
                     </div>
+                    <span class="monster-icon-side">👾</span>
                 </button>
 
-                <button class="menu-card-btn btn-card-yellow" onclick="showHistoryModal()">
-                    <span class="icon">📊</span>
-                    <div class="card-text">
+                <button class="menu-item-card btn-item-yellow" onclick="showHistoryModal()">
+                    <div class="item-content">
+                        <span class="icon">📊</span>
                         <strong>Rekod Aktiviti Saya</strong>
                     </div>
+                    <span class="monster-icon-side">🤖</span>
                 </button>
 
-                <button class="menu-card-btn btn-card-red" onclick="logout()">
-                    <span class="icon">🚪</span>
-                    <div class="card-text">
+                <button class="menu-item-card btn-item-red" onclick="logout()">
+                    <div class="item-content">
+                        <span class="icon">🚪</span>
                         <strong>Log Keluar</strong>
                     </div>
+                    <span class="monster-icon-side">👹</span>
                 </button>
             </div>
         </div>
 
-        <!-- 3.1 PAGE PEMILIHAN LEVEL (1 - 20) - Mesti ada class "hidden" -->
+        <!-- 3.1 PAGE PEMILIHAN LEVEL (1 - 20) -->
         <div id="level-page" class="hidden form-card">
             <h2>Pilih Tahap Kesukaran</h2>
             <p>Sila pilih Level latihan (1 hingga 20):</p>
@@ -125,9 +131,9 @@
             <button class="monster-btn btn-blue" onclick="backToMainMenu()">⬅️ Kembali ke Menu Utama</button>
         </div>
 
-        <!-- 4. PAGE PERMAINAN / KUIZ & PENERANGAN - Mesti ada class "hidden" -->
+        <!-- 4. PAGE PERMAINAN / KUIZ -->
         <div id="game-page" class="hidden form-card">
-            <div class="game-header">
+            <div class="game-header" style="display: flex; justify-content: space-between; font-weight: bold; margin-bottom: 10px; color: #4e54c8;">
                 <span id="current-stage-title">Level X</span>
                 <span id="question-counter">Soalan 1/10</span>
             </div>
@@ -141,26 +147,25 @@
         </div>
     </div>
 
-    <!-- MODAL POPUP KEPUTUSAN LEVEL -->
+    <!-- MODAL POPUP KEPUTUSAN -->
     <div id="result-modal" class="modal hidden">
         <div class="modal-content">
             <h2>Tahniah! 🎉</h2>
             <p>Anda telah selesai menjawab latihan untuk level ini.</p>
             <div id="modal-results-list"></div>
-            <button class="btn-secondary" onclick="closeModalAndReturn()" style="margin-top: 15px;">Pilih Level Lain</button>
+            <button class="monster-btn btn-blue" onclick="closeModalAndReturn()" style="margin-top: 15px;">Pilih Level Lain</button>
         </div>
     </div>
 
-    <!-- MODAL POPUP REKOD AKTIVITI SEJARAH -->
+    <!-- MODAL POPUP REKOD AKTIVITI -->
     <div id="history-modal" class="modal hidden">
         <div class="modal-content">
             <h2>📊 Sejarah Keputusan Anda</h2>
             <div id="history-list" style="max-height: 250px; overflow-y: auto; text-align: left; margin: 15px 0; padding: 5px;"></div>
-            <button class="btn-secondary" onclick="closeHistoryModal()">Tutup</button>
+            <button class="monster-btn btn-blue" onclick="closeHistoryModal()">Tutup</button>
         </div>
     </div>
 
-    <!-- Kesan Bunyi -->
     <audio id="sound-correct" preload="auto">
         <source src="https://actions.google.com/sounds/v1/cartoon/clang_and_wobble.ogg" type="audio/ogg">
     </audio>
@@ -168,7 +173,6 @@
         <source src="https://actions.google.com/sounds/v1/cartoon/slide_whistle.ogg" type="audio/ogg">
     </audio>
 
-    <!-- FIREBASE SDK & KOD UTAMA -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/13.2.0/firebase-app.js";
         import { getFirestore, collection, addDoc, getDocs, query, where } from "https://www.gstatic.com/firebasejs/13.2.0/firebase-firestore.js";
