@@ -1,167 +1,146 @@
 <!DOCTYPE html>
 <html lang="ms">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Modul Interaktif Matematik Darjah 3</title>
-    <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Modul Interaktif Matematik Darjah 3</title>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
-
-    <div class="container">
-        <!-- 1. PAGE PENDAFTARAN (SIGN UP) -->
-        <div id="register-page">
-            <h1>🚀 Daftar Akaun Pelajar</h1>
-            <p>Sila daftar nama, e-mel dan kata laluan anda terlebih dahulu!</p>
-            
-            <p style="color: #ff6b6b; font-weight: bold; margin-bottom: 5px;">INFO MODUL!</p>
-            <p style="margin-left: 20px; font-size: 13px; text-align: left;">Sistem ini merangkungi 20 Level latihan Matematik lengkap dengan penerangan jawapan!</p>
-            
-            <form onsubmit="handleRegister(event)">
-                <div class="form-group">
-                    <label for="reg-nama">Nama Pelajar:</label>
-                    <input type="text" id="reg-nama" required placeholder="Cth: Ali bin Abu">
-                </div>
-                <div class="form-group">
-                    <label for="reg-email">E-mel:</label>
-                    <input type="email" id="reg-email" required placeholder="Cth: ali@email.com">
-                </div>
-                <div class="form-group">
-                    <label for="reg-password">Kata Laluan (Password):</label>
-                    <input type="password" id="reg-password" required placeholder="Cipta kata laluan anda">
-                </div>
-                <button type="submit">Daftar Sekarang</button>
-            </form>
-            <p style="margin-top: 15px; font-size: 14px;">Sudah ada akaun? <a href="#" onclick="showLoginPage(event)" style="color: #4e54c8; font-weight: bold;">Log Masuk di sini</a></p>
-        </div>
-
-        <!-- 2. PAGE LOG MASUK (LOGIN) -->
-        <div id="login-page" class="hidden">
-            <h1>🔐 Log Masuk Pelajar</h1>
-            <p>Sila masukkan e-mel dan kata laluan yang telah didaftarkan.</p>
-            
-            <form onsubmit="handleLogin(event)">
-                <div class="form-group">
-                    <label for="login-email">E-mel:</label>
-                    <input type="email" id="login-email" required placeholder="Cth: ali@email.com">
-                </div>
-                <div class="form-group">
-                    <label for="login-password">Kata Laluan (Password):</label>
-                    <input type="password" id="login-password" required placeholder="Kata laluan anda">
-                </div>
-                <button type="submit">Log Masuk</button>
-            </form>
-            <p style="margin-top: 15px; font-size: 14px;">Belum ada akaun? <a href="#" onclick="showRegisterPage(event)" style="color: #4e54c8; font-weight: bold;">Daftar di sini</a></p>
-        </div>
-
-        <!-- 3. PAGE PEMILIHAN LEVEL (1 - 20) -->
-        <div id="level-page" class="hidden">
-            <h2 id="welcome-msg">Pilih Level Anda</h2>
-            <p>Sila pilih tahap kesukaran (Level 1 hingga 20):</p>
-            
-            <!-- Grid Pilihan Level 1 hingga 20 dengan Tajuk Silibus Penuh -->
-            <div class="level-grid" id="level-buttons-container" style="max-height: 280px; overflow-y: auto; padding: 5px; margin-bottom: 15px;">
-                <button class="level-btn" onclick="selectLevel(1)">Level 1: Nilai Nombor</button>
-                <button class="level-btn" onclick="selectLevel(2)">Level 2: Tertib & Banding</button>
-                <button class="level-btn" onclick="selectLevel(3)">Level 3: Tambah (Tanpa Mengumpul Semula)</button>
-                <button class="level-btn" onclick="selectLevel(4)">Level 4: Operasi Tambah hingga 10,000</button>
-                <button class="level-btn" onclick="selectLevel(5)">Level 5: Operasi Tolak hingga 10,000</button>
-                <button class="level-btn" onclick="selectLevel(6)">Level 6: Operasi Bergabung Tambah & Tolak</button>
-                <button class="level-btn" onclick="selectLevel(7)">Level 7: Menentukan Nilai Anu</button>
-                <button class="level-btn" onclick="selectLevel(8)">Level 8: Darab Sifir Asas & Gandaan 10</button>
-                <button class="level-btn" onclick="selectLevel(9)">Level 9: Darab Nombor dengan Satu Digit</button>
-                <button class="level-btn" onclick="selectLevel(10)">Level 10: Bahagi Asas & Baki</button>
-                <button class="level-btn" onclick="selectLevel(11)">Level 11: Pecahan Wajar</button>
-                <button class="level-btn" onclick="selectLevel(12)">Level 12: Perpuluhan</button>
-                <button class="level-btn" onclick="selectLevel(13)">Level 13: Wang hingga RM10,000</button>
-                <button class="level-btn" onclick="selectLevel(14)">Level 14: Masa & Waktu</button>
-                <button class="level-btn" onclick="selectLevel(15)">Level 15: Ukuran Panjang</button>
-                <button class="level-btn" onclick="selectLevel(16)">Level 16: Jisim (Berat)</button>
-                <button class="level-btn" onclick="selectLevel(17)">Level 17: Isi Padu Cecair</button>
-                <button class="level-btn" onclick="selectLevel(18)">Level 18: Ruang & Bentuk</button>
-                <button class="level-btn" onclick="selectLevel(19)">Level 19: Perimeter & Luas</button>
-                <button class="level-btn" onclick="selectLevel(20)">Level 20: Pengurusan Data</button>
-            </div>
-            
-            <button class="btn-secondary" onclick="showHistoryModal()" style="background-color: #3498db; color: white; border: none; padding: 10px; border-radius: 8px; width: 100%; margin-bottom: 8px;">📊 Rekod Aktiviti Saya</button>
-            <button class="btn-secondary" onclick="logout()" style="background-color: #e74c3c; color: white; border: none; padding: 10px; border-radius: 8px; width: 100%;">Log Keluar</button>
-        </div>
-
-        <!-- 4. PAGE PERMAINAN / KUIZ & PENERANGAN -->
-        <div id="game-page" class="hidden">
-            <div class="game-header">
-                <span id="current-stage-title">Level X</span>
-                <span id="question-counter">Soalan 1/10</span>
-            </div>
-            
-            <div class="question-box" id="question-text" style="font-size: 18px; margin-bottom: 15px; text-align: left;">Soalan Matematik...</div>
-            
-            <!-- Tempat Pilihan Jawapan A, B, C, D Dijana -->
-            <div id="options-container"></div>
-
-            <!-- Kotak Paparan Penerangan Selepas Menjawab -->
-            <div id="explanation-box" class="hidden" style="margin-top: 15px; padding: 12px; background: #f1f2f6; border-left: 5px solid #4e54c8; border-radius: 6px; text-align: left;">
-                <p id="explanation-title" style="font-weight: bold; margin-bottom: 5px;"></p>
-                <p id="explanation-text" style="font-size: 14px; color: #333; margin: 0;"></p>
-                <button onclick="nextQuestion()" style="margin-top: 10px; background-color: #2ed573; color: white; border: none; padding: 8px 12px; border-radius: 6px; cursor: pointer; width: 100%;">Soalan Seterusnya ➡️</button>
-            </div>
-        </div>
-
-    </div>
-
-    <!-- MODAL POPUP KEPUTUSAN LEVEL -->
-    <div id="result-modal" class="modal hidden">
-        <div class="modal-content">
-            <h2>Tahniah! 🎉</h2>
-            <p>Anda telah selesai menjawab latihan untuk level ini.</p>
-            <div id="modal-results-list"></div>
-            <button class="btn-secondary" onclick="closeModalAndReturn()" style="margin-top: 15px;">Pilih Level Lain</button>
-        </div>
-    </div>
-
-    <!-- MODAL POPUP REKOD AKTIVITI SEJARAH -->
-    <div id="history-modal" class="modal hidden">
-        <div class="modal-content">
-            <h2>📊 Sejarah Keputusan Anda</h2>
-            <div id="history-list" style="max-height: 250px; overflow-y: auto; text-align: left; margin: 15px 0; padding: 5px;"></div>
-            <button class="btn-secondary" onclick="closeHistoryModal()">Tutup</button>
-        </div>
-    </div>
-
-    <!-- Kesan Bunyi -->
-    <audio id="sound-correct" preload="auto">
-        <source src="https://actions.google.com/sounds/v1/cartoon/clang_and_wobble.ogg" type="audio/ogg">
-    </audio>
-    <audio id="sound-wrong" preload="auto">
-        <source src="https://actions.google.com/sounds/v1/cartoon/slide_whistle.ogg" type="audio/ogg">
-    </audio>
-
-    <!-- FIREBASE SDK & KOD UTAMA -->
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/13.2.0/firebase-app.js";
-        import { getFirestore, collection, addDoc, getDocs, query, where } from "https://www.gstatic.com/firebasejs/13.2.0/firebase-firestore.js";
-
-        const firebaseConfig = {
-            apiKey: "AIzaSyC1wfnCzIajnBDUbVvnGNv-f1rISiHXPdk",
-            authDomain: "mathematics-interactive.firebaseapp.com",
-            projectId: "mathematics-interactive",
-            storageBucket: "mathematics-interactive.firebasestorage.app",
-            messagingSenderId: "197856319533",
-            appId: "1:197856319533:web:717f67c8a64a46bc0880a4",
-            measurementId: "G-MM6TVCRLPH"
-        };
-
-        const app = initializeApp(firebaseConfig);
-        const db = getFirestore(app);
-
-        window.db = db;
-        window.collection = collection;
-        window.addDoc = addDoc;
-        window.getDocs = getDocs;
-        window.query = query;
-        window.where = where;
-    </script>
-
-    <script src="script.js"></script>
+<div class="container">
+<!-- 1. PAGE PENDAFTARAN (SIGN UP) -->
+<div id="register-page">
+<h1>🚀 Daftar Akaun Pelajar</h1>
+<p>Sila daftar nama, e-mel dan kata laluan anda terlebih dahulu!</p>
+<p style="color: #ff6b6b; font-weight: bold; margin-bottom: 5px;">INFO MODUL!</p>
+<p style="margin-left: 20px; font-size: 13px; text-align: left;">Sistem ini merangkungi 20 Level latihan Matematik lengkap dengan penerangan jawapan!</p>
+<form onsubmit="handleRegister(event)">
+<div class="form-group">
+<label for="reg-nama">Nama Pelajar:</label>
+<input type="text" id="reg-nama" required placeholder="Cth: Ali bin Abu">
+</div>
+<div class="form-group">
+<label for="reg-email">E-mel:</label>
+<input type="email" id="reg-email" required placeholder="Cth: ali@email.com">
+</div>
+<div class="form-group">
+<label for="reg-password">Kata Laluan (Password):</label>
+<input type="password" id="reg-password" required placeholder="Cipta kata laluan anda">
+</div>
+<button type="submit">Daftar Sekarang</button>
+</form>
+<p style="margin-top: 15px; font-size: 14px;">Sudah ada akaun? <a href="#" onclick="showLoginPage(event)" style="color: #4e54c8; font-weight: bold;">Log Masuk di sini</a></p>
+</div>
+<!-- 2. PAGE LOG MASUK (LOGIN) -->
+<div id="login-page" class="hidden">
+<h1>🔐 Log Masuk Pelajar</h1>
+<p>Sila masukkan e-mel dan kata laluan yang telah didaftarkan.</p>
+<form onsubmit="handleLogin(event)">
+<div class="form-group">
+<label for="login-email">E-mel:</label>
+<input type="email" id="login-email" required placeholder="Cth: ali@email.com">
+</div>
+<div class="form-group">
+<label for="login-password">Kata Laluan (Password):</label>
+<input type="password" id="login-password" required placeholder="Kata laluan anda">
+</div>
+<button type="submit">Log Masuk</button>
+</form>
+<p style="margin-top: 15px; font-size: 14px;">Belum ada akaun? <a href="#" onclick="showRegisterPage(event)" style="color: #4e54c8; font-weight: bold;">Daftar di sini</a></p>
+</div>
+<!-- 3. PAGE PEMILIHAN LEVEL (1 - 20) -->
+<div id="level-page" class="hidden">
+<h2 id="welcome-msg">Pilih Level Anda</h2>
+<p>Sila pilih tahap kesukaran (Level 1 hingga 20):</p>
+<!-- Grid Pilihan Level 1 hingga 20 dengan Tajuk Silibus Penuh & Tepat -->
+<div class="level-grid" id="level-buttons-container" style="max-height: 280px; overflow-y: auto; padding: 5px; margin-bottom: 15px;">
+<button class="level-btn" onclick="selectLevel(1)">Level 1: Nilai Nombor</button>
+<button class="level-btn" onclick="selectLevel(2)">Level 2: Tertib & Banding</button>
+<button class="level-btn" onclick="selectLevel(3)">Level 3: Tambah (Tanpa Mengumpul Semula)</button>
+<button class="level-btn" onclick="selectLevel(4)">Level 4: Operasi Tambah hingga 10,000</button>
+<button class="level-btn" onclick="selectLevel(5)">Level 5: Operasi Tolak hingga 10,000</button>
+<button class="level-btn" onclick="selectLevel(6)">Level 6: Operasi Bergabung Tambah & Tolak</button>
+<button class="level-btn" onclick="selectLevel(7)">Level 7: Menentukan Nilai Anu</button>
+<button class="level-btn" onclick="selectLevel(8)">Level 8: Darab Sifir Asas & Gandaan 10</button>
+<button class="level-btn" onclick="selectLevel(9)">Level 9: Darab Nombor dengan Satu Digit</button>
+<button class="level-btn" onclick="selectLevel(10)">Level 10: Bahagi Asas & Baki</button>
+<button class="level-btn" onclick="selectLevel(11)">Level 11: Bahagi Nombor Besar dengan Satu Digit</button>
+<button class="level-btn" onclick="selectLevel(12)">Level 12: Pecahan Wajar & Pecahan Setara</button>
+<button class="level-btn" onclick="selectLevel(13)">Level 13: Perpuluhan hingga Dua Tempat Perpuluhan</button>
+<button class="level-btn" onclick="selectLevel(14)">Level 14: Tambah & Tolak Wang</button>
+<button class="level-btn" onclick="selectLevel(15)">Level 15: Darab & Bahagi Wang</button>
+<button class="level-btn" onclick="selectLevel(16)">Level 16: Masa & Waktu (Jam & Minit)</button>
+<button class="level-btn" onclick="selectLevel(17)">Level 17: Masa & Waktu (Tempoh & Kalendar)</button>
+<button class="level-btn" onclick="selectLevel(18)">Level 18: Ukuran Panjang</button>
+<button class="level-btn" onclick="selectLevel(19)">Level 19: Jisim (Berat)</button>
+<button class="level-btn" onclick="selectLevel(20)">Level 20: Isi Padu Cecair</button>
+</div>
+<button class="btn-secondary" onclick="showHistoryModal()" style="background-color: #3498db; color: white; border: none; padding: 10px; border-radius: 8px; width: 100%; margin-bottom: 8px;">📊 Rekod Aktiviti Saya</button>
+<button class="btn-secondary" onclick="logout()" style="background-color: #e74c3c; color: white; border: none; padding: 10px; border-radius: 8px; width: 100%;">Log Keluar</button>
+</div>
+<!-- 4. PAGE PERMAINAN / KUIZ & PENERANGAN -->
+<div id="game-page" class="hidden">
+<div class="game-header">
+<span id="current-stage-title">Level X</span>
+<span id="question-counter">Soalan 1/10</span>
+</div>
+<div class="question-box" id="question-text" style="font-size: 18px; margin-bottom: 15px; text-align: left;">Soalan Matematik...</div>
+<!-- Tempat Pilihan Jawapan A, B, C, D Dijana -->
+<div id="options-container"></div>
+<!-- Kotak Paparan Penerangan Selepas Menjawab -->
+<div id="explanation-box" class="hidden" style="margin-top: 15px; padding: 12px; background: #f1f2f6; border-left: 5px solid #4e54c8; border-radius: 6px; text-align: left;">
+<p id="explanation-title" style="font-weight: bold; margin-bottom: 5px;"></p>
+<p id="explanation-text" style="font-size: 14px; color: #333; margin: 0;"></p>
+<button onclick="nextQuestion()" style="margin-top: 10px; background-color: #2ed573; color: white; border: none; padding: 8px 12px; border-radius: 6px; cursor: pointer; width: 100%;">Soalan Seterusnya ➡️</button>
+</div>
+</div>
+</div>
+<!-- MODAL POPUP KEPUTUSAN LEVEL -->
+<div id="result-modal" class="modal hidden">
+<div class="modal-content">
+<h2>Tahniah! 🎉</h2>
+<p>Anda telah selesai menjawab latihan untuk level ini.</p>
+<div id="modal-results-list"></div>
+<button class="btn-secondary" onclick="closeModalAndReturn()" style="margin-top: 15px;">Pilih Level Lain</button>
+</div>
+</div>
+<!-- MODAL POPUP REKOD AKTIVITI SEJARAH -->
+<div id="history-modal" class="modal hidden">
+<div class="modal-content">
+<h2>📊 Sejarah Keputusan Anda</h2>
+<div id="history-list" style="max-height: 250px; overflow-y: auto; text-align: left; margin: 15px 0; padding: 5px;"></div>
+<button class="btn-secondary" onclick="closeHistoryModal()">Tutup</button>
+</div>
+</div>
+<!-- Kesan Bunyi -->
+<audio id="sound-correct" preload="auto">
+<source src="https://actions.google.com/sounds/v1/cartoon/clang_and_wobble.ogg" type="audio/ogg">
+</audio>
+<audio id="sound-wrong" preload="auto">
+<source src="https://actions.google.com/sounds/v1/cartoon/slide_whistle.ogg" type="audio/ogg">
+</audio>
+<!-- FIREBASE SDK & KOD UTAMA -->
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/13.2.0/firebase-app.js";
+import { getFirestore, collection, addDoc, getDocs, query, where } from "https://www.gstatic.com/firebasejs/13.2.0/firebase-firestore.js";
+const firebaseConfig = {
+apiKey: "AIzaSyC1wfnCzIajnBDUbVvnGNv-f1rISiHXPdk",
+authDomain: "mathematics-interactive.firebaseapp.com",
+projectId: "mathematics-interactive",
+storageBucket: "mathematics-interactive.firebasestorage.app",
+messagingSenderId: "197856319533",
+appId: "1:197856319533:web:717f67c8a64a46bc0880a4",
+measurementId: "G-MM6TVCRLPH"
+};
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+window.db = db;
+window.collection = collection;
+window.addDoc = addDoc;
+window.getDocs = getDocs;
+window.query = query;
+window.where = where;
+</script>
+<script src="script.js"></script>
 </body>
 </html>
