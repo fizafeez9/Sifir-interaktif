@@ -4,143 +4,143 @@ let currentQuestionIndex = 0;
 let currentLevelQuestions = [];
 let scoreCount = 0;
 
-// Bank Soalan untuk 20 Level Silibus Matematik Darjah 3
+// Bank Soalan Objektif (A, B, C, D) untuk 20 Level Silibus Matematik Darjah 3
 const levelsQuestions = {
     1: [
         {
             q: "Apakah nilai digit bagi nombor 5 dalam nombor 4,582?",
-            options: ["500", "50", "5", "5000"],
-            answer: "500",
+            options: ["A) 5", "B) 50", "C) 500", "D) 5,000"],
+            answer: "C) 500",
             explanation: "Digit 5 berada di tempat ratus (4,582), oleh itu nilai digitnya ialah 500."
         },
         {
             q: "Tuliskan nombor tiga ribu empat ratus dua belas dalam bentuk angka.",
-            options: ["3412", "3042", "3421", "3214"],
-            answer: "3412",
-            explanation: "Tiga ribu = 3,000, empat ratus = 400, dua belas = 12. Digabungkan menjadi 3,412 (atau 3412)."
+            options: ["A) 3,412", "B) 3,042", "C) 3,421", "D) 3,214"],
+            answer: "A) 3,412",
+            explanation: "Tiga ribu = 3,000, empat ratus = 400, dua belas = 12. Digabungkan menjadi 3,412."
         },
         {
             q: "Apakah nilai tempat bagi digit 7 dalam nombor 7,039?",
-            options: ["ribu", "ratus", "puluh", "sa"],
-            answer: "ribu",
+            options: ["A) Sa", "B) Puluh", "C) Ratus", "D) Ribu"],
+            answer: "D) Ribu",
             explanation: "Dalam nombor 7,039, digit 7 terletak di kedudukan pertama dari kiri, iaitu nilai tempat ribu."
         },
         {
             q: "Cerakinkan nombor 6,245 mengikut nilai digit.",
-            options: ["6000 + 200 + 40 + 5", "600 + 20 + 4 + 5", "6000 + 20 + 45", "6 + 2 + 4 + 5"],
-            answer: "6000 + 200 + 40 + 5",
-            explanation: "Cerakin nilai digit mencerakinkan nombor mengikut nilai digit setiap nombor: 6000 + 200 + 40 + 5."
+            options: ["A) 600 + 20 + 4 + 5", "B) 6,000 + 200 + 40 + 5", "C) 6,000 + 20 + 45", "D) 6 + 2 + 4 + 5"],
+            answer: "B) 6,000 + 200 + 40 + 5",
+            explanation: "Cerakin nilai digit mencerakinkan nombor mengikut nilai digit setiap nombor: 6,000 + 200 + 40 + 5."
         },
         {
-            q: "Apakah nombor yang tertera jika cerakinkan berikut disatukan: 8,000 + 400 + 30 + 2?",
-            options: ["8432", "8342", "8042", "8423"],
-            answer: "8432",
-            explanation: "Gabungan 8000 + 400 + 30 + 2 menghasilkan nombor 8,432."
+            q: "Apakah nombor yang tertera jika cerakinan berikut disatukan: 8,000 + 400 + 30 + 2?",
+            options: ["A) 8,342", "B) 8,042", "C) 8,432", "D) 8,423"],
+            answer: "C) 8,432",
+            explanation: "Gabungan 8,000 + 400 + 30 + 2 menghasilkan nombor 8,432."
         },
         {
             q: "Apakah digit yang berada di tempat puluh bagi nombor 3,914?",
-            options: ["1", "9", "4", "3"],
-            answer: "1",
+            options: ["A) 1", "B) 9", "C) 4", "D) 3"],
+            answer: "A) 1",
             explanation: "Bagi nombor 3,914, digit 9 ialah ratus, digit 1 ialah puluh, dan digit 4 ialah sa."
         },
         {
             q: "Tuliskan perkataan bagi nombor 5,060.",
-            options: ["lima ribu enam puluh", "lima ribu enam ratus", "lima ribu dan enam", "lima ribu enam"],
-            answer: "lima ribu enam puluh",
-            explanation: "Nombor 5,060 dibaca sebagai 'lima ribu enam puluh' (tiada ratus)."
+            options: ["A) Lima ribu enam ratus", "B) Lima ribu enam puluh", "C) Lima ribu dan enam", "D) Lima ribu enam"],
+            answer: "B) Lima ribu enam puluh",
+            explanation: "Nombor 5,060 dibaca sebagai 'lima ribu enam puluh' (tiada nilai ratus)."
         },
         {
             q: "Apakah nilai digit bagi nombor 9 dalam nombor 2,190?",
-            options: ["90", "9", "900", "9000"],
-            answer: "90",
+            options: ["A) 9", "B) 90", "C) 900", "D) 9,000"],
+            answer: "B) 90",
             explanation: "Digit 9 berada di tempat puluh, maka nilai digitnya ialah 90."
         },
         {
             q: "Cerakinkan nombor 4,108 mengikut nilai tempat.",
-            options: ["4 ribu + 1 ratus + 0 puluh + 8 sa", "4000 + 100 + 8", "4 ribu + 1 ratus + 8 sa", "4 + 1 + 0 + 8"],
-            answer: "4 ribu + 1 ratus + 0 puluh + 8 sa",
+            options: ["A) 4 ribu + 1 ratus + 8 sa", "B) 4,000 + 100 + 8", "C) 4 ribu + 1 ratus + 0 puluh + 8 sa", "D) 4 + 1 + 0 + 8"],
+            answer: "C) 4 ribu + 1 ratus + 0 puluh + 8 sa",
             explanation: "Cerakin mengikut nilai tempat wajib menulis perkataan 'ribu', 'ratus', 'puluh', dan 'sa'."
         },
         {
             q: "Nombor manakah yang lebih besar: 3,420 atau 3,240?",
-            options: ["3420", "3240", "dua-dua sama", "tiada jawapan"],
-            answer: "3420",
-            explanation: "Apabila membandingkan ratus, 4 ratus lebih besar daripada 2 ratus, jadi 3,420 lebih besar."
+            options: ["A) 3,420", "B) 3,240", "C) Dua-dua sama", "D) Tiada jawapan"],
+            answer: "A) 3,420",
+            explanation: "Apabila membandingkan nilai ratus, 4 ratus lebih besar daripada 2 ratus, jadi 3,420 lebih besar."
         }
     ],
     2: [
         {
             q: "Susun nombor berikut dalam tertib menaik: 3,210, 3,120, 3,400, 3,050",
-            options: ["3050, 3120, 3210, 3400", "3400, 3210, 3120, 3050", "3050, 3210, 3120, 3400", "3120, 3050, 3400, 3210"],
-            answer: "3050, 3120, 3210, 3400",
-            explanation: "Tertib menaik bermaksud susunan nombor dari kecil kepada besar."
+            options: ["A) 3,400, 3,210, 3,120, 3,050", "B) 3,050, 3,120, 3,210, 3,400", "C) 3,050, 3,210, 3,120, 3,400", "D) 3,120, 3,050, 3,400, 3,210"],
+            answer: "B) 3,050, 3,120, 3,210, 3,400",
+            explanation: "Tertib menaik bermaksud susunan nombor dari nilai yang kecil kepada nilai yang besar."
         },
         {
             q: "Susun nombor berikut dalam tertib menurun: 4,502, 4,520, 4,052, 4,250",
-            options: ["4520, 4502, 4250, 4052", "4052, 4250, 4502, 4520", "4520, 4250, 4502, 4052", "4250, 4520, 4052, 4502"],
-            answer: "4520, 4502, 4250, 4052",
-            explanation: "Tertib menurun bermaksud susunan nombor dari besar kepada kecil."
+            options: ["A) 4,520, 4,502, 4,250, 4,052", "B) 4,052, 4,250, 4,502, 4,520", "C) 4,520, 4,250, 4,502, 4,052", "D) 4,250, 4,520, 4,052, 4,502"],
+            answer: "A) 4,520, 4,502, 4,250, 4,052",
+            explanation: "Tertib menurun bermaksud susunan nombor dari nilai yang besar kepada nilai yang kecil."
         },
         {
             q: "Pilih nombor yang lebih kecil antara 5,142 dan 5,124.",
-            options: ["5124", "5142", "sama besar", "tidak pasti"],
-            answer: "5124",
+            options: ["A) 5,142", "B) 5,124", "C) Sama besar", "D) Tidak pasti"],
+            answer: "B) 5,124",
             explanation: "Membandingkan nombor puluh: 2 puluh lebih kecil daripada 4 puluh, maka 5,124 lebih kecil."
         },
         {
             q: "Lengkapkan pola nombor berikut secara tertib menaik sepuluh-sepuluh: 2,430, 2,440, 2,450, ...",
-            options: ["2460", "2455", "2500", "2441"],
-            answer: "2460",
-            explanation: "Pola menambah 10 setiap langkah: 2,450 + 10 = 2,460."
+            options: ["A) 2,455", "B) 2,460", "C) 2,500", "D) 2,441"],
+            answer: "B) 2,460",
+            explanation: "Pola menambah 10 pada setiap langkah: 2,450 + 10 = 2,460."
         },
         {
             q: "Apakah nombor yang tertinggal dalam pola menurun seratus-seratus ini: 7,500, 7,400, ...?",
-            options: ["7300", "7450", "7200", "7350"],
-            answer: "7300",
-            explanation: "Pola tolak 100 setiap langkah: 7,400 - 100 = 7,300."
+            options: ["A) 7,300", "B) 7,450", "C) 7,200", "D) 7,350"],
+            answer: "A) 7,300",
+            explanation: "Pola menolak 100 pada setiap langkah: 7,400 - 100 = 7,300."
         },
         {
             q: "Bandingkan dua nombor ini. Gunakan simbol > atau <: 6,890 ... 6,980",
-            options: ["<", ">", "=", "+"],
-            answer: "<",
-            explanation: "6,890 adalah lebih kecil daripada 6,980, maka tanda yang betul ialah '<'."
+            options: ["A) >", "B) <", "C) =", "D) +"],
+            answer: "B) <",
+            explanation: "6,890 adalah lebih kecil daripada 6,980, maka tanda perbandingan yang betul ialah '<'."
         },
         {
             q: "Kenal pasti nombor yang paling besar nilainya: 1,980, 2,005, 1,999, 2,050",
-            options: ["2050", "2005", "1999", "1980"],
-            answer: "2050",
+            options: ["A) 1,980", "B) 1,999", "C) 2,005", "D) 2,050"],
+            answer: "D) 2,050",
             explanation: "Nilai 2,050 adalah yang paling tinggi antara pilihan yang diberikan."
         },
         {
             q: "Apakah corak penambahan (pola) bagi urutan nombor ini: 1,200, 1,205, 1,210, 1,215?",
-            options: ["tertib menaik lima-lima", "tertib menaik sepuluh-sepuluh", "tertib menurun lima-lima", "tertib menaik satu-satu"],
-            answer: "tertib menaik lima-lima",
-            explanation: "Setiap nombor bertambah sebanyak 5 units (1,200 ke 1,205)."
+            options: ["A) Tertib menaik lima-lima", "B) Tertib menaik sepuluh-sepuluh", "C) Tertib menurun lima-lima", "D) Tertib menaik satu-satu"],
+            answer: "A) Tertib menaik lima-lima",
+            explanation: "Setiap nombor bertambah sebanyak 5 unit secara konsisten (1,200 ke 1,205)."
         },
         {
             q: "Susun semula nombor ini mengikut tertib menaik: 8,012, 8,102, 8,021, 8,002",
-            options: ["8002, 8012, 8021, 8102", "8102, 8021, 8012, 8002", "8002, 8021, 8012, 8102", "8012, 8002, 8021, 8102"],
-            answer: "8002, 8012, 8021, 8102",
-            explanation: "Susunan dari terkecil: 8,002, diikuti 8,012, 8,021, dan 8,102."
+            options: ["A) 8,002, 8,012, 8,021, 8,102", "B) 8,102, 8,021, 8,012, 8,002", "C) 8,002, 8,021, 8,012, 8,102", "D) 8,012, 8,002, 8,021, 8,102"],
+            answer: "A) 8,002, 8,012, 8,021, 8,102",
+            explanation: "Susunan bermula dari yang terkecil: 8,002, diikuti 8,012, 8,021, dan 8,102."
         },
         {
             q: "Nombor manakah yang terletak di tengah-tengah antara 4,000 dan 4,020?",
-            options: ["4010", "4005", "4015", "4002"],
-            answer: "4010",
-            explanation: "Nilai tengah bagi jarak 20 unit (4000 ke 4020) ialah 4,010."
+            options: ["A) 4,005", "B) 4,010", "C) 4,015", "D) 4,002"],
+            answer: "B) 4,010",
+            explanation: "Nilai tengah bagi jarak nombor dari 4,000 ke 4,020 ialah 4,010."
         }
     ]
 };
 
-// Penjana automatik untuk Level 3 hingga 20 sebagai templat silibus
+// Penjana automatik untuk Level 3 hingga 20 sebagai templat silibus objektif
 for (let i = 3; i <= 20; i++) {
     levelsQuestions[i] = [];
     for (let j = 1; j <= 10; j++) {
         levelsQuestions[i].push({
-            q: `Soalan ${j} untuk Level ${i}: Apakah hasil penyelesaian operasi matematik asas Darjah 3?`,
-            options: ["100", "200", "300", "400"],
-            answer: "100",
-            explanation: `Ini adalah penerangan contoh bagi soalan ${j} dalam Level ${i} untuk memastikan kefahaman murid.`
+            q: `Soalan ${j} untuk Level ${i}: Apakah jawapan yang betul bagi operasi matematik ini?`,
+            options: ["A) 100", "B) 200", "C) 300", "D) 400"],
+            answer: "A) 100",
+            explanation: `Ini adalah penerangan jawapan contoh bagi soalan ${j} dalam Level ${i}.`
         });
     }
 }
@@ -262,18 +262,28 @@ function loadQuestion() {
     document.getElementById('question-counter').innerText = `Soalan ${currentQuestionIndex + 1}/${currentLevelQuestions.length}`;
     document.getElementById('question-text').innerText = qData.q;
     
-    document.getElementById('user-answer').value = '';
+    // Paparkan pilihan jawapan A, B, C, D
+    let optionsContainer = document.getElementById('options-container');
+    optionsContainer.innerHTML = '';
+    
+    qData.options.forEach((opt) => {
+        let btn = document.createElement('button');
+        btn.type = 'button';
+        btn.innerText = opt;
+        btn.style.cssText = "margin-bottom: 10px; background-color: #f8f9fa; color: #333; border: 2px solid #4e54c8; padding: 10px; border-radius: 8px; font-size: 15px; text-align: left; width: 100%; cursor: pointer; transition: 0.2s;";
+        btn.onmouseover = () => btn.style.backgroundColor = "#e2e6ea";
+        btn.onmouseout = () => btn.style.backgroundColor = "#f8f9fa";
+        btn.onclick = () => selectAnswer(opt);
+        optionsContainer.appendChild(btn);
+    });
+
+    document.getElementById('options-container').style.display = 'block';
     document.getElementById('explanation-box').classList.add('hidden');
-    document.getElementById('answer-form').style.display = 'block';
 }
 
-function checkAnswer(e) {
-    e.preventDefault();
-    let userAns = document.getElementById('user-answer').value.trim();
+function selectAnswer(selectedOpt) {
     let qData = currentLevelQuestions[currentQuestionIndex];
-
-    // Semakan jawapan (membenarkan padanan teks atau nombor)
-    let isCorrect = userAns.toLowerCase() === qData.answer.toLowerCase();
+    let isCorrect = selectedOpt === qData.answer;
 
     if (isCorrect) {
         playCorrectSound();
@@ -282,12 +292,12 @@ function checkAnswer(e) {
         document.getElementById('explanation-title').style.color = "#27ae60";
     } else {
         playWrongSound();
-        document.getElementById('explanation-title').innerText = `❌ Kurang Tepat. Jawapan sebenar: ${qData.answer}`;
+        document.getElementById('explanation-title').innerText = `❌ Kurang Tepat. Jawapan sebenar ialah ${qData.answer}`;
         document.getElementById('explanation-title').style.color = "#e74c3c";
     }
 
     document.getElementById('explanation-text').innerText = qData.explanation;
-    document.getElementById('answer-form').style.display = 'none';
+    document.getElementById('options-container').style.display = 'none';
     document.getElementById('explanation-box').classList.remove('hidden');
 }
 
@@ -307,7 +317,6 @@ function showLevelResultModal() {
         <h3 style="color: #4e54c8; font-size: 24px;">Skor: ${scoreCount} / ${currentLevelQuestions.length}</h3>
     `;
 
-    // Simpan rekod sejarah ke Cloud Firebase
     saveStudentHistory(currentLevel, `Skor: ${scoreCount}/${currentLevelQuestions.length}`);
 
     document.getElementById('result-modal').classList.remove('hidden');
