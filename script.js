@@ -4,7 +4,7 @@ let currentQuestionIndex = 0;
 let currentLevelQuestions = [];
 let scoreCount = 0;
 
-// Bank Soalan Objektif (A, B, C, D) & Explanation untuk Level 1 hingga Level 17 (Tag sarat dibersihkan)
+// Bank Soalan Objektif (A, B, C, D) & Explanation untuk Level 1 hingga Level 17
 const levelsQuestions = {
     1: [
         {
@@ -1062,7 +1062,7 @@ const levelsQuestions = {
     ]
 };
 
-// Penjana automatik untuk Level 18 hingga 20 sebagai templat baki silibus
+// Penjana automatik untuk Level 18 hingga 20
 for (let i = 18; i <= 20; i++) {
     levelsQuestions[i] = [];
     for (let j = 1; j <= 10; j++) {
@@ -1085,6 +1085,27 @@ function showRegisterPage(e) {
     e.preventDefault();
     document.getElementById('login-page').classList.add('hidden');
     document.getElementById('register-page').classList.remove('hidden');
+}
+
+// Navigasi Menu Utama
+function showMainMenu() {
+    document.getElementById('register-page').classList.add('hidden');
+    document.getElementById('login-page').classList.add('hidden');
+    document.getElementById('level-page').classList.add('hidden');
+    document.getElementById('game-page').classList.add('hidden');
+    
+    document.getElementById('main-menu-page').classList.remove('hidden');
+    document.getElementById('main-header').classList.remove('hidden');
+}
+
+function showLevelSelection() {
+    document.getElementById('main-menu-page').classList.add('hidden');
+    document.getElementById('level-page').classList.remove('hidden');
+}
+
+function backToMainMenu() {
+    document.getElementById('level-page').classList.add('hidden');
+    document.getElementById('main-menu-page').classList.remove('hidden');
 }
 
 // 1. Pendaftaran Akaun ke Firebase Firestore
@@ -1150,7 +1171,7 @@ async function handleLogin(e) {
 
             document.getElementById('welcome-msg').innerText = `Hai, ${studentData.name}!`;
             document.getElementById('login-page').classList.add('hidden');
-            document.getElementById('level-page').classList.remove('hidden');
+            showMainMenu();
         } else {
             alert("❌ Kata laluan salah! Sila cuba lagi.");
         }
@@ -1162,7 +1183,11 @@ async function handleLogin(e) {
 
 function logout() {
     studentData = { name: '', email: '' };
+    document.getElementById('main-menu-page').classList.add('hidden');
     document.getElementById('level-page').classList.add('hidden');
+    document.getElementById('game-page').classList.add('hidden');
+    document.getElementById('main-header').classList.add('hidden');
+    
     document.getElementById('login-page').classList.remove('hidden');
     document.getElementById('login-email').value = '';
     document.getElementById('login-password').value = '';
