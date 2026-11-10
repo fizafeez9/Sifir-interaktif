@@ -747,7 +747,7 @@ const levelsQuestions = {
             q: "Susun pecahan berikut mengikut tertib menaik: 1/6, 5/6, 3/6, 2/6",
             options: ["A) 1/6, 2/6, 3/6, 5/6", "B) 5/6, 3/6, 2/6, 1/6", "C) 1/6, 3/6, 2/6, 5/6", "D) 2/6, 1/6, 3/6, 5/6"],
             answer: "A) 1/6, 2/6, 3/6, 5/6",
-            explanation: "Susun mengikut nilai pengangka dari kecil ke besar: 1, 2, 3, 5."
+            explanation: "Susunan mengikut nilai pengangka dari kecil ke besar: 1, 2, 3, 5."
         }
     ],
     13: [
@@ -1093,10 +1093,9 @@ function showMainMenu() {
     document.getElementById('login-page').classList.add('hidden');
     document.getElementById('level-page').classList.add('hidden');
     document.getElementById('game-page').classList.add('hidden');
+    document.getElementById('history-page').classList.add('hidden');
     
     document.getElementById('main-menu-page').classList.remove('hidden');
-    
-    // Aktifkan background khas menu utama (IMG_8339.jpeg)
     document.body.classList.add('menu-active-bg');
 }
 
@@ -1108,6 +1107,7 @@ function showLevelSelection() {
 function backToMainMenu() {
     document.getElementById('level-page').classList.add('hidden');
     document.getElementById('game-page').classList.add('hidden');
+    document.getElementById('history-page').classList.add('hidden');
     document.getElementById('main-menu-page').classList.remove('hidden');
 }
 
@@ -1189,8 +1189,8 @@ function logout() {
     document.getElementById('main-menu-page').classList.add('hidden');
     document.getElementById('level-page').classList.add('hidden');
     document.getElementById('game-page').classList.add('hidden');
+    document.getElementById('history-page').classList.add('hidden');
     
-    // Buang background menu utama, kembali ke background asal login
     document.body.classList.remove('menu-active-bg');
     
     document.getElementById('login-page').classList.remove('hidden');
@@ -1301,12 +1301,18 @@ async function saveStudentHistory(level, summary) {
     }
 }
 
+// Paparkan Halaman Sejarah Keputusan Penuh
 async function showHistoryModal() {
-    if (!studentData.email) return;
+    if (!studentData.email) {
+        alert("⚠️ Sila log masuk terlebih dahulu!");
+        return;
+    }
 
     let historyListDiv = document.getElementById('history-list');
-    historyListDiv.innerHTML = '<p style="text-align: center;">Memuatkan rekod...</p>';
-    document.getElementById('history-modal').classList.remove('hidden');
+    historyListDiv.innerHTML = '<p style="text-align: center; color: #555;">Memuatkan rekod...</p>';
+
+    document.getElementById('main-menu-page').classList.add('hidden');
+    document.getElementById('history-page').classList.remove('hidden');
 
     try {
         const q = window.query(window.collection(window.db, "history"), window.where("email", "==", studentData.email));
@@ -1315,7 +1321,7 @@ async function showHistoryModal() {
         historyListDiv.innerHTML = '';
 
         if (querySnapshot.empty) {
-            historyListDiv.innerHTML = '<p style="text-align: center; color: #666;">Tiada rekod aktiviti lagi. Jom mula jawab soalan!</p>';
+            historyListDiv.innerHTML = '<p style="text-align: center; color: #666; padding: 20px 0;">Tiada rekod aktiviti lagi. Jom mula jawab soalan di Latihan & Kefahaman!</p>';
             return;
         }
 
@@ -1328,11 +1334,11 @@ async function showHistoryModal() {
 
         historyData.forEach((item) => {
             let itemDiv = document.createElement('div');
-            itemDiv.style.cssText = "background: #f8f9fa; border-left: 4px solid #4e54c8; padding: 8px 12px; margin-bottom: 8px; border-radius: 4px; font-size: 13px;";
+            itemDiv.style.cssText = "background: #f8f9fa; border-left: 5px solid #4e54c8; padding: 12px 15px; margin-bottom: 10px; border-radius: 8px; font-size: 14px; box-shadow: 0 2px 4px rgba(0,0,0,0.05);";
             itemDiv.innerHTML = `
                 <strong>🗓️ ${item.date}</strong><br>
-                <span>🏆 Level ${item.level}</span><br>
-                <small style="color: #555;">${item.details}</small>
+                <span style="color: #2e7d32; font-weight: bold;">🏆 Level ${item.level}</span><br>
+                <span style="color: #333; font-weight: 600;">${item.details}</span>
             `;
             historyListDiv.appendChild(itemDiv);
         });
@@ -1343,8 +1349,10 @@ async function showHistoryModal() {
     }
 }
 
-function closeHistoryModal() {
-    document.getElementById('history-modal').classList.add('hidden');
+// Tutup Halaman Sejarah & Kembali ke Menu Utama
+function closeHistoryPage() {
+    document.getElementById('history-page').classList.add('hidden');
+    document.getElementById('main-menu-page').classList.remove('hidden');
 }
 
 function closeModalAndReturn() {
