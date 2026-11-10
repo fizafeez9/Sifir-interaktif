@@ -11,8 +11,8 @@
         
         <!-- HEADER UTAMA (Di luar kad putih, muncul selepas login/masuk menu) -->
         <div id="main-header" class="app-header hidden">
-            <span class="logo-text">MathKids 👾</span>
-            <button class="credit-btn">⭐ Tebus Kredit: 0</button>
+            <img src="background/buttons/IMG_8337.jpeg" alt="MathKids" class="header-logo">
+            <img src="background/buttons/IMG_8336.jpeg" alt="Tebus Kredit" class="header-credit-btn" onclick="openCreditModal()">
         </div>
 
         <!-- 1. PAGE PENDAFTARAN (SIGN UP) -->
@@ -59,46 +59,18 @@
             <p style="margin-top: 15px; font-size: 14px;">Belum ada akaun? <a href="#" onclick="showRegisterPage(event)" style="color: #4e54c8; font-weight: bold;">Daftar di sini</a></p>
         </div>
 
-        <!-- 3. MENU UTAMA (Tanpa kad putih besar, terus atas background) -->
+        <!-- 3. MENU UTAMA (Menggunakan background IMG_8339.jpeg & imej fizikal butang 2x2) -->
         <div id="main-menu-page" class="hidden menu-main-wrapper">
             <div class="menu-title-area">
                 <h2 id="welcome-msg" style="margin-bottom: 2px; font-size: 22px;">Hai, Fiza!</h2>
                 <p style="font-size: 13px; color: #333; margin-bottom: 15px; font-weight: 500;">Pilih aktiviti hebat anda hari ini:</p>
             </div>
             
-            <div class="menu-grid-styled">
-                <button class="menu-item-card btn-item-green" onclick="showLevelSelection()">
-                    <div class="item-content">
-                        <span class="icon">🧠</span>
-                        <strong>Latihan & Kefahaman</strong>
-                        <small>(Level 1-20)</small>
-                    </div>
-                    <span class="monster-icon-side">🦖</span>
-                </button>
-
-                <button class="menu-item-card btn-item-blue" onclick="alert('Mod Ujian akan datang!')">
-                    <div class="item-content">
-                        <span class="icon">🎯</span>
-                        <strong>Ujian Penilaian Minda</strong>
-                    </div>
-                    <span class="monster-icon-side">👾</span>
-                </button>
-
-                <button class="menu-item-card btn-item-yellow" onclick="showHistoryModal()">
-                    <div class="item-content">
-                        <span class="icon">📊</span>
-                        <strong>Rekod Aktiviti Saya</strong>
-                    </div>
-                    <span class="monster-icon-side">🤖</span>
-                </button>
-
-                <button class="menu-item-card btn-item-red" onclick="logout()">
-                    <div class="item-content">
-                        <span class="icon">🚪</span>
-                        <strong>Log Keluar</strong>
-                    </div>
-                    <span class="monster-icon-side">👹</span>
-                </button>
+            <div class="menu-grid-2col">
+                <img src="background/buttons/IMG_8328.jpeg" alt="Latihan & Kefahaman" class="menu-img-btn" onclick="showLevelSelection()">
+                <img src="background/buttons/IMG_8330.jpeg" alt="Ujian Penilaian Minda" class="menu-img-btn" onclick="alert('Mod Ujian akan datang!')">
+                <img src="background/buttons/IMG_8329.jpeg" alt="Rekod Aktiviti Saya" class="menu-img-btn" onclick="showHistoryModal()">
+                <img src="background/buttons/IMG_8331.jpeg" alt="Log Keluar" class="menu-img-btn" onclick="logout()">
             </div>
         </div>
 
