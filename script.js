@@ -4,7 +4,7 @@ let currentQuestionIndex = 0;
 let currentLevelQuestions = [];
 let scoreCount = 0;
 
-// Bank Soalan Objektif (A, B, C, D) & Explanation Bersih
+// Bank Soalan Objektif (A, B, C, D) & Explanation untuk Level 1 hingga Level 17 (Tag sarat dibersihkan)
 const levelsQuestions = {
     1: [
         {
@@ -547,4 +547,793 @@ const levelsQuestions = {
         },
         {
             q: "Hitung hasil darab bagi 1,234 × 8.",
-            options: ["A) 9,
+            options: ["A) 9,872", "B) 9,772", "C) 9,972", "D) 9,862"],
+            answer: "A) 9,872",
+            explanation: "1,234 × 8 = 9,872."
+        },
+        {
+            q: "Sebuah kilang mengeluarkan 1,420 buah buku nota setiap hari. Berapakah jumlah buku nota yang dikeluarkan dalam masa 4 hari?",
+            options: ["A) 5,680", "B) 5,580", "C) 5,780", "D) 5,670"],
+            answer: "A) 5,680",
+            explanation: "1,420 × 4 = 5,680 buah buku nota."
+        },
+        {
+            q: "Selesaikan ayat matematik berikut: 1,111 × 9 = ?",
+            options: ["A) 9,999", "B) 9,899", "C) 9,989", "D) 8,999"],
+            answer: "A) 9,999",
+            explanation: "1,111 × 9 = 9,999."
+        }
+    ],
+    10: [
+        {
+            q: "Apakah baki bagi 45 ÷ 6?",
+            options: ["A) 3", "B) 1", "C) 2", "D) 4"],
+            answer: "A) 3",
+            explanation: "6 × 7 = 42. 45 - 42 = 3 (baki 3)."
+        },
+        {
+            q: "Selesaikan: 72 ÷ 8.",
+            options: ["A) 9", "B) 8", "C) 7", "D) 6"],
+            answer: "A) 9",
+            explanation: "Sifir 8: 72 ÷ 8 = 9."
+        },
+        {
+            q: "Bahagikan 54 dengan 9.",
+            options: ["A) 6", "B) 5", "C) 7", "D) 8"],
+            answer: "A) 6",
+            explanation: "Sifir 9: 54 ÷ 9 = 6."
+        },
+        {
+            q: "Hitung hasil bahagi bagi 480 ÷ 10.",
+            options: ["A) 48", "B) 4", "C) 480", "D) 4.8"],
+            answer: "A) 48",
+            explanation: "Membahagi dengan 10 memotong satu sifar di belakang: 480 ÷ 10 = 48."
+        },
+        {
+            q: "Apakah baki bagi 29 ÷ 4?",
+            options: ["A) 1", "B) 2", "C) 3", "D) 0"],
+            answer: "A) 1",
+            explanation: "4 × 7 = 28. 29 - 28 = 1 (baki 1)."
+        },
+        {
+            q: "Selesaikan: 560 ÷ 7",
+            options: ["A) 80", "B) 70", "C) 90", "D) 800"],
+            answer: "A) 80",
+            explanation: "56 ÷ 7 = 8 tambah sifar jadi 80."
+        },
+        {
+            q: "Cari hasil bahagi bagi 81 ÷ 9",
+            options: ["A) 9", "B) 8", "C) 7", "D) 6"],
+            answer: "A) 9",
+            explanation: "81 ÷ 9 = 9."
+        },
+        {
+            q: "Apakah baki apabila 38 dibahagikan dengan 5?",
+            options: ["A) 3", "B) 1", "C) 2", "D) 4"],
+            answer: "A) 3",
+            explanation: "5 × 7 = 35. 38 - 35 = 3 (baki 3)."
+        },
+        {
+            q: "Cikgu Amin mempunyai 42 batang pensel. Dia membahagikannya sama rata kepada 6 orang murid. Berapakah sebatang pensel yang diperolehi setiap murid?",
+            options: ["A) 7", "B) 6", "C) 8", "D) 9"],
+            answer: "A) 7",
+            explanation: "42 ÷ 6 = 7 batang pensel."
+        },
+        {
+            q: "Selesaikan ayat matematik berikut: 630 ÷ 9 = ?",
+            options: ["A) 70", "B) 60", "C) 80", "D) 700"],
+            answer: "A) 70",
+            explanation: "63 ÷ 9 = 7 tambah sifar jadi 70."
+        }
+    ],
+    11: [
+        {
+            q: "Selesaikan: 8,460 ÷ 4.",
+            options: ["A) 2,115", "B) 2,105", "C) 2,215", "D) 2,110"],
+            answer: "A) 2,115",
+            explanation: "8,460 ÷ 4 = 2,115."
+        },
+        {
+            q: "Hitung hasil bahagi bagi 6,300 ÷ 3.",
+            options: ["A) 2,100", "B) 2,200", "C) 2,050", "D) 2,150"],
+            answer: "A) 2,100",
+            explanation: "6,300 ÷ 3 = 2,100."
+        },
+        {
+            q: "Bahagikan 4,824 dengan 2.",
+            options: ["A) 2,412", "B) 2,402", "C) 2,312", "D) 2,512"],
+            answer: "A) 2,412",
+            explanation: "4,824 ÷ 2 = 2,412."
+        },
+        {
+            q: "Selesaikan: 5,505 ÷ 5.",
+            options: ["A) 1,101", "B) 1,111", "C) 1,011", "D) 1,100"],
+            answer: "A) 1,101",
+            explanation: "5,505 ÷ 5 = 1,101."
+        },
+        {
+            q: "Cari hasil bahagi bagi 3,690 ÷ 3.",
+            options: ["A) 1,230", "B) 1,220", "C) 1,330", "D) 1,240"],
+            answer: "A) 1,230",
+            explanation: "3,690 ÷ 3 = 1,230."
+        },
+        {
+            q: "Selesaikan: 7,420 ÷ 7",
+            options: ["A) 1,060", "B) 1,050", "C) 1,070", "D) 1,600"],
+            answer: "A) 1,060",
+            explanation: "7,420 ÷ 7 = 1,060."
+        },
+        {
+            q: "Hitung nilai bagi 630 ÷ 3",
+            options: ["A) 210", "B) 220", "C) 200", "D) 230"],
+            answer: "A) 210",
+            explanation: "630 ÷ 3 = 210."
+        },
+        {
+            q: "Bahagikan 4,264 dengan 4.",
+            options: ["A) 1,066", "B) 1,056", "C) 1,076", "D) 1,166"],
+            answer: "A) 1,066",
+            explanation: "4,264 ÷ 4 = 1,066."
+        },
+        {
+            q: "Sebuah kilang mengedarkan 2,480 buah buku teks secara sama rata kepada 4 buah sekolah. Berapakah buah buku yang diterima oleh setiap sekolah?",
+            options: ["A) 620", "B) 610", "C) 630", "D) 600"],
+            answer: "A) 620",
+            explanation: "2,480 ÷ 4 = 620 buah buku."
+        },
+        {
+            q: "Selesaikan ayat matematik berikut: 6,363 ÷ 3 = ?",
+            options: ["A) 2,121", "B) 2,111", "C) 2,212", "D) 2,131"],
+            answer: "A) 2,121",
+            explanation: "6,363 ÷ 3 = 2,121."
+        }
+    ],
+    12: [
+        {
+            q: "Apakah pecahan setara bagi 1/2 jika penyebutnya ialah 6?",
+            options: ["A) 3/6", "B) 2/6", "C) 4/6", "D) 5/6"],
+            answer: "A) 3/6",
+            explanation: "Penyebut darab 3, maka pengangka (1×3=3). Pecahannya ialah 3/6."
+        },
+        {
+            q: "Selesaikan: Apakah pecahan wajar bagi 2/3 jika pengangkanya ialah 4?",
+            options: ["A) 4/6", "B) 4/9", "C) 4/5", "D) 4/12"],
+            answer: "A) 4/6",
+            explanation: "Pengangka 2 menjadi 4 (darab 2), maka penyebut (3×2=6). Pecahannya 4/6."
+        },
+        {
+            q: "Bandingkan pecahan: Manakah yang lebih besar antara 3/4 dengan 1/4?",
+            options: ["A) 3/4", "B) 1/4", "C) Sama besar", "D) Tidak pasti"],
+            answer: "A) 3/4",
+            explanation: "Apabila penyebut sama, pengangka yang lebih besar menunjukkan nilai yang lebih besar (3 > 1)."
+        },
+        {
+            q: "Tukarkan pecahan 2/4 kepada bentuk termudah.",
+            options: ["A) 1/2", "B) 1/3", "C) 2/3", "D) 1/4"],
+            answer: "A) 1/2",
+            explanation: "Bahagikan pengangka dan penyebut dengan 2: 2÷2 / 4÷2 = 1/2."
+        },
+        {
+            q: "Apakah pecahan setara bagi 1/3 jika penyebutnya ialah 9?",
+            options: ["A) 3/9", "B) 2/9", "C) 4/9", "D) 6/9"],
+            answer: "A) 3/9",
+            explanation: "Penyebut 3 menjadi 9 (darab 3), pengangka (1×3=3). Pecahannya 3/9."
+        },
+        {
+            q: "Selesaikan hasil tambah pecahan: 1/5 + 2/5 = ?",
+            options: ["A) 3/5", "B) 3/10", "C) 4/5", "D) 1/5"],
+            answer: "A) 3/5",
+            explanation: "Penyebut kekal sama, tambah pengangka: 1+2 = 3 (3/5)."
+        },
+        {
+            q: "Hitung hasil tolak pecahan berikut: 4/6 - 1/6 = ?",
+            options: ["A) 3/6", "B) 2/6", "C) 5/6", "D) 1/6"],
+            answer: "A) 3/6",
+            explanation: "Penyebut kekal, tolak pengangka: 4-1 = 3 (3/6)."
+        },
+        {
+            q: "Apakah nilai anu bagi x dalam pecahan setara berikut: 1/2 = x/8?",
+            options: ["A) 4", "B) 2", "C) 6", "D) 3"],
+            answer: "A) 4",
+            explanation: "Penyebut 2 menjadi 8 (darab 4), maka x = 1 × 4 = 4."
+        },
+        {
+            q: "Ibu memotong sebiji kek kepada 8 bahagian sama besar. Amin makan 3 bahagian. Apakah pecahan bahagian kek yang telah dimakan oleh Amin?",
+            options: ["A) 3/8", "B) 5/8", "C) 3/5", "D) 8/3"],
+            answer: "A) 3/8",
+            explanation: "Bahagian dimakan (3) daripada keseluruhan bahagian (8), iaitu 3/8."
+        },
+        {
+            q: "Susun pecahan berikut mengikut tertib menaik: 1/6, 5/6, 3/6, 2/6",
+            options: ["A) 1/6, 2/6, 3/6, 5/6", "B) 5/6, 3/6, 2/6, 1/6", "C) 1/6, 3/6, 2/6, 5/6", "D) 2/6, 1/6, 3/6, 5/6"],
+            answer: "A) 1/6, 2/6, 3/6, 5/6",
+            explanation: "Susun mengikut nilai pengangka dari kecil ke besar: 1, 2, 3, 5."
+        }
+    ],
+    13: [
+        {
+            q: "Tukarkan pecahan 7/10 kepada nombor perpuluhan.",
+            options: ["A) 0.7", "B) 0.07", "C) 7.0", "D) 0.77"],
+            answer: "A) 0.7",
+            explanation: "7 per sepuluh ditulis sebagai 0.7 dalam bentuk perpuluhan."
+        },
+        {
+            q: "Tukarkan pecahan 35/100 kepada nombor perpuluhan.",
+            options: ["A) 0.35", "B) 3.5", "C) 0.035", "D) 35.0"],
+            answer: "A) 0.35",
+            explanation: "35 per seratus ditulis sebagai 0.35."
+        },
+        {
+            q: "Tuliskan nombor perpuluhan 0.8 dalam bentuk perkataan.",
+            options: ["A) Sifar perpuluhan lapan", "B) Sifar perpuluhan kosong lapan", "C) Lapan perpuluhan", "D) Sifar lapan"],
+            answer: "A) Sifar perpuluhan lapan",
+            explanation: "0.8 dibaca sebagai 'sifar perpuluhan lapan'."
+        },
+        {
+            q: "Apakah nilai digit bagi nombor 4 dalam perpuluhan 0.46?",
+            options: ["A) 0.4", "B) 0.04", "C) 4", "D) 40"],
+            answer: "A) 0.4",
+            explanation: "Digit 4 berada di tempat persepuluh (0.4)."
+        },
+        {
+            q: "Bandingkan perpuluhan: Manakah yang lebih besar antara 0.6 dengan 0.39?",
+            options: ["A) 0.6", "B) 0.39", "C) Sama besar", "D) Tidak pasti"],
+            answer: "A) 0.6",
+            explanation: "0.6 sama dengan 0.60. Bandingkan 0.60 dengan 0.39, maka 0.6 lebih besar."
+        },
+        {
+            q: "Selesaikan hasil tambah perpuluhan: 0.4 + 0.3 = ?",
+            options: ["A) 0.7", "B) 0.07", "C) 7.0", "D) 0.34"],
+            answer: "A) 0.7",
+            explanation: "0.4 + 0.3 = 0.7."
+        },
+        {
+            q: "Hitung hasil tolak perpuluhan berikut: 0.9 - 0.25 = ?",
+            options: ["A) 0.65", "B) 0.75", "C) 0.64", "D) 0.85"],
+            answer: "A) 0.65",
+            explanation: "0.90 - 0.25 = 0.65."
+        },
+        {
+            q: "Susun nombor perpuluhan berikut dalam tertib menaik: 0.5, 0.2, 0.85, 0.47.",
+            options: ["A) 0.2, 0.47, 0.5, 0.85", "B) 0.85, 0.5, 0.47, 0.2", "C) 0.2, 0.5, 0.47, 0.85", "D) 0.47, 0.2, 0.5, 0.85"],
+            answer: "A) 0.2, 0.47, 0.5, 0.85",
+            explanation: "Susunan dari nilai terkecil ke terbesar: 0.2, 0.47, 0.5 (atau 0.50), 0.85."
+        },
+        {
+            q: "Tukarkan nombor perpuluhan 0.09 kepada pecahan per seratus.",
+            options: ["A) 9/100", "B) 9/10", "C) 90/100", "D) 1/9"],
+            answer: "A) 9/100",
+            explanation: "0.09 bermaksud 9 bahagian daripada 100 (9/100)."
+        },
+        {
+            q: "Selesaikan: 0.32 + 0.45 = ?",
+            options: ["A) 0.77", "B) 0.67", "C) 0.87", "D) 0.76"],
+            answer: "A) 0.77",
+            explanation: "0.32 + 0.45 = 0.77."
+        }
+    ],
+    14: [
+        {
+            q: "Hitung hasil tambah: RM2,450.50 + RM1,320.20.",
+            options: ["A) RM3,770.70", "B) RM3,670.70", "C) RM3,770.60", "D) RM3,870.70"],
+            answer: "A) RM3,770.70",
+            explanation: "RM2,450.50 + RM1,320.20 = RM3,770.70."
+        },
+        {
+            q: "Selesaikan: RM4,125.75 + RM2,340.10.",
+            options: ["A) RM6,465.85", "B) RM6,365.85", "C) RM6,455.85", "D) RM6,465.75"],
+            answer: "A) RM6,465.85",
+            explanation: "RM4,125.75 + RM2,340.10 = RM6,465.85."
+        },
+        {
+            q: "Hitung baki tolak: RM5,000.00 - RM1,840.50.",
+            options: ["A) RM3,159.50", "B) RM3,259.50", "C) RM3,149.50", "D) RM3,159.40"],
+            answer: "A) RM3,159.50",
+            explanation: "RM5,000.00 - RM1,840.50 = RM3,159.50."
+        },
+        {
+            q: "Selesaikan: RM7,340.25 - RM3,120.10.",
+            options: ["A) RM4,220.15", "B) RM4,210.15", "C) RM4,320.15", "D) RM4,220.25"],
+            answer: "A) RM4,220.15",
+            explanation: "RM7,340.25 - RM3,120.10 = RM4,220.15."
+        },
+        {
+            q: "Operasi bergabung: RM3,200.00 + RM1,550.50 - RM920.00.",
+            options: ["A) RM3,830.50", "B) RM3,730.50", "C) RM3,930.50", "D) RM3,820.50"],
+            answer: "A) RM3,830.50",
+            explanation: "RM3,200 + RM1,550.50 = RM4,750.50. RM4,750.50 - RM920.00 = RM3,830.50."
+        },
+        {
+            q: "Tambahkan: RM845.60 + RM2,130.40.",
+            options: ["A) RM2,976.00", "B) RM2,876.00", "C) RM2,966.00", "D) RM2,975.00"],
+            answer: "A) RM2,976.00",
+            explanation: "RM845.60 + RM2,130.40 = RM2,976.00."
+        },
+        {
+            q: "Cari beza wang antara RM6,200.00 dengan RM4,150.80.",
+            options: ["A) RM2,049.20", "B) RM2,059.20", "C) RM1,949.20", "D) RM2,048.20"],
+            answer: "A) RM2,049.20",
+            explanation: "RM6,200.00 - RM4,150.80 = RM2,049.20."
+        },
+        {
+            q: "Selesaikan: RM1,250.00 + RM3,400.20 - RM850.10.",
+            options: ["A) RM3,800.10", "B) RM3,700.10", "C) RM3,810.10", "D) RM3,900.10"],
+            answer: "A) RM3,800.10",
+            explanation: "RM1,250 + RM3,400.20 = RM4,650.20. RM4,650.20 - RM850.10 = RM3,800.10."
+        },
+        {
+            q: "Ibu mempunyai RM500.00. Dia membeli sebuah beg sekolah berharga RM145.50. Berapakah baki wang ibu?",
+            options: ["A) RM354.50", "B) RM364.50", "C) RM354.40", "D) RM344.50"],
+            answer: "A) RM354.50",
+            explanation: "RM500.00 - RM145.50 = RM354.50."
+        },
+        {
+            q: "Selesaikan ayat matematik berikut: RM4,500.00 - RM2,350.25 = ?",
+            options: ["A) RM2,149.75", "B) RM2,150.75", "C) RM2,149.50", "D) RM2,249.75"],
+            answer: "A) RM2,149.75",
+            explanation: "RM4,500.00 - RM2,350.25 = RM2,149.75."
+        }
+    ],
+    15: [
+        {
+            q: "Hitung hasil darab: RM145.50 × 4.",
+            options: ["A) RM582.00", "B) RM572.00", "C) RM592.00", "D) RM581.00"],
+            answer: "A) RM582.00",
+            explanation: "RM145.50 × 4 = RM582.00."
+        },
+        {
+            q: "Selesaikan: RM230.20 × 5.",
+            options: ["A) RM1,151.00", "B) RM1,150.00", "C) RM1,141.00", "D) RM1,251.00"],
+            answer: "A) RM1,151.00",
+            explanation: "RM230.20 × 5 = RM1,151.00."
+        },
+        {
+            q: "Hitung hasil bahagi: RM450.00 ÷ 3.",
+            options: ["A) RM150.00", "B) RM140.00", "C) RM160.00", "D) RM155.00"],
+            answer: "A) RM150.00",
+            explanation: "RM450.00 ÷ 3 = RM150.00."
+        },
+        {
+            q: "Selesaikan: RM840.80 ÷ 4.",
+            options: ["A) RM210.20", "B) RM210.00", "C) RM220.20", "D) RM200.20"],
+            answer: "A) RM210.20",
+            explanation: "RM840.80 ÷ 4 = RM210.20."
+        },
+        {
+            q: "Darabkan: RM312.40 × 6.",
+            options: ["A) RM1,874.40", "B) RM1,864.40", "C) RM1,873.40", "D) RM1,974.40"],
+            answer: "A) RM1,874.40",
+            explanation: "RM312.40 × 6 = RM1,874.40."
+        },
+        {
+            q: "Bahagikan: RM1,250.00 ÷ 5.",
+            options: ["A) RM250.00", "B) RM240.00", "C) RM260.00", "D) RM255.00"],
+            answer: "A) RM250.00",
+            explanation: "RM1,250.00 ÷ 5 = RM250.00."
+        },
+        {
+            q: "Selesaikan: RM125.75 × 8.",
+            options: ["A) RM1,006.00", "B) RM1,005.00", "C) RM996.00", "D) RM1,016.00"],
+            answer: "A) RM1,006.00",
+            explanation: "RM125.75 × 8 = RM1,006.00."
+        },
+        {
+            q: "Cari nilai bagi: RM3,120.60 ÷ 6.",
+            options: ["A) RM520.10", "B) RM510.10", "C) RM520.00", "D) RM530.10"],
+            answer: "A) RM520.10",
+            explanation: "RM3,120.60 ÷ 6 = RM520.10."
+        },
+        {
+            q: "Harga sebuah buku cerita ialah RM24.50. Berapakah jumlah harga untuk 4 buah buku cerita yang sama?",
+            options: ["A) RM98.00", "B) RM96.00", "C) RM98.50", "D) RM92.00"],
+            answer: "A) RM98.00",
+            explanation: "RM24.50 × 4 = RM98.00."
+        },
+        {
+            q: "Selesaikan ayat matematik berikut: RM728.00 ÷ 8 = ?",
+            options: ["A) RM91.00", "B) RM90.00", "C) RM92.00", "D) RM95.00"],
+            answer: "A) RM91.00",
+            explanation: "RM728.00 ÷ 8 = RM91.00."
+        }
+    ],
+    16: [
+        {
+            q: "Tukarkan 2 jam kepada minit.",
+            options: ["A) 120 minit", "B) 60 minit", "C) 180 minit", "D) 240 minit"],
+            answer: "A) 120 minit",
+            explanation: "1 jam = 60 minit, maka 2 jam = 2 × 60 = 120 minit."
+        },
+        {
+            q: "Tukarkan 130 minit kepada jam dan minit.",
+            options: ["A) 2 jam 10 minit", "B) 1 jam 30 minit", "C) 2 jam 30 minit", "D) 3 jam 10 minit"],
+            answer: "A) 2 jam 10 minit",
+            explanation: "120 minit = 2 jam, baki 10 minit. Jadi 2 jam 10 minit."
+        },
+        {
+            q: "Selesaikan tambah masa: 3 jam 20 minit + 1 jam 45 minit.",
+            options: ["A) 5 jam 5 minit", "B) 4 jam 65 minit", "C) 5 jam 15 minit", "D) 4 jam 55 minit"],
+            answer: "A) 5 jam 5 minit",
+            explanation: "Jam: 3+1 = 4 jam. Minit: 20+45 = 65 minit (1 jam 5 minit). Jumlah: 5 jam 5 minit."
+        },
+        {
+            q: "Hitung beza masa: 5 jam 10 minit - 2 jam 35 minit.",
+            options: ["A) 2 jam 35 minit", "B) 3 jam 35 minit", "C) 2 jam 25 minit", "D) 3 jam 25 minit"],
+            answer: "A) 2 jam 35 minit",
+            explanation: "Pinjam 1 jam (60 minit) jadi 4 jam 70 minit. 4 jam 70 minit - 2 jam 35 minit = 2 jam 35 minit."
+        },
+        {
+            q: "Tukarkan 3 jam 15 minit sepenuhnya kepada minit.",
+            options: ["A) 195 minit", "B) 185 minit", "C) 175 minit", "D) 205 minit"],
+            answer: "A) 195 minit",
+            explanation: "(3 × 60) + 15 = 180 + 15 = 195 minit."
+        },
+        {
+            q: "Selesaikan: 4 jam 40 minit + 2 jam 50 minit.",
+            options: ["A) 7 jam 30 minit", "B) 6 jam 90 minit", "C) 7 jam 20 minit", "D) 6 jam 50 minit"],
+            answer: "A) 7 jam 30 minit",
+            explanation: "4+2 = 6 jam. 40+50 = 90 minit (1 jam 30 minit). Jumlah: 7 jam 30 minit."
+        },
+        {
+            q: "Hitung: 6 jam - 1 jam 45 minit.",
+            options: ["A) 4 jam 15 minit", "B) 5 jam 15 minit", "C) 4 jam 45 minit", "D) 5 jam 45 minit"],
+            answer: "A) 4 jam 15 minit",
+            explanation: "6 jam = 5 jam 60 minit. 5 jam 60 minit - 1 jam 45 minit = 4 jam 15 minit."
+        },
+        {
+            q: "Tukarkan 195 minit kepada jam dan minit.",
+            options: ["A) 3 jam 15 minit", "B) 3 jam 35 minit", "C) 2 jam 55 minit", "D) 3 jam 45 minit"],
+            answer: "A) 3 jam 15 minit",
+            explanation: "195 ÷ 60 = 3 jam dengan baki 15 minit (3 jam 15 minit)."
+        },
+        {
+            q: "Ali mengambil masa 1 jam 15 minit untuk menyiapkan kerja sekolahnya. Dia mula pada pukul 3:00 petang. Pukul berapakah dia siap?",
+            options: ["A) 4:15 petang", "B) 4:00 petang", "C) 4:30 petang", "D) 3:45 petang"],
+            answer: "A) 4:15 petang",
+            explanation: "3:00 petang + 1 jam 15 minit = 4:15 petang."
+        },
+        {
+            q: "Selesaikan ayat matematik berikut: 2 jam 30 minit × 3 = ?",
+            options: ["A) 7 jam 30 minit", "B) 6 jam 90 minit", "C) 7 jam 00 minit", "D) 8 jam 00 minit"],
+            answer: "A) 7 jam 30 minit",
+            explanation: "2 jam × 3 = 6 jam. 30 minit × 3 = 90 minit (1 jam 30 minit). Jumlah: 7 jam 30 minit."
+        }
+    ],
+    17: [
+        {
+            q: "Hitung tempoh masa dari pukul 8:00 pagi hingga pukul 11:30 pagi pada hari yang sama.",
+            options: ["A) 3 jam 30 minit", "B) 3 jam 00 minit", "C) 4 jam 30 minit", "D) 2 jam 30 minit"],
+            answer: "A) 3 jam 30 minit",
+            explanation: "Dari 8:00 pagi ke 11:00 pagi ialah 3 jam, ditambah 30 minit menjadi 3 jam 30 minit."
+        },
+        {
+            q: "Suatu majlis bermula pada pukul 2:15 petang dan tamat pada pukul 5:45 petang. Berapakah tempoh masa majlis tersebut?",
+            options: ["A) 3 jam 30 minit", "B) 3 jam 15 minit", "C) 4 jam 30 minit", "D) 3 jam 45 minit"],
+            answer: "A) 3 jam 30 minit",
+            explanation: "Beza jam: 5 - 2 = 3 jam. Beza minit: 45 - 15 = 30 minit (3 jam 30 minit)."
+        },
+        {
+            q: "Ayah memandu kereta dari Johor Bahru ke Melaka selama 2 jam 45 minit. Jika perjalanan bermula pada pukul 9:00 pagi, pukul berapakah ayah sampai di Melaka?",
+            options: ["A) 11:45 pagi", "B) 11:30 pagi", "C) 12:15 tengah hari", "D) 11:15 pagi"],
+            answer: "A) 11:45 pagi",
+            explanation: "9:00 pagi + 2 jam 45 minit = 11:45 pagi."
+        },
+        {
+            q: "Ali menyiapkan kerja sekolahnya selama 1 jam 20 minit. Jika dia mula pada pukul 4:10 petang, pukul berapakah dia siap?",
+            options: ["A) 5:30 petang", "B) 5:20 petang", "C) 5:40 petang", "D) 5:10 petang"],
+            answer: "A) 5:30 petang",
+            explanation: "Jam: 4 + 1 = 5. Minit: 10 + 20 = 30. Waktu siap: 5:30 petang."
+        },
+        {
+            q: "Berapakah bilangan hari dalam bulan Februari pada Tahun Lompat?",
+            options: ["A) 29 hari", "B) 28 hari", "C) 30 hari", "D) 31 hari"],
+            answer: "A) 29 hari",
+            explanation: "Dalam Tahun Lompat, bulan Februari mempunyai 29 hari (berbanding 28 hari biasa)."
+        },
+        {
+            q: "Tukarkan 3 minggu kepada bilangan hari.",
+            options: ["A) 21 hari", "B) 14 hari", "C) 28 hari", "D) 70 hari"],
+            answer: "A) 21 hari",
+            explanation: "1 minggu = 7 hari, maka 3 minggu = 3 × 7 = 21 hari."
+        },
+        {
+            q: "Suatu kursus berlangsung selama 5 hari. Berapakah jumlah jam bagi 5 hari tersebut?",
+            options: ["A) 120 jam", "B) 100 jam", "C) 96 jam", "D) 144 jam"],
+            answer: "A) 120 jam",
+            explanation: "1 hari = 24 jam, maka 5 hari = 5 × 24 = 120 jam."
+        },
+        {
+            q: "Siti melancong selama 2 minggu 4 hari. Berapakah jumlah hari Siti melancong kesemuanya?",
+            options: ["A) 18 hari", "B) 14 hari", "C) 20 hari", "D) 15 hari"],
+            answer: "A) 18 hari",
+            explanation: "2 minggu = 14 hari. 14 hari + 4 hari = 18 hari."
+        },
+        {
+            q: "Encik Ali bekerja dari pukul 8:00 pagi hingga pukul 5:00 petang setiap hari. Hitung tempoh masa kerja Encik Ali dalam sehari (andaikan tiada rehat).",
+            options: ["A) 9 jam", "B) 8 jam", "C) 10 jam", "D) 7 jam"],
+            answer: "A) 9 jam",
+            explanation: "Dari 8:00 pagi ke 12:00 tengah hari (4 jam), dari 12:00 tengah hari ke 5:00 petang (5 jam). Jumlah = 9 jam."
+        },
+        {
+            q: "Jika hari ini hari Rabu, hari apakah selepas 10 hari?",
+            options: ["A) Sabtu", "B) Jumaat", "C) Ahad", "D) Khamis"],
+            answer: "A) Sabtu",
+            explanation: "10 hari = 1 minggu (7 hari) + 3 hari. Selepas Rabu + 3 hari ialah Khamis, Jumaat, Sabtu."
+        }
+    ]
+};
+
+// Penjana automatik untuk Level 18 hingga 20 sebagai templat baki silibus
+for (let i = 18; i <= 20; i++) {
+    levelsQuestions[i] = [];
+    for (let j = 1; j <= 10; j++) {
+        levelsQuestions[i].push({
+            q: `Soalan ${j} untuk Level ${i}: Selesaikan soalan silibus Matematik Darjah 3 ini dengan betul.`,
+            options: ["A) Jawapan A", "B) Jawapan B", "C) Jawapan C", "D) Jawapan D"],
+            answer: "A) Jawapan A",
+            explanation: `Ini adalah penerangan jawapan bagi soalan ${j} dalam Level ${i}.`
+        });
+    }
+}
+
+function showLoginPage(e) {
+    e.preventDefault();
+    document.getElementById('register-page').classList.add('hidden');
+    document.getElementById('login-page').classList.remove('hidden');
+}
+
+function showRegisterPage(e) {
+    e.preventDefault();
+    document.getElementById('login-page').classList.add('hidden');
+    document.getElementById('register-page').classList.remove('hidden');
+}
+
+// 1. Pendaftaran Akaun ke Firebase Firestore
+async function handleRegister(e) {
+    e.preventDefault();
+    let name = document.getElementById('reg-nama').value.trim();
+    let email = document.getElementById('reg-email').value.trim();
+    let password = document.getElementById('reg-password').value.trim();
+
+    if (!name || !email || !password) {
+        alert("⚠️ Sila isi semua maklumat pendaftaran!");
+        return;
+    }
+
+    try {
+        const q = window.query(window.collection(window.db, "students"), window.where("email", "==", email));
+        const querySnapshot = await window.getDocs(q);
+
+        if (!querySnapshot.empty) {
+            alert("⚠️ E-mel ini sudah berdaftar! Sila log masuk.");
+            showLoginPage(e);
+            return;
+        }
+
+        await window.addDoc(window.collection(window.db, "students"), {
+            name: name,
+            email: email,
+            password: password,
+            createdAt: new Date().toISOString()
+        });
+
+        alert("✅ Pendaftaran berjaya! Sila log masuk.");
+        document.getElementById('reg-nama').value = '';
+        document.getElementById('reg-email').value = '';
+        document.getElementById('reg-password').value = '';
+        showLoginPage(e);
+    } catch (error) {
+        console.error("Ralat pendaftaran:", error);
+        alert("❌ Pendaftaran gagal. Sila cuba lagi.");
+    }
+}
+
+// 2. Log Masuk dari Firebase Firestore
+async function handleLogin(e) {
+    e.preventDefault();
+    let emailInput = document.getElementById('login-email').value.trim();
+    let passwordInput = document.getElementById('login-password').value.trim();
+
+    try {
+        const q = window.query(window.collection(window.db, "students"), window.where("email", "==", emailInput));
+        const querySnapshot = await window.getDocs(q);
+
+        if (querySnapshot.empty) {
+            alert("⚠️ Tiada akaun dijumpai dengan e-mel ini. Sila daftar terlebih dahulu!");
+            return;
+        }
+
+        let studentDoc = querySnapshot.docs[0].data();
+
+        if (studentDoc.password === passwordInput) {
+            studentData.name = studentDoc.name;
+            studentData.email = studentDoc.email;
+
+            document.getElementById('welcome-msg').innerText = `Hai, ${studentData.name}!`;
+            document.getElementById('login-page').classList.add('hidden');
+            document.getElementById('level-page').classList.remove('hidden');
+        } else {
+            alert("❌ Kata laluan salah! Sila cuba lagi.");
+        }
+    } catch (error) {
+        console.error("Ralat log masuk:", error);
+        alert("❌ Ralat sambungan ke pangkalan data.");
+    }
+}
+
+function logout() {
+    studentData = { name: '', email: '' };
+    document.getElementById('level-page').classList.add('hidden');
+    document.getElementById('login-page').classList.remove('hidden');
+    document.getElementById('login-email').value = '';
+    document.getElementById('login-password').value = '';
+}
+
+function selectLevel(lvl) {
+    if (!studentData.name) {
+        alert("⚠️ Sila log masuk terlebih dahulu!");
+        logout();
+        return;
+    }
+
+    currentLevel = lvl;
+    currentQuestionIndex = 0;
+    scoreCount = 0;
+    currentLevelQuestions = levelsQuestions[lvl] || levelsQuestions[1];
+
+    document.getElementById('level-page').classList.add('hidden');
+    document.getElementById('game-page').classList.remove('hidden');
+    
+    loadQuestion();
+}
+
+function loadQuestion() {
+    let qData = currentLevelQuestions[currentQuestionIndex];
+    document.getElementById('current-stage-title').innerText = `Level ${currentLevel}`;
+    document.getElementById('question-counter').innerText = `Soalan ${currentQuestionIndex + 1}/${currentLevelQuestions.length}`;
+    document.getElementById('question-text').innerText = qData.q;
+    
+    let optionsContainer = document.getElementById('options-container');
+    optionsContainer.innerHTML = '';
+    
+    qData.options.forEach((opt) => {
+        let btn = document.createElement('button');
+        btn.type = 'button';
+        btn.innerText = opt;
+        btn.style.cssText = "margin-bottom: 10px; background-color: #f8f9fa; color: #333; border: 2px solid #4e54c8; padding: 10px; border-radius: 8px; font-size: 15px; text-align: left; width: 100%; cursor: pointer; transition: 0.2s;";
+        btn.onmouseover = () => btn.style.backgroundColor = "#e2e6ea";
+        btn.onmouseout = () => btn.style.backgroundColor = "#f8f9fa";
+        btn.onclick = () => selectAnswer(opt);
+        optionsContainer.appendChild(btn);
+    });
+
+    document.getElementById('options-container').style.display = 'block';
+    document.getElementById('explanation-box').classList.add('hidden');
+}
+
+function selectAnswer(selectedOpt) {
+    let qData = currentLevelQuestions[currentQuestionIndex];
+    let isCorrect = selectedOpt === qData.answer;
+
+    if (isCorrect) {
+        playCorrectSound();
+        scoreCount++;
+        document.getElementById('explanation-title').innerText = "✅ Betul! Tahniah!";
+        document.getElementById('explanation-title').style.color = "#27ae60";
+    } else {
+        playWrongSound();
+        document.getElementById('explanation-title').innerText = `❌ Kurang Tepat. Jawapan sebenar ialah ${qData.answer}`;
+        document.getElementById('explanation-title').style.color = "#e74c3c";
+    }
+
+    document.getElementById('explanation-text').innerText = qData.explanation;
+    document.getElementById('options-container').style.display = 'none';
+    document.getElementById('explanation-box').classList.remove('hidden');
+}
+
+function nextQuestion() {
+    currentQuestionIndex++;
+    if (currentQuestionIndex < currentLevelQuestions.length) {
+        loadQuestion();
+    } else {
+        showLevelResultModal();
+    }
+}
+
+function showLevelResultModal() {
+    let modalList = document.getElementById('modal-results-list');
+    modalList.innerHTML = `
+        <p style="font-size: 16px; margin: 10px 0;">Pencapaian anda untuk <strong>Level ${currentLevel}</strong>:</p>
+        <h3 style="color: #4e54c8; font-size: 24px;">Skor: ${scoreCount} / ${currentLevelQuestions.length}</h3>
+    `;
+
+    saveStudentHistory(currentLevel, `Skor: ${scoreCount}/${currentLevelQuestions.length}`);
+
+    document.getElementById('result-modal').classList.remove('hidden');
+}
+
+async function saveStudentHistory(level, summary) {
+    if (!studentData.email) return;
+
+    let now = new Date();
+    let dateStr = now.toLocaleDateString() + ' ' + now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+
+    try {
+        await window.addDoc(window.collection(window.db, "history"), {
+            email: studentData.email,
+            date: dateStr,
+            level: level,
+            details: summary,
+            timestamp: Date.now()
+        });
+    } catch (error) {
+        console.error("Gagal simpan sejarah:", error);
+    }
+}
+
+async function showHistoryModal() {
+    if (!studentData.email) return;
+
+    let historyListDiv = document.getElementById('history-list');
+    historyListDiv.innerHTML = '<p style="text-align: center;">Memuatkan rekod...</p>';
+    document.getElementById('history-modal').classList.remove('hidden');
+
+    try {
+        const q = window.query(window.collection(window.db, "history"), window.where("email", "==", studentData.email));
+        const querySnapshot = await window.getDocs(q);
+
+        historyListDiv.innerHTML = '';
+
+        if (querySnapshot.empty) {
+            historyListDiv.innerHTML = '<p style="text-align: center; color: #666;">Tiada rekod aktiviti lagi. Jom mula jawab soalan!</p>';
+            return;
+        }
+
+        let historyData = [];
+        querySnapshot.forEach((doc) => {
+            historyData.push(doc.data());
+        });
+
+        historyData.sort((a, b) => b.timestamp - a.timestamp);
+
+        historyData.forEach((item) => {
+            let itemDiv = document.createElement('div');
+            itemDiv.style.cssText = "background: #f8f9fa; border-left: 4px solid #4e54c8; padding: 8px 12px; margin-bottom: 8px; border-radius: 4px; font-size: 13px;";
+            itemDiv.innerHTML = `
+                <strong>🗓️ ${item.date}</strong><br>
+                <span>🏆 Level ${item.level}</span><br>
+                <small style="color: #555;">${item.details}</small>
+            `;
+            historyListDiv.appendChild(itemDiv);
+        });
+
+    } catch (error) {
+        console.error("Gagal ambil sejarah:", error);
+        historyListDiv.innerHTML = '<p style="text-align: center; color: red;">Gagal memuatkan rekod dari pelayan.</p>';
+    }
+}
+
+function closeHistoryModal() {
+    document.getElementById('history-modal').classList.add('hidden');
+}
+
+function closeModalAndReturn() {
+    document.getElementById('result-modal').classList.add('hidden');
+    document.getElementById('game-page').classList.add('hidden');
+    document.getElementById('level-page').classList.remove('hidden');
+}
+
+function playCorrectSound() {
+    let sound = document.getElementById('sound-correct');
+    if (sound) {
+        sound.currentTime = 0;
+        sound.play().catch(e => console.log("Audio disekat:", e));
+    }
+}
+
+function playWrongSound() {
+    let sound = document.getElementById('sound-wrong');
+    if (sound) {
+        sound.currentTime = 0;
+        sound.play().catch(e => console.log("Audio disekat:", e));
+    }
+}
