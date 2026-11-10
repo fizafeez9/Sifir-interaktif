@@ -25,7 +25,6 @@ body.menu-active-bg {
     display: flex;
     justify-content: center;
     align-items: center; /* Letakkan keseluruhan kandungan di tengah skrin */
-    position: relative;
 }
 
 .container {
@@ -34,28 +33,37 @@ body.menu-active-bg {
     padding: 15px;
     box-sizing: border-box;
     position: relative;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Pusatkan menu utama secara menegak */
 }
 
-/* Wrapper Menu Utama - Turun ke tengah secara seimbang */
+/* Wrapper Menu Utama - Turun ke tengah */
 .menu-main-wrapper {
     background: transparent !important;
     padding: 0 !important;
     box-shadow: none !important;
     text-align: center;
     width: 100%;
-    margin-top: 60px; /* Turunkan ke kawasan tengah */
 }
 
-/* Header Atas di dalam Menu Utama (Hanya ada logo MathKids) */
+/* Header Atas di dalam Menu Utama (Khas untuk Logo MathKids & Butang Kredit) */
 .menu-main-wrapper .app-header {
     display: flex;
-    justify-content: flex-start;
+    justify-content: space-between;
     align-items: center;
     width: 100%;
-    margin-bottom: 15px;
+    margin-bottom: 25px;
     padding: 0;
     background: transparent !important;
     box-shadow: none !important;
+    position: absolute;
+    top: 20px;
+    left: 0;
+    right: 0;
+    padding: 0 20px;
+    box-sizing: border-box;
 }
 
 /* Logo MathKids (PNG) */
@@ -65,11 +73,8 @@ body.menu-active-bg {
     object-fit: contain;
 }
 
-/* Butang Tebus Kredit Kekal di Atas Kanan secara Tetap (Absolute) */
-.credit-btn-fixed {
-    position: absolute;
-    top: 20px;
-    right: 20px;
+/* Butang Tebus Kredit Kekal di Atas Kanan */
+.credit-btn {
     background: #9b59b6;
     color: white;
     border: 3px solid #222;
@@ -80,10 +85,9 @@ body.menu-active-bg {
     box-shadow: 0 4px 0 #222;
     cursor: pointer;
     transition: 0.1s;
-    z-index: 10;
 }
 
-.credit-btn-fixed:active {
+.credit-btn:active {
     transform: translateY(3px);
     box-shadow: 0 1px 0 #222;
 }
