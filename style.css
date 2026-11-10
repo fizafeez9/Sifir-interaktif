@@ -15,9 +15,9 @@ body.monster-bg {
     align-items: center;
 }
 
-/* Background Khas Menu Utama (Menggunakan fail baru IMG_8387.png) */
+/* Background Khas Menu Utama (Menggunakan fail baharu IMG_8390.png) */
 body.menu-active-bg {
-    background: url('background/IMG_8387.png') no-repeat center center fixed !important;
+    background: url('background/IMG_8390.png') no-repeat center center fixed !important;
     background-size: cover !important;
 }
 
