@@ -9,7 +9,7 @@
 <body class="monster-bg">
     <div class="container">
         
-        <!-- HEADER UTAMA (Selepas Login: Logo & Tebus Kredit) -->
+        <!-- HEADER UTAMA (Hanya muncul selepas login/masuk menu) -->
         <div id="main-header" class="app-header hidden">
             <span class="logo-text">MathKids 👾</span>
             <button class="credit-btn">⭐ Tebus Kredit: 0</button>
@@ -41,7 +41,7 @@
             <p style="margin-top: 15px; font-size: 14px;">Sudah ada akaun? <a href="#" onclick="showLoginPage(event)" style="color: #4e54c8; font-weight: bold;">Log Masuk di sini</a></p>
         </div>
 
-        <!-- 2. PAGE LOG MASUK (LOGIN) -->
+        <!-- 2. PAGE LOG MASUK (LOGIN) - Mesti ada class "hidden" di awal -->
         <div id="login-page" class="hidden form-card">
             <h1>🔐 Log Masuk Pelajar</h1>
             <p>Sila masukkan e-mel dan kata laluan yang telah didaftarkan.</p>
@@ -59,7 +59,7 @@
             <p style="margin-top: 15px; font-size: 14px;">Belum ada akaun? <a href="#" onclick="showRegisterPage(event)" style="color: #4e54c8; font-weight: bold;">Daftar di sini</a></p>
         </div>
 
-        <!-- 3. MENU UTAMA (Selepas Login: 4 Butang Grid Ceria) -->
+        <!-- 3. MENU UTAMA (Selepas Login: 4 Butang Grid Ceria) - Mesti ada class "hidden" -->
         <div id="main-menu-page" class="hidden form-card">
             <h2 id="welcome-msg" style="margin-bottom: 5px;">Hai, Fiza!</h2>
             <p style="font-size: 14px; color: #555; margin-bottom: 20px;">Pilih aktiviti hebat anda hari ini:</p>
@@ -96,7 +96,7 @@
             </div>
         </div>
 
-        <!-- 3.1 PAGE PEMILIHAN LEVEL (1 - 20) - Masuk Lepas Tekan Latihan -->
+        <!-- 3.1 PAGE PEMILIHAN LEVEL (1 - 20) - Mesti ada class "hidden" -->
         <div id="level-page" class="hidden form-card">
             <h2>Pilih Tahap Kesukaran</h2>
             <p>Sila pilih Level latihan (1 hingga 20):</p>
@@ -125,7 +125,7 @@
             <button class="monster-btn btn-blue" onclick="backToMainMenu()">⬅️ Kembali ke Menu Utama</button>
         </div>
 
-        <!-- 4. PAGE PERMAINAN / KUIZ & PENERANGAN -->
+        <!-- 4. PAGE PERMAINAN / KUIZ & PENERANGAN - Mesti ada class "hidden" -->
         <div id="game-page" class="hidden form-card">
             <div class="game-header">
                 <span id="current-stage-title">Level X</span>
