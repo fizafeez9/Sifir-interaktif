@@ -17,7 +17,7 @@ body.monster-bg {
 
 /* Background Khas Menu Utama (IMG_8390.png) */
 body.menu-active-bg {
-    background: url('background/IMG_8390.png') no-repeat center center fixed !important;
+    background: url('background/IMG_8436.png') no-repeat center center fixed !important;
     background-size: cover !important;
     height: 100vh;
     width: 100vw;
