@@ -15,13 +15,13 @@ body.monster-bg {
     align-items: center;
 }
 
-/* Background Khas Menu Utama (Dipulihkan kepada IMG_8390.png dengan betul) */
+/* Background Khas Menu Utama (IMG_8436.png) */
 body.menu-active-bg {
-    background: url('background/IMG_8390.png') no-repeat center center fixed !important;
+    background: url('background/IMG_8436.png') no-repeat center center fixed !important;
     background-size: cover !important;
-    height: 100vh;
+    min-height: 100vh;
     width: 100vw;
-    overflow-y: auto;
+    margin: 0;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -33,10 +33,6 @@ body.menu-active-bg {
     padding: 15px;
     box-sizing: border-box;
     position: relative;
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
 }
 
 /* Wrapper Menu Utama - Dinaikkan ke atas sedikit sebanyak ~2cm */
@@ -46,7 +42,7 @@ body.menu-active-bg {
     box-shadow: none !important;
     text-align: center;
     width: 100%;
-    margin-top: -60px;
+    margin-top: -40px;
 }
 
 /* Header Atas di dalam Menu Utama */
@@ -60,7 +56,7 @@ body.menu-active-bg {
     background: transparent !important;
     box-shadow: none !important;
     position: absolute;
-    top: 20px;
+    top: 15px;
     left: 0;
     right: 0;
     padding: 0 20px;
@@ -136,7 +132,7 @@ body.menu-active-bg {
     transform: scale(0.95);
 }
 
-/* Kawasan Butang Log Keluar (Saiz asal dikekalkan penuh dan selari) */
+/* Kawasan Butang Log Keluar (Saiz Asal Dikekalkan Penuh) */
 .menu-logout-area {
     width: 100%;
     display: flex;
@@ -144,9 +140,9 @@ body.menu-active-bg {
 }
 
 .logout-img-btn {
-    width: 100%; /* Dikembalikan kepada saiz penuh asal */
-    max-width: 230px; /* Lebar seimbang mengikut saiz butang lain */
-    height: 65px; /* Ketinggian disamakan dengan butang grid yang lain */
+    width: 100%;
+    max-width: 230px;
+    height: 65px;
     object-fit: fill;
     border-radius: 16px;
     cursor: pointer;
