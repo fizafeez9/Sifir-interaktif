@@ -32,28 +32,29 @@ body.menu-active-bg {
     max-width: 450px;
     padding: 15px;
     box-sizing: border-box;
-    position: relative; /* Menjadikan kontena sebagai rujukan utama absolute */
+    position: relative;
     height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
 }
 
-/* Wrapper Menu Utama */
+/* Wrapper Menu Utama - Dinaikkan ke atas sebanyak 35px (margin-top: -15px) */
 .menu-main-wrapper {
     background: transparent !important;
     padding: 0 !important;
     box-shadow: none !important;
     text-align: center;
     width: 100%;
-    margin-top: 20px;
+    margin-top: -15px;
+    position: relative;
 }
 
-/* Butang Tebus Kredit - DIPAKSA NAIK KE ATAS SEKALI (Absolute terhadap .container) */
+/* Butang Tebus Kredit - Atas Sekali */
 .credit-btn-top {
     position: absolute;
-    top: 40px; /* Jarak dari bahagian paling atas skrin */
-    right: 20px; /* Jarak dari penjuru kanan skrin */
+    top: 40px;
+    right: 20px;
     background: #9b59b6;
     color: white;
     border: 3px solid #222;
