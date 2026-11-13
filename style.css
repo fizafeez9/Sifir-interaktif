@@ -42,19 +42,20 @@ body.menu-active-bg {
     box-shadow: none !important;
     text-align: center;
     width: 100%;
-    margin-top: -20px;
+    margin-top: -30px;
 }
 
-/* Header Atas di dalam Menu Utama (Diselaraskan kedudukannya supaya tebus kredit di atas kanan) */
+/* Header Atas di dalam Menu Utama (Susunan asal kembali ke flex normal) */
 .menu-main-wrapper .app-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     width: 100%;
-    margin-bottom: 20px;
-    padding: 0;
+    margin-bottom: 15px;
+    padding: 0 10px;
     background: transparent !important;
     box-shadow: none !important;
+    box-sizing: border-box;
 }
 
 /* Logo MathKids (PNG) */
@@ -64,7 +65,7 @@ body.menu-active-bg {
     object-fit: contain;
 }
 
-/* Butang Tebus Kredit Asal di Atas Kanan */
+/* Butang Tebus Kredit Kembali ke Tempat Asal (Di dalam Header Atas Kanan) */
 .credit-btn {
     background: #9b59b6;
     color: white;
@@ -126,7 +127,7 @@ body.menu-active-bg {
     transform: scale(0.95);
 }
 
-/* Kawasan Butang Log Keluar (Saiz Penuh Asal Dikekalkan) */
+/* Kawasan Butang Log Keluar di Bawah */
 .menu-logout-area {
     width: 100%;
     display: flex;
