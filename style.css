@@ -39,40 +39,21 @@ body.menu-active-bg {
     justify-content: center;
 }
 
-/* Wrapper Menu Utama - Dinaikkan ke atas sedikit sebanyak ~2cm */
+/* Wrapper Menu Utama */
 .menu-main-wrapper {
     background: transparent !important;
     padding: 0 !important;
     box-shadow: none !important;
     text-align: center;
     width: 100%;
-    margin-top: -30px;
+    margin-top: -10px;
     position: relative;
 }
 
-/* Header Atas di dalam Menu Utama (Hanya ada Logo) */
-.menu-main-wrapper .app-header {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    width: 100%;
-    margin-bottom: 15px;
-    padding: 0;
-    background: transparent !important;
-    box-shadow: none !important;
-}
-
-/* Logo MathKids (PNG) */
-.header-logo {
-    height: 42px;
-    width: auto;
-    object-fit: contain;
-}
-
-/* Butang Tebus Kredit - ATAS SEKALI (Terapung mutlak di penjuru atas kanan skrin) */
+/* Butang Tebus Kredit - ATAS SEKALI (Ditarik naik ke atas skrin dengan nilai negatif yang tinggi) */
 .credit-btn-top {
     position: absolute;
-    top: -45px;
+    top: -75px;
     right: 0px;
     background: #9b59b6;
     color: white;
