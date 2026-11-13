@@ -7,8 +7,11 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body class="monster-bg">
-    <div class="container">
+    <div class="container" style="position: relative;">
         
+        <!-- Butang Tebus Kredit Asal Diletakkan Semula di Atas Kanan secara Terapung (Absolute) -->
+        <button class="credit-btn" onclick="openCreditModal()" style="position: absolute; top: 15px; right: 15px; z-index: 10;">⭐ Tebus Kredit: <span id="credit-count">0</span></button>
+
         <!-- 1. PAGE PENDAFTARAN (SIGN UP) -->
         <div id="register-page" class="form-card">
             <h1>🚀 Daftar Akaun Pelajar</h1>
@@ -55,10 +58,9 @@
 
         <!-- 3. MENU UTAMA -->
         <div id="main-menu-page" class="hidden menu-main-wrapper">
-            <!-- Header Atas: Logo MathKids & Butang Tebus Kredit di Atas Kanan -->
+            <!-- Header Atas: Hanya Logo MathKids Sahaja -->
             <div class="app-header">
                 <img src="background/buttons/IMG_8337.png" alt="MathKids" class="header-logo">
-                <button class="credit-btn" onclick="openCreditModal()">⭐ Tebus Kredit: <span id="credit-count">0</span></button>
             </div>
 
             <!-- Tajuk Aluan -->
