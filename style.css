@@ -15,9 +15,9 @@ body.monster-bg {
     align-items: center;
 }
 
-/* Background Khas Menu Utama (IMG_8436.png) */
+/* Background Khas Menu Utama (IMG_8390.png) */
 body.menu-active-bg {
-    background: url('background/IMG_8436.png') no-repeat center center fixed !important;
+    background: url('background/IMG_8390.png') no-repeat center center fixed !important;
     background-size: cover !important;
     height: 100vh;
     width: 100vw;
@@ -39,14 +39,14 @@ body.menu-active-bg {
     justify-content: center;
 }
 
-/* Wrapper Menu Utama - Dinaikkan ke atas sedikit sebanyak ~2cm (margin-top negatif) */
+/* Wrapper Menu Utama - Dinaikkan ke atas sedikit sebanyak ~2cm */
 .menu-main-wrapper {
     background: transparent !important;
     padding: 0 !important;
     box-shadow: none !important;
     text-align: center;
     width: 100%;
-    margin-top: -60px; /* Dinaikkan ke atas supaya lebih dekat ke bahagian atas */
+    margin-top: -60px;
 }
 
 /* Header Atas di dalam Menu Utama (Khas untuk Logo MathKids & Butang Kredit) */
@@ -120,6 +120,7 @@ body.menu-active-bg {
     gap: 12px;
     width: 100%;
     align-items: center;
+    margin-bottom: 12px;
 }
 
 .menu-img-btn {
@@ -132,6 +133,26 @@ body.menu-active-bg {
 }
 
 .menu-img-btn:active {
+    transform: scale(0.95);
+}
+
+/* Kawasan Butang Log Keluar di Bawah Kotak Merah */
+.menu-logout-area {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.logout-img-btn {
+    width: 60%;
+    height: 55px;
+    object-fit: fill;
+    border-radius: 16px;
+    cursor: pointer;
+    transition: transform 0.1s ease;
+}
+
+.logout-img-btn:active {
     transform: scale(0.95);
 }
 
