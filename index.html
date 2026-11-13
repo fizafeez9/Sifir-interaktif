@@ -55,10 +55,13 @@
 
         <!-- 3. MENU UTAMA -->
         <div id="main-menu-page" class="hidden menu-main-wrapper">
-            <!-- Header Atas: Logo MathKids & Butang Tebus Kredit di Atas Kanan (Mengikut asal) -->
+            
+            <!-- Butang Tebus Kredit - ATAS SEKALI (Terapung di penjuru atas kanan) -->
+            <button class="credit-btn-top" onclick="openCreditModal()">⭐ Tebus Kredit: <span id="credit-count">0</span></button>
+
+            <!-- Header Atas: Logo MathKids di Kiri Atas -->
             <div class="app-header">
                 <img src="background/buttons/IMG_8337.png" alt="MathKids" class="header-logo">
-                <button class="credit-btn" onclick="openCreditModal()">⭐ Tebus Kredit: <span id="credit-count">0</span></button>
             </div>
 
             <!-- Tajuk Aluan -->
@@ -67,7 +70,7 @@
                 <p style="font-size: 13px; color: #222; margin-bottom: 15px; font-weight: 600;">Pilih aktiviti hebat anda hari ini:</p>
             </div>
             
-            <!-- Grid 4 Button Menu Utama (2x2) - Butang ke-4 ditukar kepada Silibus Matematik (IMG_8523.png) -->
+            <!-- Grid 4 Button Menu Utama (2x2) -->
             <div class="menu-grid-2col">
                 <img src="background/buttons/4D67F292-DE49-4DEE-925D-38A65E3EBEF5.png" alt="Latihan & Kefahaman" class="menu-img-btn" onclick="showLevelSelection()">
                 <img src="background/buttons/1D4D4A3E-E3AF-4DF5-8A5A-6A246EC7C758.png" alt="Ujian Penilaian Minda" class="menu-img-btn" onclick="alert('Mod Ujian akan datang!')">
@@ -75,7 +78,7 @@
                 <img src="background/buttons/IMG_8523.png" alt="Silibus Matematik" class="menu-img-btn" onclick="alert('Mod Silibus Matematik akan datang!')">
             </div>
 
-            <!-- Butang Log Keluar di Bawah (Kawasan Kotak Merah) -->
+            <!-- Butang Log Keluar di Bawah -->
             <div class="menu-logout-area" style="margin-top: 12px; text-align: center;">
                 <img src="background/buttons/58A89777-E31F-4D92-9953-37ED91100A0A.png" alt="Log Keluar" class="logout-img-btn" onclick="logout()" style="width: 100%; max-width: 230px; height: 65px; object-fit: fill; border-radius: 16px; cursor: pointer;">
             </div>
