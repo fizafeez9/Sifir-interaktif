@@ -39,7 +39,7 @@ body.menu-active-bg {
     justify-content: center;
 }
 
-/* Wrapper Menu Utama - Dinaikkan ke atas sebanyak 35px (margin-top: -15px) */
+/* Wrapper Menu Utama - Dinaikkan ke atas */
 .menu-main-wrapper {
     background: transparent !important;
     padding: 0 !important;
@@ -50,11 +50,20 @@ body.menu-active-bg {
     position: relative;
 }
 
-/* Butang Tebus Kredit - Atas Sekali */
-.credit-btn-top {
-    position: absolute;
-    top: 40px;
-    right: 20px;
+/* Header Atas: Letak balik butang tebus kredit di penjuru atas kanan asal */
+.app-header {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 0;
+    background: transparent !important;
+    box-shadow: none !important;
+}
+
+/* Butang Tebus Kredit - Kekal di atas kanan seperti asal */
+.credit-btn {
     background: #9b59b6;
     color: white;
     border: 3px solid #222;
@@ -65,10 +74,9 @@ body.menu-active-bg {
     box-shadow: 0 4px 0 #222;
     cursor: pointer;
     transition: 0.1s;
-    z-index: 100;
 }
 
-.credit-btn-top:active {
+.credit-btn:active {
     transform: translateY(3px);
     box-shadow: 0 1px 0 #222;
 }
