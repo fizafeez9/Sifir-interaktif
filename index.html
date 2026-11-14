@@ -59,13 +59,13 @@
             <!-- Butang Tebus Kredit - ATAS SEKALI (Terapung di penjuru atas kanan) -->
             <button class="credit-btn-top" onclick="openCreditModal()">⭐ Tebus Kredit: <span id="credit-count">0</span></button>
 
-            <!-- Tajuk Aluan (Logo MathKids dibuang sepenuhnya) -->
+            <!-- Tajuk Aluan -->
             <div class="menu-title-area" style="margin-top: 10px;">
                 <h2 id="welcome-msg" style="margin-bottom: 2px; font-size: 24px; color: #222;">Hai, Fiza!</h2>
                 <p style="font-size: 13px; color: #222; margin-bottom: 15px; font-weight: 600;">Pilih aktiviti hebat anda hari ini:</p>
             </div>
             
-            <!-- Grid 4 Button Menu Utama (2x2) - BUTANG KETIGA DIPERBETULKAN KEPADA IMG_8523.png (Silibus Matematik) -->
+            <!-- Grid 4 Button Menu Utama -->
             <div class="menu-grid-2col">
                 <img src="background/buttons/4D67F292-DE49-4DEE-925D-38A65E3EBEF5.png" alt="Latihan & Kefahaman" class="menu-img-btn" onclick="showLevelSelection()">
                 <img src="background/buttons/1D4D4A3E-E3AF-4DF5-8A5A-6A246EC7C758.png" alt="Ujian Penilaian Minda" class="menu-img-btn" onclick="alert('Mod Ujian akan datang!')">
@@ -79,9 +79,9 @@
             </div>
         </div>
 
-        <!-- 3.1 PAGE PEMILIHAN LEVEL (1 - 20) -->
+        <!-- 3.1 PAGE PEMILIHAN LEVEL (1 - 20) DARJAH 3 -->
         <div id="level-page" class="hidden form-card">
-            <h2>Pilih Tahap Kesukaran</h2>
+            <h2>Pilih Tahap Kesukaran (Darjah 3)</h2>
             <p>Sila pilih Level latihan (1 hingga 20):</p>
             <div class="level-grid" id="level-buttons-container" style="max-height: 250px; overflow-y: auto; padding: 5px; margin-bottom: 15px;">
                 <button class="level-btn" onclick="selectLevel(1)">Level 1: Nilai Nombor</button>
@@ -106,6 +106,29 @@
                 <button class="level-btn" onclick="selectLevel(20)">Level 20: Isi Padu Cecair</button>
             </div>
             <button class="monster-btn btn-blue" onclick="backToMainMenu()">⬅️ Kembali ke Menu Utama</button>
+        </div>
+
+        <!-- 3.1.1 PAGE PEMILIHAN LEVEL TAHUN 2 (DIMASUKKAN DI SINI) -->
+        <div id="tahun2-level-page" class="hidden form-card">
+            <h2>Pilih Tahap Kesukaran (Tahun 2)</h2>
+            <p>Sila pilih Level latihan Tahun 2 (1 hingga 14):</p>
+            <div class="level-grid" style="max-height: 250px; overflow-y: auto; padding: 5px; margin-bottom: 15px;">
+                <button class="level-btn" onclick="selectTahun2Level(1)">Level 1: Nilai Nombor</button>
+                <button class="level-btn" onclick="selectTahun2Level(2)">Level 2: Nombor Hingga 1000 & Bundar</button>
+                <button class="level-btn" onclick="selectTahun2Level(3)">Level 3: Operasi Tambah</button>
+                <button class="level-btn" onclick="selectTahun2Level(4)">Level 4: Operasi Tolak</button>
+                <button class="level-btn" onclick="selectTahun2Level(5)">Level 5: Darab Asas</button>
+                <button class="level-btn" onclick="selectTahun2Level(6)">Level 6: Bahagi Asas</button>
+                <button class="level-btn" onclick="selectTahun2Level(7)">Level 7: Pecahan</button>
+                <button class="level-btn" onclick="selectTahun2Level(8)">Level 8: Perpuluhan</button>
+                <button class="level-btn" onclick="selectTahun2Level(9)">Level 9: Wang (Tambah)</button>
+                <button class="level-btn" onclick="selectTahun2Level(10)">Level 10: Wang (Tolak)</button>
+                <button class="level-btn" onclick="selectTahun2Level(11)">Level 11: Masa & Waktu</button>
+                <button class="level-btn" onclick="selectTahun2Level(12)">Level 12: Ukuran Panjang</button>
+                <button class="level-btn" onclick="selectTahun2Level(13)">Level 13: Jisim & Isi Padu Cecair</button>
+                <button class="level-btn" onclick="selectTahun2Level(14)">Level 14: Bentuk 2D & 3D / Data</button>
+            </div>
+            <button class="monster-btn btn-blue" onclick="showSilibusPage()">⬅️ Kembali ke Pilih Silibus</button>
         </div>
 
         <!-- 3.2 PAGE PILIHAN SILIBUS MATEMATIK (TAHUN 2, 3, 4) -->
