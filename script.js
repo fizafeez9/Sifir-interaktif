@@ -4,7 +4,7 @@ let currentQuestionIndex = 0;
 let currentLevelQuestions = [];
 let scoreCount = 0;
 
-// Bank Soalan Objektif (A, B, C, D) & Explanation untuk Level 1 hingga Level 17
+// Bank Soalan Objektif (A, B, C, D) & Explanation untuk Level 1 hingga Level 17 (Darjah 3)
 const levelsQuestions = {
     1: [
         {
@@ -1062,7 +1062,7 @@ const levelsQuestions = {
     ]
 };
 
-// Penjana automatik untuk Level 18 hingga 20
+// Penjana automatik untuk Level 18 hingga 20 (Darjah 3)
 for (let i = 18; i <= 20; i++) {
     levelsQuestions[i] = [];
     for (let j = 1; j <= 10; j++) {
@@ -1075,10 +1075,190 @@ for (let i = 18; i <= 20; i++) {
     }
 }
 
+// Bank Soalan Silibus Matematik Tahun 2 (Level 1 hingga 14)
+const tahun2Questions = {
+    1: [
+        { q: "Tulis nombor 'tiga ratus empat puluh dua' dalam bentuk angka.", options: ["A) 342", "B) 324", "C) 304", "D) 432"], answer: "A) 342", explanation: "Tiga ratus empat puluh dua ditulis sebagai 342." },
+        { q: "Apakah nilai digit bagi nombor 5 dalam 752?", options: ["A) 5", "B) 50", "C) 500", "D) 2"], answer: "B) 50", explanation: "Digit 5 berada di tempat puluh, maka nilai digitnya ialah 50." },
+        { q: "Nyatakan nilai tempat bagi digit 8 dalam 834.", options: ["A) Sa", "B) Puluh", "C) Ratus", "D) Ribu"], answer: "C) Ratus", explanation: "Digit 8 terletak di kedudukan ratus dalam nombor 834." },
+        { q: "Cerakinkan nombor 469 mengikut nilai digit.", options: ["A) 400 + 60 + 9", "B) 40 + 60 + 9", "C) 400 + 6 + 9", "D) 4 + 6 + 9"], answer: "A) 400 + 60 + 9", explanation: "Cerakin nilai digit bagi 469 ialah 400 + 60 + 9." },
+        { q: "Tulis nombor 608 dalam perkataan.", options: ["A) Enam ratus lapan", "B) Enam ratus lapan puluh", "C) Enam ratus dan lapan", "D) Enam ratus"], answer: "A) Enam ratus lapan", explanation: "Nombor 608 dibaca sebagai enam ratus lapan." },
+        { q: "Apakah nombor yang terhasil daripada 3 ratus + 5 puluhan + 7 sa?", options: ["A) 357", "B) 375", "C) 537", "D) 753"], answer: "A) 357", explanation: "3 ratus (300) + 5 puluhan (50) + 7 sa (7) menjadi 357." },
+        { q: "Susun nombor berikut mengikut tertib menaik: 421, 312, 450, 380.", options: ["A) 312, 380, 421, 450", "B) 450, 421, 380, 312", "C) 312, 421, 380, 450", "D) 380, 312, 421, 450"], answer: "A) 312, 380, 421, 450", explanation: "Tertib menaik bermaksud susunan dari kecil ke besar." },
+        { q: "Susun nombor berikut mengikut tertib menurun: 610, 740, 550, 800.", options: ["A) 800, 740, 610, 550", "B) 550, 610, 740, 800", "C) 800, 610, 740, 550", "D) 740, 800, 610, 550"], answer: "A) 800, 740, 610, 550", explanation: "Tertib menurun bermaksud susunan dari besar ke kecil." },
+        { q: "Apakah nombor sebelum 500?", options: ["A) 499", "B) 501", "C) 490", "D) 400"], answer: "A) 499", explanation: "Nombor yang berada sebelum 500 ialah 499." },
+        { q: "Apakah nombor di antara 412 dan 414?", options: ["A) 413", "B) 415", "C) 411", "D) 410"], answer: "A) 413", explanation: "Nombor di tengah-tengah antara 412 dan 414 ialah 413." }
+    ],
+    2: [
+        { q: "Bandingkan 345 dan 354. Nombor manakah yang lebih besar?", options: ["A) 354", "B) 345", "C) Sama besar", "D) Tidak pasti"], answer: "A) 354", explanation: "354 lebih besar daripada 345 kerana nilai puluhan 5 lebih besar daripada 4." },
+        { q: "Apakah nombor yang lebih kecil daripada 500 sebanyak 20?", options: ["A) 480", "B) 520", "C) 490", "D) 470"], answer: "A) 480", explanation: "500 - 20 = 480." },
+        { q: "Lengkapkan pola nombor: 120, 130, 140, ...", options: ["A) 150", "B) 160", "C) 145", "D) 135"], answer: "A) 150", explanation: "Pola menambah 10 pada setiap langkah (140 + 10 = 150)." },
+        { q: "Lengkapkan pola nombor secara menurun: 500, 490, 480, ...", options: ["A) 470", "B) 460", "C) 475", "D) 485"], answer: "A) 470", explanation: "Pola menolak 10 secara konsisten (480 - 10 = 470)." },
+        { q: "Bundarkan 342 kepada puluh terdekat.", options: ["A) 340", "B) 350", "C) 300", "D) 400"], answer: "A) 340", explanation: "Digit sa ialah 2 (kurang dari 5), maka kekal menjadi 340." },
+        { q: "Bundarkan 678 kepada ratus terdekat.", options: ["A) 700", "B) 600", "C) 670", "D) 680"], answer: "A) 700", explanation: "Digit puluh ialah 7 (lebih besar atau sama dengan 5), jadi bundar kepada 700." },
+        { q: "Bundarkan 425 kepada puluh terdekat.", options: ["A) 430", "B) 420", "C) 400", "D) 450"], answer: "A) 430", explanation: "Digit sa ialah 5, jadi digit puluh bertambah 1 menjadi 430." },
+        { q: "Apakah nombor yang menjadi 300 apabila dibundarkan kepada ratus terdekat?", options: ["A) 320", "B) 360", "C) 240", "D) 380"], answer: "A) 320", explanation: "320 dibundarkan kepada ratus terdekat menjadi 300." },
+        { q: "Nyatakan nilai paling kecil antara: 412, 421, 402, 430.", options: ["A) 402", "B) 412", "C) 421", "D) 430"], answer: "A) 402", explanation: "402 mempunyai nilai yang paling kecil berbanding yang lain." },
+        { q: "Anggarkan bilangan buah epal di dalam bakul jika ada 10 ikat dengan setiap ikat 10 biji.", options: ["A) 100", "B) 50", "C) 10", "D) 200"], answer: "A) 100", explanation: "10 kumpulan 10 biji menjadi 100 biji epal." }
+    ],
+    3: [
+        { q: "Selesaikan: 245 + 132 = ?", options: ["A) 377", "B) 367", "C) 387", "D) 277"], answer: "A) 377", explanation: "245 + 132 = 377." },
+        { q: "Selesaikan: 410 + 258 = ?", options: ["A) 668", "B) 658", "C) 678", "D) 568"], answer: "A) 668", explanation: "410 + 258 = 668." },
+        { q: "Selesaikan: 324 + 189 = ?", options: ["A) 513", "B) 503", "C) 523", "D) 413"], answer: "A) 513", explanation: "324 + 189 = 513." },
+        { q: "Selesaikan: 506 + 321 = ?", options: ["A) 827", "B) 817", "C) 837", "D) 727"], answer: "A) 827", explanation: "506 + 321 = 827." },
+        { q: "Selesaikan: 175 + 412 = ?", options: ["A) 587", "B) 577", "C) 597", "D) 487"], answer: "A) 587", explanation: "175 + 412 = 587." },
+        { q: "Cari jumlah bagi 620 dan 150.", options: ["A) 770", "B) 760", "C) 780", "D) 670"], answer: "A) 770", explanation: "620 + 150 = 770." },
+        { q: "Selesaikan: 431 + 290 = ?", options: ["A) 721", "B) 711", "C) 731", "D) 621"], answer: "A) 721", explanation: "431 + 290 = 721." },
+        { q: "Tambahkan 312 kepada 450.", options: ["A) 762", "B) 752", "C) 772", "D) 662"], answer: "A) 762", explanation: "450 + 312 = 762." },
+        { q: "Selesaikan: 215 + 314 + 111 = ?", options: ["A) 640", "B) 630", "C) 650", "D) 540"], answer: "A) 640", explanation: "215 + 314 + 111 = 640." },
+        { q: "Ali ada 240 biji guli. Ayahnya beri lagi 150 biji. Berapakah jumlah guli Ali?", options: ["A) 390", "B) 380", "C) 400", "D) 370"], answer: "A) 390", explanation: "240 + 150 = 390 biji guli." }
+    ],
+    4: [
+        { q: "Selesaikan: 586 - 234 = ?", options: ["A) 352", "B) 362", "C) 342", "D) 252"], answer: "A) 352", explanation: "586 - 234 = 352." },
+        { q: "Selesaikan: 640 - 210 = ?", options: ["A) 430", "B) 420", "C) 440", "D) 330"], answer: "A) 430", explanation: "640 - 210 = 430." },
+        { q: "Selesaikan: 932 - 411 = ?", options: ["A) 521", "B) 511", "C) 531", "D) 421"], answer: "A) 521", explanation: "932 - 411 = 521." },
+        { q: "Selesaikan: 570 - 140 = ?", options: ["A) 430", "B) 420", "C) 440", "D) 330"], answer: "A) 430", explanation: "570 - 140 = 430." },
+        { q: "Selesaikan: 815 - 402 = ?", options: ["A) 413", "B) 403", "C) 423", "D) 313"], answer: "A) 413", explanation: "815 - 402 = 413." },
+        { q: "Cari beza antara 750 dan 320.", options: ["A) 430", "B) 420", "C) 440", "D) 530"], answer: "A) 430", explanation: "750 - 320 = 430." },
+        { q: "Selesaikan: 400 - 125 = ?", options: ["A) 275", "B) 285", "C) 265", "D) 375"], answer: "A) 275", explanation: "400 - 125 = 275." },
+        { q: "Tolakkan 214 daripada 689.", options: ["A) 475", "B) 465", "C) 485", "D) 575"], answer: "A) 475", explanation: "689 - 214 = 475." },
+        { q: "Selesaikan: 899 - 456 = ?", options: ["A) 443", "B) 433", "C) 453", "D) 343"], answer: "A) 443", explanation: "899 - 456 = 443." },
+        { q: "Ibu ada 540 biji manik. Sebanyak 215 biji telah digunakan. Berapakah baki manik?", options: ["A) 325", "B) 335", "C) 315", "D) 225"], answer: "A) 325", explanation: "540 - 215 = 325 biji manik." }
+    ],
+    5: [
+        { q: "Selesaikan: 3 × 2 = ?", options: ["A) 6", "B) 5", "C) 8", "D) 9"], answer: "A) 6", explanation: "Sifir 2: 3 × 2 = 6." },
+        { q: "Selesaikan: 4 × 5 = ?", options: ["A) 20", "B) 15", "C) 25", "D) 10"], answer: "A) 20", explanation: "Sifir 5: 4 × 5 = 20." },
+        { q: "Selesaikan: 6 × 10 = ?", options: ["A) 60", "B) 50", "C) 70", "D) 66"], answer: "A) 60", explanation: "Sifir 10: 6 × 10 = 60." },
+        { q: "Selesaikan: 7 × 4 = ?", options: ["A) 28", "B) 24", "C) 32", "D) 21"], answer: "A) 28", explanation: "Sifir 4: 7 × 4 = 28." },
+        { q: "Selesaikan: 5 × 5 = ?", options: ["A) 25", "B) 20", "C) 30", "D) 15"], answer: "A) 25", explanation: "Sifir 5: 5 × 5 = 25." },
+        { q: "Selesaikan: 8 × 2 = ?", options: ["A) 16", "B) 14", "C) 18", "D) 12"], answer: "A) 16", explanation: "Sifir 2: 8 × 2 = 16." },
+        { q: "Selesaikan: 9 × 10 = ?", options: ["A) 90", "B) 80", "C) 100", "D) 95"], answer: "A) 90", explanation: "Sifir 10: 9 × 10 = 90." },
+        { q: "Selesaikan: 4 × 4 = ?", options: ["A) 16", "B) 12", "C) 20", "D) 14"], answer: "A) 16", explanation: "Sifir 4: 4 × 4 = 16." },
+        { q: "Selesaikan: 6 × 5 = ?", options: ["A) 30", "B) 25", "C) 35", "D) 20"], answer: "A) 30", explanation: "Sifir 5: 6 × 5 = 30." },
+        { q: "Selesaikan: 7 × 2 = ?", options: ["A) 14", "B) 12", "C) 16", "D) 10"], answer: "A) 14", explanation: "Sifir 2: 7 × 2 = 14." }
+    ],
+    6: [
+        { q: "Selesaikan: 10 ÷ 2 = ?", options: ["A) 5", "B) 4", "C) 6", "D) 2"], answer: "A) 5", explanation: "10 dibahagi 2 ialah 5." },
+        { q: "Selesaikan: 20 ÷ 5 = ?", options: ["A) 4", "B) 5", "C) 6", "D) 3"], answer: "A) 4", explanation: "20 dibahagi 5 ialah 4." },
+        { q: "Selesaikan: 30 ÷ 10 = ?", options: ["A) 3", "B) 4", "C) 5", "D) 2"], answer: "A) 3", explanation: "30 dibahagi 10 ialah 3." },
+        { q: "Selesaikan: 16 ÷ 4 = ?", options: ["A) 4", "B) 3", "C) 5", "D) 6"], answer: "A) 4", explanation: "16 dibahagi 4 ialah 4." },
+        { q: "Selesaikan: 18 ÷ 2 = ?", options: ["A) 9", "B) 8", "C) 7", "D) 6"], answer: "A) 9", explanation: "18 dibahagi 2 ialah 9." },
+        { q: "Selesaikan: 25 ÷ 5 = ?", options: ["A) 5", "B) 4", "C) 6", "D) 3"], answer: "A) 5", explanation: "25 dibahagi 5 ialah 5." },
+        { q: "Selesaikan: 40 ÷ 10 = ?", options: ["A) 4", "B) 5", "C) 3", "D) 6"], answer: "A) 4", explanation: "40 dibahagi 10 ialah 4." },
+        { q: "Selesaikan: 12 ÷ 4 = ?", options: ["A) 3", "B) 4", "C) 2", "D) 5"], answer: "A) 3", explanation: "12 dibahagi 4 ialah 3." },
+        { q: "Selesaikan: 14 ÷ 2 = ?", options: ["A) 7", "B) 6", "C) 8", "D) 5"], answer: "A) 7", explanation: "14 dibahagi 2 ialah 7." },
+        { q: "Selesaikan: 35 ÷ 5 = ?", options: ["A) 7", "B) 6", "C) 8", "D) 5"], answer: "A) 7", explanation: "35 dibahagi 5 ialah 7." }
+    ],
+    7: [
+        { q: "Apakah pecahan bahagian berlorek jika 1 daripada 2 bahagian dilorek?", options: ["A) 1/2", "B) 1/3", "C) 1/4", "D) 2/1"], answer: "A) 1/2", explanation: "1 bahagian daripada 2 bahagian ditulis sebagai 1/2." },
+        { q: "Tulis dalam perkataan: 1/4", options: ["A) Satu perempat", "B) Satu perdua", "C) Satu pertiga", "D) Satu perlima"], answer: "A) Satu perempat", explanation: "Pecahan 1/4 dibaca sebagai satu perempat atau seperempat." },
+        { q: "Apakah pecahan yang lebih besar antara 1/2 dan 1/3?", options: ["A) 1/2", "B) 1/3", "C) Sama besar", "D) Tidak pasti"], answer: "A) 1/2", explanation: "1/2 lebih besar daripada 1/3 kerana kek dibahagi kepada 2 bahagian lebih besar berbanding 3 bahagian." },
+        { q: "Tuliskan pecahan bagi 'satu pertiga'.", options: ["A) 1/3", "B) 1/2", "C) 1/4", "D) 1/5"], answer: "A) 1/3", explanation: "Satu pertiga ditulis dalam angka sebagai 1/3." },
+        { q: "Apakah pecahan setara bagi 1/2 dengan pengangka 2?", options: ["A) 2/4", "B) 2/3", "C) 2/5", "D) 2/6"], answer: "A) 2/4", explanation: "Pengangka dan penyebut darab dengan 2 menjadi 2/4." },
+        { q: "Ibu potong kek kepada 4 bahagian. Ali makan 1 bahagian. Berapakah pecahan kek Ali?", options: ["A) 1/4", "B) 1/2", "C) 3/4", "D) 4/1"], answer: "A) 1/4", explanation: "1 bahagian dimakan daripada 4 bahagian keseluruhan (1/4)." },
+        { q: "Bandingkan 1/5 dan 1/10. Mana satukah lebih kecil?", options: ["A) 1/10", "B) 1/5", "C) Sama besar", "D) Tidak pasti"], answer: "A) 1/10", explanation: "1/10 lebih kecil kerana keseluruhan dibahagi kepada lebih banyak bahagian." },
+        { q: "Tuliskan pecahan bagi 'satu persepuluh'.", options: ["A) 1/10", "B) 1/100", "C) 1/5", "D) 1/2"], answer: "A) 1/10", explanation: "Satu persepuluh ditulis sebagai 1/10." },
+        { q: "Jika satu objek dibahagi kepada 3 bahagian sama besar dan diambil 1, apakah pecahan bahagian itu?", options: ["A) 1/3", "B) 1/2", "C) 1/4", "D) 2/3"], answer: "A) 1/3", explanation: "1 bahagian daripada 3 ialah 1/3." },
+        { q: "Pecahan manakah yang menunjukkan separuh daripada satu objek?", options: ["A) 1/2", "B) 1/4", "C) 1/3", "D) 1/5"], answer: "A) 1/2", explanation: "1/2 mewakili separuh daripada satu objek utuh." }
+    ],
+    8: [
+        { q: "Tuliskan 'sifar perpuluhan tiga' dalam bentuk angka.", options: ["A) 0.3", "B) 0.03", "C) 3.0", "D) 0.33"], answer: "A) 0.3", explanation: "Sifar perpuluhan tiga ditulis sebagai 0.3." },
+        { q: "Apakah nilai tempat bagi digit 5 dalam 0.5?", options: ["A) Persepuluh", "B) Sa", "C) Puluh", "D) Ratus"], answer: "A) Persepuluh", explanation: "Digit selepas titik perpuluhan yang pertama ialah nilai tempat persepuluh." },
+        { q: "Tukarkan pecahan 4/10 kepada perpuluhan.", options: ["A) 0.4", "B) 0.04", "C) 4.0", "D) 0.44"], answer: "A) 0.4", explanation: "4 per sepuluh ditulis sebagai 0.4." },
+        { q: "Tuliskan 0.7 dalam bentuk pecahan persepuluh.", options: ["A) 7/10", "B) 7/100", "C) 1/7", "D) 7/7"], answer: "A) 7/10", explanation: "0.7 ditukar kepada pecahan menjadi 7/10." },
+        { q: "Apakah perpuluhan yang lebih besar antara 0.2 dan 0.6?", options: ["A) 0.6", "B) 0.2", "C) Sama besar", "D) Tidak pasti"], answer: "A) 0.6", explanation: "0.6 lebih besar daripada 0.2." },
+        { q: "Tuliskan nombor perpuluhan 'sifar perpuluhan sembilan'.", options: ["A) 0.9", "B) 0.09", "C) 9.0", "D) 0.99"], answer: "A) 0.9", explanation: "Sifar perpuluhan sembilan ditulis sebagai 0.9." },
+        { q: "Apakah nilai digit 8 dalam 0.8?", options: ["A) 0.8", "B) 0.08", "C) 8.0", "D) 8"], answer: "A) 0.8", explanation: "Nilai digit bagi 8 dalam 0.8 ialah 0.8." },
+        { q: "Tukarkan pecahan 9/10 kepada perpuluhan.", options: ["A) 0.9", "B) 0.09", "C) 9.0", "D) 0.99"], answer: "A) 0.9", explanation: "9/10 dalam bentuk perpuluhan ialah 0.9." },
+        { q: "Susun perpuluhan berikut mengikut tertib menaik: 0.5, 0.1, 0.8, 0.3.", options: ["A) 0.1, 0.3, 0.5, 0.8", "B) 0.8, 0.5, 0.3, 0.1", "C) 0.1, 0.5, 0.3, 0.8", "D) 0.3, 0.1, 0.5, 0.8"], answer: "A) 0.1, 0.3, 0.5, 0.8", explanation: "Tertib menaik bermaksud dari nilai terkecil ke terbesar." },
+        { q: "Apakah nombor perpuluhan bagi 5 bahagian daripada 10 bahagian sama besar?", options: ["A) 0.5", "B) 0.2", "C) 0.05", "D) 5.0"], answer: "A) 0.5", explanation: "5/10 ditulis sebagai nombor perpuluhan 0.5." }
+    ],
+    9: [
+        { q: "Tukarkan nilai RM3.50 kepada sen.", options: ["A) 350 sen", "B) 35 sen", "C) 3,500 sen", "D) 3 sen"], answer: "A) 350 sen", explanation: "RM1 = 100 sen, maka RM3.50 = 350 sen." },
+        { q: "Tukarkan 250 sen kepada ringgit (RM).", options: ["A) RM2.50", "B) RM25.00", "C) RM0.25", "D) RM250.00"], answer: "A) RM2.50", explanation: "250 sen bahagi 100 menjadi RM2.50." },
+        { q: "Selesaikan: RM12.40 + RM5.20 = ?", options: ["A) RM17.60", "B) RM17.50", "C) RM16.60", "D) RM18.60"], answer: "A) RM17.60", explanation: "RM12.40 + RM5.20 = RM17.60." },
+        { q: "Selesaikan: RM35.10 + RM14.30 = ?", options: ["A) RM49.40", "B) RM48.40", "C) RM49.30", "D) RM50.40"], answer: "A) RM49.40", explanation: "RM35.10 + RM14.30 = RM49.40." },
+        { q: "Selesaikan: RM24.80 + RM15.40 = ?", options: ["A) RM40.20", "B) RM39.20", "C) RM40.10", "D) RM41.20"], answer: "A) RM40.20", explanation: "RM24.80 + RM15.40 = RM40.20." },
+        { q: "Selesaikan: RM10.50 + RM8.00 + RM3.25 = ?", options: ["A) RM21.75", "B) RM21.50", "C) RM20.75", "D) RM22.75"], answer: "A) RM21.75", explanation: "RM10.50 + RM8.00 + RM3.25 = RM21.75." },
+        { q: "Ali ada RM20. Ayahnya beri RM15. Berapakah jumlah wang Ali?", options: ["A) RM35", "B) RM30", "C) RM40", "D) RM25"], answer: "A) RM35", explanation: "RM20 + RM15 = RM35." },
+        { q: "Selesaikan: RM45.00 + RM22.50 = ?", options: ["A) RM67.50", "B) RM66.50", "C) RM67.00", "D) RM68.50"], answer: "A) RM67.50", explanation: "RM45.00 + RM22.50 = RM67.50." },
+        { q: "Harga sebuah buku ialah RM12. Beli 2 buah buku, berapakah jumlah harga?", options: ["A) RM24", "B) RM22", "C) RM26", "D) RM20"], answer: "A) RM24", explanation: "RM12 × 2 = RM24." },
+        { q: "Hitung jumlah: RM50.00 + RM25.50 = ?", options: ["A) RM75.50", "B) RM74.50", "C) RM76.50", "D) RM75.00"], answer: "A) RM75.50", explanation: "RM50.00 + RM25.50 = RM75.50." }
+    ],
+    10: [
+        { q: "Selesaikan: RM50.00 - RM15.20 = ?", options: ["A) RM34.80", "B) RM35.80", "C) RM34.20", "D) RM33.80"], answer: "A) RM34.80", explanation: "RM50.00 - RM15.20 = RM34.80." },
+        { q: "Selesaikan: RM30.00 - RM12.50 = ?", options: ["A) RM17.50", "B) RM18.50", "C) RM17.00", "D) RM16.50"], answer: "A) RM17.50", explanation: "RM30.00 - RM12.50 = RM17.50." },
+        { q: "Selesaikan: RM100.00 - RM45.50 = ?", options: ["A) RM54.50", "B) RM55.50", "C) RM54.00", "D) RM53.50"], answer: "A) RM54.50", explanation: "RM100.00 - RM45.50 = RM54.50." },
+        { q: "Selesaikan: RM25.40 - RM10.20 = ?", options: ["A) RM15.20", "B) RM15.40", "C) RM14.20", "D) RM16.20"], answer: "A) RM15.20", explanation: "RM25.40 - RM10.20 = RM15.20." },
+        { q: "Ali bayar RM50 untuk barang berharga RM32.40. Berapakah bakinya?", options: ["A) RM17.60", "B) RM18.60", "C) RM17.40", "D) RM16.60"], answer: "A) RM17.60", explanation: "RM50.00 - RM32.40 = RM17.60." },
+        { q: "Baki wang selepas beli mainan RM18.50 daripada wang RM50.00.", options: ["A) RM31.50", "B) RM32.50", "C) RM30.50", "D) RM31.00"], answer: "A) RM31.50", explanation: "RM50.00 - RM18.50 = RM31.50." },
+        { q: "Selesaikan: RM75.50 - RM24.30 = ?", options: ["A) RM51.20", "B) RM51.80", "C) RM50.20", "D) RM52.20"], answer: "A) RM51.20", explanation: "RM75.50 - RM24.30 = RM51.20." },
+        { q: "Ibu ada RM80. Dia beli baju RM45. Berapakah baki wangnya?", options: ["A) RM35", "B) RM45", "C) RM25", "D) RM40"], answer: "A) RM35", explanation: "RM80 - RM45 = RM35." },
+        { q: "Selesaikan: RM40.00 - RM18.60 = ?", options: ["A) RM21.40", "B) RM22.40", "C) RM21.60", "D) RM20.40"], answer: "A) RM21.40", explanation: "RM40.00 - RM18.60 = RM21.40." },
+        { q: "Hitung baki: RM60.00 - RM27.50 = ?", options: ["A) RM32.50", "B) RM33.50", "C) RM31.50", "D) RM32.00"], answer: "A) RM32.50", explanation: "RM60.00 - RM27.50 = RM32.50." }
+    ],
+    11: [
+        { q: "Pukul berapakah jarum pendek di angka 3 dan jarum panjang di angka 12?", options: ["A) Pukul 3:00", "B) Pukul 12:03", "C) Pukul 6:00", "D) Pukul 9:00"], answer: "A) Pukul 3:00", explanation: "Jarum pendek di angka 3 dan panjang di angka 12 menunjukkan pukul 3:00." },
+        { q: "Tuliskan waktu 'pukul empat tiga puluh' dalam angka.", options: ["A) 4:30", "B) 3:30", "C) 4:00", "D) 3:40"], answer: "A) 4:30", explanation: "Pukul empat tiga puluh ditulis sebagai 4:30." },
+        { q: "Berapakah bilangan jam dalam sehari?", options: ["A) 24 jam", "B) 12 jam", "C) 7 jam", "D) 60 jam"], answer: "A) 24 jam", explanation: "Sehari semalam mengandungi 24 jam." },
+        { q: "Berapakah bilangan hari dalam seminggu?", options: ["A) 7 hari", "B) 5 hari", "C) 30 hari", "D) 12 hari"], answer: "A) 7 hari", explanation: "Seminggu mempunyai 7 hari." },
+        { q: "Berapakah bilangan bulan dalam setahun?", options: ["A) 12 bulan", "B) 7 bulan", "C) 24 bulan", "D) 365 bulan"], answer: "A) 12 bulan", explanation: "Setahun mempunyai 12 bulan." },
+        { q: "Hari apakah selepas hari Rabu?", options: ["A) Khamis", "B) Selasa", "C) Jumaat", "D) Isnin"], answer: "A) Khamis", explanation: "Selepas hari Rabu ialah hari Khamis." },
+        { q: "Bulan apakah sebelum bulan Mac?", options: ["A) Februari", "B) Januari", "C) April", "D) Mei"], answer: "A) Februari", explanation: "Sebelum bulan Mac ialah bulan Februari." },
+        { q: "Ali tidur pukul 9:00 malam dan bangun pukul 6:00 pagi. Berapa jam Ali tidur pada waktu malam?", options: ["A) 9 jam", "B) 8 jam", "C) 10 jam", "D) 7 jam"], answer: "A) 9 jam", explanation: "Dari 9:00 malam ke 6:00 pagi ialah selama 9 jam." },
+        { q: "Berapakah bilangan hari dalam bulan Februari tahun biasa?", options: ["A) 28 hari", "B) 29 hari", "C) 30 hari", "D) 31 hari"], answer: "A) 28 hari", explanation: "Bulan Februari dalam tahun biasa mempunyai 28 hari." },
+        { q: "Tukarkan 2 minggu kepada bilangan hari.", options: ["A) 14 hari", "B) 7 hari", "C) 21 hari", "D) 28 hari"], answer: "A) 14 hari", explanation: "2 minggu × 7 hari = 14 hari." }
+    ],
+    12: [
+        { q: "Tukarkan 2 m kepada sentimeter.", options: ["A) 200 cm", "B) 20 cm", "C) 2,000 cm", "D) 2 cm"], answer: "A) 200 cm", explanation: "1 m = 100 cm, maka 2 m = 200 cm." },
+        { q: "Tukarkan 300 cm kepada meter.", options: ["A) 3 m", "B) 30 m", "C) 300 m", "D) 0.3 m"], answer: "A) 3 m", explanation: "300 cm bahagi 100 menjadi 3 m." },
+        { q: "Selesaikan: 25 cm + 40 cm = ?", options: ["A) 65 cm", "B) 55 cm", "C) 75 cm", "D) 60 cm"], answer: "A) 65 cm", explanation: "25 cm + 40 cm = 65 cm." },
+        { q: "Selesaikan: 3 m + 4 m = ?", options: ["A) 7 m", "B) 6 m", "C) 8 m", "D) 12 m"], answer: "A) 7 m", explanation: "3 m + 4 m = 7 m." },
+        { q: "Hitung beza: 85 cm - 30 cm = ?", options: ["A) 55 cm", "B) 65 cm", "C) 45 cm", "D) 50 cm"], answer: "A) 55 cm", explanation: "85 cm - 30 cm = 55 cm." },
+        { q: "Panjang sebatang pensel 15 cm. Pembaris 30 cm. Berapakah beza panjang?", options: ["A) 15 cm", "B) 20 cm", "C) 10 cm", "D) 45 cm"], answer: "A) 15 cm", explanation: "30 cm - 15 cm = 15 cm." },
+        { q: "Tukarkan 120 cm kepada meter dan sentimeter.", options: ["A) 1 m 20 cm", "B) 12 m 0 cm", "C) 1 m 2 cm", "D) 2 m 10 cm"], answer: "A) 1 m 20 cm", explanation: "120 cm = 100 cm (1 m) dan 20 cm." },
+        { q: "Selesaikan: 4 m 20 cm + 1 m 50 cm = ?", options: ["A) 5 m 70 cm", "B) 5 m 60 cm", "C) 4 m 70 cm", "D) 6 m 70 cm"], answer: "A) 5 m 70 cm", explanation: "4m + 1m = 5m, 20cm + 50cm = 70cm (5 m 70 cm)." },
+        { q: "Kain panjang 3 m dipotong 1 m. Berapakah baki panjang kain?", options: ["A) 2 m", "B) 1 m", "C) 4 m", "D) 3 m"], answer: "A) 2 m", explanation: "3 m - 1 m = 2 m." },
+        { q: "Ukuran meja 2 m. 2 buah meja disusun sebaris, berapakah jumlah panjang dalam meter?", options: ["A) 4 m", "B) 2 m", "C) 3 m", "D) 5 m"], answer: "A) 4 m", explanation: "2 m + 2 m = 4 m." }
+    ],
+    13: [
+        { q: "Tukarkan 1 kg kepada gram.", options: ["A) 1,000 g", "B) 100 g", "C) 10 g", "D) 10,000 g"], answer: "A) 1,000 g", explanation: "1 kg adalah sama dengan 1,000 gram." },
+        { q: "Tukarkan 2,000 g kepada kilogram.", options: ["A) 2 kg", "B) 20 kg", "C) 200 kg", "D) 0.2 kg"], answer: "A) 2 kg", explanation: "2,000 g bahagi 1,000 menjadi 2 kg." },
+        { q: "Selesaikan: 300 g + 450 g = ?", options: ["A) 750 g", "B) 650 g", "C) 850 g", "D) 700 g"], answer: "A) 750 g", explanation: "300 g + 450 g = 750 g." },
+        { q: "Selesaikan: 2 kg + 5 kg = ?", options: ["A) 7 kg", "B) 6 kg", "C) 8 kg", "D) 10 kg"], answer: "A) 7 kg", explanation: "2 kg + 5 kg = 7 kg." },
+        { q: "Tukarkan 1 liter kepada mililiter.", options: ["A) 1,000 ml", "B) 100 ml", "C) 10 ml", "D) 10,000 ml"], answer: "A) 1,000 ml", explanation: "1 liter = 1,000 mililiter." },
+        { q: "Tukarkan 3,000 ml kepada liter.", options: ["A) 3 l", "B) 30 l", "C) 300 l", "D) 0.3 l"], answer: "A) 3 l", explanation: "3,000 ml bahagi 1,000 menjadi 3 liter." },
+        { q: "Selesaikan: 400 ml + 250 ml = ?", options: ["A) 650 ml", "B) 550 ml", "C) 750 ml", "D) 600 ml"], answer: "A) 650 ml", explanation: "400 ml + 250 ml = 650 ml." },
+        { q: "Sebiji kek jisim 2 kg. Biskut jisim 500 g. Berapakah jumlah jisim dalam gram?", options: ["A) 2,500 g", "B) 2,050 g", "C) 700 g", "D) 502 g"], answer: "A) 2,500 g", explanation: "2 kg = 2,000 g, ditambah 500 g menjadi 2,500 g." },
+        { q: "Botol ada 2 l air. Dituang 500 ml. Berapakah baki air dalam mililiter?", options: ["A) 1,500 ml", "B) 1,000 ml", "C) 1,800 ml", "D) 500 ml"], answer: "A) 1,500 ml", explanation: "2 l = 2,000 ml. 2,000 ml - 500 ml = 1,500 ml." },
+        { q: "Baldi ada 5 l air. Ditambah lagi 3 l. Berapakah jumlah isipadu air?", options: ["A) 8 l", "B) 7 l", "C) 9 l", "D) 15 l"], answer: "A) 8 l", explanation: "5 l + 3 l = 8 l." }
+    ],
+    14: [
+        { q: "Apakah nama bentuk 2D yang mempunyai 4 sisi sama panjang?", options: ["A) Segi Empat Sama", "B) Segi Empat Tepat", "C) Segi Tiga", "D) Bulatan"], answer: "A) Segi Empat Sama", explanation: "Segi empat sama mempunyai 4 sisi lurus yang sama panjang." },
+        { q: "Apakah nama bentuk 3D yang mempunyai permukaan melengkung dan 2 tapak bulatan?", options: ["A) Silinder", "B) Kon", "C) Sfera", "D) Kuboid"], answer: "A) Silinder", explanation: "Silinder mempunyai permukaan melengkung dan 2 tapak berbentuk bulatan." },
+        { q: "Nyatakan bilangan bucu bagi sebuah Segi Tiga.", options: ["A) 3", "B) 4", "C) 5", "D) 2"], answer: "A) 3", explanation: "Sebuah segi tiga mempunyai 3 bucu." },
+        { q: "Nyatakan bilangan sisi lurus bagi sebuah Segi Empat Tepat.", options: ["A) 4", "B) 3", "C) 5", "D) 6"], answer: "A) 4", explanation: "Segi empat tepat mempunyai 4 sisi lurus." },
+        { q: "Bentuk apakah bola sepak?", options: ["A) Sfera", "B) Silinder", "C) Kubus", "D) Kon"], answer: "A) Sfera", explanation: "Bola sepak berbentuk sfera (bulat penuh 3D)." },
+        { q: "Berdasarkan carta palang, jika 5 orang suka epal dan 3 suka oren, berapakah jumlah peminat epal dan oren?", options: ["A) 8", "B) 7", "C) 6", "D) 9"], answer: "A) 8", explanation: "5 + 3 = 8 orang peminat." },
+        { q: "Nyatakan bentuk bagi tin minuman.", options: ["A) Silinder", "B) Kuboid", "C) Kon", "D) Sfera"], answer: "A) Silinder", explanation: "Tin minuman menyerupai bentuk silinder." },
+        { q: "Berapakah bilangan permukaan rata bagi sebuah Kuboid?", options: ["A) 6", "B) 4", "C) 8", "D) 5"], answer: "A) 6", explanation: "Kuboid mempunyai 6 permukaan rata." },
+        { q: "Apakah bentuk permukaan tapak bagi sebuah Kon?", options: ["A) Bulatan", "B) Segi Tiga", "C) Segi Empat", "D) Sfera"], answer: "A) Bulatan", "explanation: "Tapak kon berbentuk bulatan." },
+        { q: "Jika 1 simbol piktograf mewakili 2 orang murid, berapakah nilai untuk 4 simbol?", options: ["A) 8", "B) 6", "C) 10", "D) 4"], answer: "A) 8", explanation: "4 simbol × 2 orang = 8 orang murid." }
+    ]
+};
+
+// Fungsi lain yang sedia ada
 function showLoginPage(e) {
     e.preventDefault();
     document.getElementById('register-page').classList.add('hidden');
     document.getElementById('login-page').classList.remove('hidden');
+}
+
+// Tambah fungsi startTahun2Silibus di sini:
+function startTahun2Silibus() {
+    currentLevel = 1; 
+    // Nanti kita boleh tukar kod ni supaya ia load data dari 'tahun2Questions' pula
+    alert("Mod Silibus Tahun 2 dipilih! (Sila sambungkan fungsi paparan level Tahun 2 anda di sini)");
 }
 
 function showRegisterPage(e) {
