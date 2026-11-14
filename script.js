@@ -56,6 +56,10 @@ function startTahun2Silibus() {
     document.getElementById('silibus-page').classList.add('hidden');
     document.getElementById('tahun2-level-page').classList.remove('hidden');
 }
+function backToSilibus() {
+    document.getElementById('tahun2-level-page').classList.add('hidden');
+    document.getElementById('silibus-page').classList.remove('hidden');
+}
 
 function backToMainMenu() {
     document.getElementById('level-page').classList.add('hidden');
