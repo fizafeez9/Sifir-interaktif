@@ -205,3 +205,30 @@ body.menu-active-bg {
     text-align: left;
     cursor: pointer;
 }
+
+/* ==========================================
+   STYLE KHAS UNTUK POPUP KEPUTUSAN ("TAHNIAH!")
+   ================================---------- */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6); /* Menggelapkan latar belakang skrin */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999; /* Memastikan popup berada di lapisan paling atas sekali */
+}
+
+.modal-content {
+    background: #ffffff;
+    padding: 25px;
+    border-radius: 20px;
+    width: 90%;
+    max-width: 350px;
+    text-align: center;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+    box-sizing: border-box;
+}
