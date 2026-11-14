@@ -108,7 +108,7 @@
             <button class="monster-btn btn-blue" onclick="backToMainMenu()">⬅️ Kembali ke Menu Utama</button>
         </div>
 
-        <!-- 3.1.1 PAGE PEMILIHAN LEVEL TAHUN 2 (DIMASUKKAN DI SINI) -->
+        <!-- 3.1.1 PAGE PEMILIHAN LEVEL TAHUN 2 -->
         <div id="tahun2-level-page" class="hidden form-card">
             <h2>Pilih Tahap Kesukaran (Tahun 2)</h2>
             <p>Sila pilih Level latihan Tahun 2 (1 hingga 14):</p>
@@ -128,7 +128,8 @@
                 <button class="level-btn" onclick="selectTahun2Level(13)">Level 13: Jisim & Isi Padu Cecair</button>
                 <button class="level-btn" onclick="selectTahun2Level(14)">Level 14: Bentuk 2D & 3D / Data</button>
             </div>
-            <button class="monster-btn btn-blue" onclick="showSilibusPage()">⬅️ Kembali ke Pilih Silibus</button>
+            <!-- Diubah kepada backToSilibus() supaya ia tidak bertindih -->
+            <button class="monster-btn btn-blue" onclick="backToSilibus()">⬅️ Kembali ke Pilih Silibus</button>
         </div>
 
         <!-- 3.2 PAGE PILIHAN SILIBUS MATEMATIK (TAHUN 2, 3, 4) -->
