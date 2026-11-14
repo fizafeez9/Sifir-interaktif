@@ -1249,7 +1249,7 @@ const tahun2Questions = {
 
 // Fungsi lain yang sedia ada
 function showLoginPage(e) {
-    e.preventDefault();
+    if (e) e.preventDefault();
     document.getElementById('register-page').classList.add('hidden');
     document.getElementById('login-page').classList.remove('hidden');
 }
@@ -1262,7 +1262,7 @@ function startTahun2Silibus() {
 }
 
 function showRegisterPage(e) {
-    e.preventDefault();
+    if (e) e.preventDefault();
     document.getElementById('login-page').classList.add('hidden');
     document.getElementById('register-page').classList.remove('hidden');
 }
