@@ -109,15 +109,19 @@
         </div>
 
         <!-- 3.2 PAGE PILIHAN SILIBUS MATEMATIK (TAHUN 2, 3, 4) -->
-        <div id="silibus-page" class="hidden form-card">
-            <h2>Silibus Matematik</h2>
-            <p>Sila pilih tahun pembelajaran anda:</p>
-            <div style="display: flex; flex-direction: column; gap: 10px; width: 100%; align-items: center; margin: 15px 0;">
+        <div id="silibus-page" class="hidden" style="background: transparent !important; box-shadow: none !important; text-align: center; width: 100%;">
+            <h2 style="font-size: 24px; color: #222; margin-bottom: 5px; font-weight: 800;">Silibus Matematik</h2>
+            <p style="font-size: 14px; color: #222; font-weight: 700; margin-bottom: 20px;">Sila pilih tahun pembelajaran anda:</p>
+            
+            <div style="display: flex; flex-direction: column; gap: 12px; width: 100%; align-items: center; margin-bottom: 20px;">
                 <img src="background/buttons/IMG_8525.png" alt="Tahun 2" onclick="alert('Mod Silibus Tahun 2 akan datang!')" style="height: 65px; width: auto; max-width: 230px; object-fit: fill; border-radius: 16px; cursor: pointer;">
                 <img src="background/buttons/IMG_8526.png" alt="Tahun 3" onclick="alert('Mod Silibus Tahun 3 akan datang!')" style="height: 65px; width: auto; max-width: 230px; object-fit: fill; border-radius: 16px; cursor: pointer;">
                 <img src="background/buttons/IMG_8524.png" alt="Tahun 4" onclick="alert('Mod Silibus Tahun 4 akan datang!')" style="height: 65px; width: auto; max-width: 230px; object-fit: fill; border-radius: 16px; cursor: pointer;">
             </div>
-            <button class="monster-btn btn-blue" onclick="backToMainMenu()">⬅️ Kembali ke Menu Utama</button>
+            
+            <div style="display: flex; justify-content: center;">
+                <button class="monster-btn btn-blue" onclick="backToMainMenu()" style="max-width: 230px; border-radius: 16px;">⬅️ Kembali ke Menu Utama</button>
+            </div>
         </div>
 
         <!-- 4. PAGE PERMAINAN / KUIZ -->
