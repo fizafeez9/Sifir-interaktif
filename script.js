@@ -3,9 +3,10 @@ let currentLevel = 1;
 let currentQuestionIndex = 0;
 let currentLevelQuestions = [];
 let scoreCount = 0;
+let isTahun2Mode = false; // Penanda untuk kenal sama ada mod Tahun 2 atau Darjah 3
 
 // ==========================================
-// FUNGSI NAVIGASI HALAMAN (DILETAKKAN DI ATAS SEKALI)
+// FUNGSI NAVIGASI HALAMAN
 // ==========================================
 
 function showLoginPage(e) {
@@ -24,6 +25,7 @@ function showMainMenu() {
     document.getElementById('register-page').classList.add('hidden');
     document.getElementById('login-page').classList.add('hidden');
     document.getElementById('level-page').classList.add('hidden');
+    document.getElementById('tahun2-level-page').classList.add('hidden');
     document.getElementById('game-page').classList.add('hidden');
     document.getElementById('history-page').classList.add('hidden');
     document.getElementById('silibus-page').classList.add('hidden');
@@ -33,6 +35,7 @@ function showMainMenu() {
 }
 
 function showLevelSelection() {
+    isTahun2Mode = false;
     document.getElementById('main-menu-page').classList.add('hidden');
     document.getElementById('level-page').classList.remove('hidden');
 }
@@ -42,17 +45,25 @@ function showSilibusPage() {
     document.getElementById('silibus-page').classList.remove('hidden');
 }
 
+function startTahun2Silibus() {
+    if (!studentData.name) {
+        alert("⚠️ Sila log masuk terlebih dahulu!");
+        logout();
+        return;
+    }
+
+    // Paparkan pilihan level Tahun 2
+    document.getElementById('silibus-page').classList.add('hidden');
+    document.getElementById('tahun2-level-page').classList.remove('hidden');
+}
+
 function backToMainMenu() {
     document.getElementById('level-page').classList.add('hidden');
+    document.getElementById('tahun2-level-page').classList.add('hidden');
     document.getElementById('game-page').classList.add('hidden');
     document.getElementById('history-page').classList.add('hidden');
     document.getElementById('silibus-page').classList.add('hidden');
     document.getElementById('main-menu-page').classList.remove('hidden');
-}
-
-function startTahun2Silibus() {
-    currentLevel = 1; 
-    alert("Mod Silibus Tahun 2 dipilih! (Sila sambungkan fungsi paparan level Tahun 2 anda di sini)");
 }
 
 // ==========================================
@@ -134,6 +145,7 @@ function logout() {
     studentData = { name: '', email: '' };
     document.getElementById('main-menu-page').classList.add('hidden');
     document.getElementById('level-page').classList.add('hidden');
+    document.getElementById('tahun2-level-page').classList.add('hidden');
     document.getElementById('game-page').classList.add('hidden');
     document.getElementById('history-page').classList.add('hidden');
     document.getElementById('silibus-page').classList.add('hidden');
@@ -156,6 +168,7 @@ function selectLevel(lvl) {
         return;
     }
 
+    isTahun2Mode = false;
     currentLevel = lvl;
     currentQuestionIndex = 0;
     scoreCount = 0;
@@ -168,9 +181,30 @@ function selectLevel(lvl) {
     loadQuestion();
 }
 
+function selectTahun2Level(lvl) {
+    if (!studentData.name) {
+        alert("⚠️ Sila log masuk terlebih dahulu!");
+        logout();
+        return;
+    }
+
+    isTahun2Mode = true;
+    currentLevel = lvl;
+    currentQuestionIndex = 0;
+    scoreCount = 0;
+    currentLevelQuestions = tahun2Questions[lvl] || tahun2Questions[1];
+
+    document.getElementById('tahun2-level-page').classList.add('hidden');
+    document.getElementById('game-page').classList.remove('hidden');
+    
+    loadQuestion();
+}
+
 function loadQuestion() {
     let qData = currentLevelQuestions[currentQuestionIndex];
-    document.getElementById('current-stage-title').innerText = `Level ${currentLevel}`;
+    let modeTitle = isTahun2Mode ? `Tahun 2 - Level ${currentLevel}` : `Level ${currentLevel}`;
+    
+    document.getElementById('current-stage-title').innerText = modeTitle;
     document.getElementById('question-counter').innerText = `Soalan ${currentQuestionIndex + 1}/${currentLevelQuestions.length}`;
     document.getElementById('question-text').innerText = qData.q;
     
@@ -223,16 +257,18 @@ function nextQuestion() {
 
 function showLevelResultModal() {
     let modalList = document.getElementById('modal-results-list');
+    let levelPrefix = isTahun2Mode ? `Tahun 2 (Lvl ${currentLevel})` : `Level ${currentLevel}`;
+    
     modalList.innerHTML = `
-        <p style="font-size: 16px; margin: 10px 0;">Pencapaian anda untuk <strong>Level ${currentLevel}</strong>:</p>
+        <p style="font-size: 16px; margin: 10px 0;">Pencapaian anda untuk <strong>${levelPrefix}</strong>:</p>
         <h3 style="color: #4e54c8; font-size: 24px;">Skor: ${scoreCount} / ${currentLevelQuestions.length}</h3>
     `;
 
-    saveStudentHistory(currentLevel, `Skor: ${scoreCount}/${currentLevelQuestions.length}`);
+    saveStudentHistory(levelPrefix, `Skor: ${scoreCount}/${currentLevelQuestions.length}`);
     document.getElementById('result-modal').classList.remove('hidden');
 }
 
-async function saveStudentHistory(level, summary) {
+async function saveStudentHistory(levelInfo, summary) {
     if (!studentData.email) return;
 
     let now = new Date();
@@ -242,7 +278,7 @@ async function saveStudentHistory(level, summary) {
         await window.addDoc(window.collection(window.db, "history"), {
             email: studentData.email,
             date: dateStr,
-            level: level,
+            level: levelInfo,
             details: summary,
             timestamp: Date.now()
         });
@@ -270,7 +306,7 @@ async function showHistoryModal() {
         historyListDiv.innerHTML = '';
 
         if (querySnapshot.empty) {
-            historyListDiv.innerHTML = '<p style="text-align: center; color: #666; padding: 20px 0;">Tiada rekod aktiviti lagi. Jom mula jawab soalan di Latihan & Kefahaman!</p>';
+            historyListDiv.innerHTML = '<p style="text-align: center; color: #666; padding: 20px 0;">Tiada rekod aktiviti lagi. Jom mula jawab soalan!</p>';
             return;
         }
 
@@ -286,7 +322,7 @@ async function showHistoryModal() {
             itemDiv.style.cssText = "background: #f8f9fa; border-left: 5px solid #4e54c8; padding: 12px 15px; margin-bottom: 10px; border-radius: 8px; font-size: 14px; box-shadow: 0 2px 4px rgba(0,0,0,0.05);";
             itemDiv.innerHTML = `
                 <strong>🗓️ ${item.date}</strong><br>
-                <span style="color: #2e7d32; font-weight: bold;">🏆 Level ${item.level}</span><br>
+                <span style="color: #2e7d32; font-weight: bold;">🏆 ${item.level}</span><br>
                 <span style="color: #333; font-weight: 600;">${item.details}</span>
             `;
             historyListDiv.appendChild(itemDiv);
@@ -306,7 +342,12 @@ function closeHistoryPage() {
 function closeModalAndReturn() {
     document.getElementById('result-modal').classList.add('hidden');
     document.getElementById('game-page').classList.add('hidden');
-    document.getElementById('level-page').classList.remove('hidden');
+    
+    if (isTahun2Mode) {
+        document.getElementById('tahun2-level-page').classList.remove('hidden');
+    } else {
+        document.getElementById('level-page').classList.remove('hidden');
+    }
 }
 
 function openCreditModal() {
@@ -330,7 +371,7 @@ function playWrongSound() {
 }
 
 // ==========================================
-// BANK SOALAN (DILETAKKAN DI BAHAGIAN BAWAH)
+// BANK SOALAN DARJAH 3 (Level 1 hingga 20)
 // ==========================================
 
 const levelsQuestions = {
@@ -540,7 +581,7 @@ const levelsQuestions = {
     ]
 };
 
-// Penjana automatik untuk Level 18 hingga 20
+// Penjana automatik untuk Level 18 hingga 20 (Darjah 3)
 for (let i = 18; i <= 20; i++) {
     levelsQuestions[i] = [];
     for (let j = 1; j <= 10; j++) {
@@ -553,7 +594,10 @@ for (let i = 18; i <= 20; i++) {
     }
 }
 
-// Bank Soalan Silibus Matematik Tahun 2 (Level 1 hingga 14)
+// ==========================================
+// BANK SOALAN SILIBUS MATEMATIK TAHUN 2 (Level 1 hingga 14)
+// ==========================================
+
 const tahun2Questions = {
     1: [
         { q: "Tulis nombor 'tiga ratus empat puluh dua' dalam bentuk angka.", options: ["A) 342", "B) 324", "C) 304", "D) 432"], answer: "A) 342", explanation: "Tiga ratus empat puluh dua ditulis sebagai 342." },
