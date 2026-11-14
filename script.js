@@ -1099,17 +1099,23 @@ function showMainMenu() {
     document.body.classList.add('menu-active-bg');
 }
 
-function showLevelSelection() {
-    document.getElementById('main-menu-page').classList.add('hidden');
-    document.getElementById('level-page').classList.remove('hidden');
-}
+    function showLevelSelection() {
+        document.getElementById('main-menu-page').classList.add('hidden');
+        document.getElementById('level-page').classList.remove('hidden');
+    }
 
-function backToMainMenu() {
-    document.getElementById('level-page').classList.add('hidden');
-    document.getElementById('game-page').classList.add('hidden');
-    document.getElementById('history-page').classList.add('hidden');
-    document.getElementById('main-menu-page').classList.remove('hidden');
-}
+    function showSilibusPage() {
+        document.getElementById('main-menu-page').classList.add('hidden');
+        document.getElementById('silibus-page').classList.remove('hidden');
+    }
+
+    function backToMainMenu() {
+        document.getElementById('level-page').classList.add('hidden');
+        document.getElementById('game-page').classList.add('hidden');
+        document.getElementById('history-page').classList.add('hidden');
+        document.getElementById('silibus-page').classList.add('hidden');
+        document.getElementById('main-menu-page').classList.remove('hidden');
+    }
 
 // 1. Pendaftaran Akaun ke Firebase Firestore
 async function handleRegister(e) {
