@@ -212,6 +212,19 @@ function loadQuestion() {
     document.getElementById('question-counter').innerText = `Soalan ${currentQuestionIndex + 1}/${currentLevelQuestions.length}`;
     document.getElementById('question-text').innerText = qData.q;
     
+    // --- KOD UNTUK PAPAR ATAU SEMBUNYIKAN GAMBAR RAJAH ---
+    let imgContainer = document.getElementById('question-image-container');
+    let imgElement = document.getElementById('question-img');
+    
+    if (qData.image) {
+        imgElement.src = qData.image;
+        imgContainer.classList.remove('hidden'); // Paparkan kotak gambar jika ada
+    } else {
+        imgContainer.classList.add('hidden'); // Sembunyikan jika tiada gambar
+        imgElement.src = '';
+    }
+    // ----------------------------------------------------
+
     let optionsContainer = document.getElementById('options-container');
     optionsContainer.innerHTML = '';
     
@@ -676,7 +689,7 @@ const tahun2Questions = {
         { q: "Selesaikan: 35 ÷ 5 = ?", options: ["A) 7", "B) 6", "C) 8", "D) 5"], answer: "A) 7", explanation: "35 dibahagi 5 ialah 7." }
     ],
     7: [
-        { q: "Apakah pecahan bahagian berlorek jika 1 daripada 2 bahagian dilorek?", options: ["A) 1/2", "B) 1/3", "C) 1/4", "D) 2/1"], answer: "A) 1/2", explanation: "1 bahagian daripada 2 bahagian ditulis sebagai 1/2." },
+        { q: "Apakah pecahan bahagian berlorek jika 1 daripada 2 bahagian dilorek?", image: "background/Images/IMG_8633.jpeg", options: ["A) 1/2", "B) 1/3", "C) 1/4", "D) 2/1"], answer: "A) 1/2", explanation: "1 bahagian daripada 2 bahagian ditulis sebagai 1/2." },
         { q: "Tulis dalam perkataan: 1/4", options: ["A) Satu perempat", "B) Satu perdua", "C) Satu pertiga", "D) Satu perlima"], answer: "A) Satu perempat", explanation: "Pecahan 1/4 dibaca sebagai satu perempat atau seperempat." },
         { q: "Apakah pecahan yang lebih besar antara 1/2 dan 1/3?", options: ["A) 1/2", "B) 1/3", "C) Sama besar", "D) Tidak pasti"], answer: "A) 1/2", explanation: "1/2 lebih besar daripada 1/3 kerana kek dibahagi kepada 2 bahagian lebih besar berbanding 3 bahagian." },
         { q: "Tuliskan pecahan bagi 'satu pertiga'.", options: ["A) 1/3", "B) 1/2", "C) 1/4", "D) 1/5"], answer: "A) 1/3", explanation: "Satu pertiga ditulis dalam angka sebagai 1/3." },
