@@ -4,6 +4,8 @@ let currentQuestionIndex = 0;
 let currentLevelQuestions = [];
 let scoreCount = 0;
 let isTahun2Mode = false; // Penanda untuk kenal sama ada mod Tahun 2 atau Darjah 3
+let isPiawaianMode = false;
+let currentPiawaianLevel = 1; // Kalau nak bahagikan kepada Bahagian A, B, C
 
 // ==========================================
 // FUNGSI NAVIGASI HALAMAN
