@@ -703,11 +703,11 @@ const tahun2Questions = {
         { q: "Selesaikan: 7 × 2 = ?", options: ["A) 14", "B) 12", "C) 16", "D) 10"], answer: "A) 14", explanation: "Sifir 2: 7 × 2 = 14." }
     ],
     6: [
-        { q: "Selesaikan: 10 ÷ 2 = ?", options: ["A) 5", "B) 4", "C) 6", "D) 2"], answer: "A) 5", explanation: "10 dibahagi 2 ialah 5." },
+        { q: "Selesaikan: 10 ÷ 2 = ?", options: ["A) 4", "B) 5", "C) 6", "D) 2"], answer: "B) 5", explanation: "10 dibahagi 2 ialah 5." },
         { q: "Selesaikan: 20 ÷ 5 = ?", options: ["A) 4", "B) 5", "C) 6", "D) 3"], answer: "A) 4", explanation: "20 dibahagi 5 ialah 4." },
         { q: "Selesaikan: 30 ÷ 10 = ?", options: ["A) 3", "B) 4", "C) 5", "D) 2"], answer: "A) 3", explanation: "30 dibahagi 10 ialah 3." },
         { q: "Selesaikan: 16 ÷ 4 = ?", options: ["A) 4", "B) 3", "C) 5", "D) 6"], answer: "A) 4", explanation: "16 dibahagi 4 ialah 4." },
-        { q: "Selesaikan: 18 ÷ 2 = ?", options: ["A) 9", "B) 8", "C) 7", "D) 6"], answer: "A) 9", explanation: "18 dibahagi 2 ialah 9." },
+        { q: "Selesaikan: 18 ÷ 2 = ?", options: ["A) 7", "B) 8", "C) 9", "D) 6"], answer: "C) 9", explanation: "18 dibahagi 2 ialah 9." },
         { q: "Selesaikan: 25 ÷ 5 = ?", options: ["A) 5", "B) 4", "C) 6", "D) 3"], answer: "A) 5", explanation: "25 dibahagi 5 ialah 5." },
         { q: "Selesaikan: 40 ÷ 10 = ?", options: ["A) 4", "B) 5", "C) 3", "D) 6"], answer: "A) 4", explanation: "40 dibahagi 10 ialah 4." },
         { q: "Selesaikan: 12 ÷ 4 = ?", options: ["A) 3", "B) 4", "C) 2", "D) 5"], answer: "A) 3", explanation: "12 dibahagi 4 ialah 3." },
@@ -720,7 +720,7 @@ const tahun2Questions = {
         { q: "Apakah pecahan yang lebih besar antara 1/2 dan 1/3?", options: ["A) 1/2", "B) 1/3", "C) Sama besar", "D) Tidak pasti"], answer: "A) 1/2", explanation: "1/2 lebih besar daripada 1/3 kerana kek dibahagi kepada 2 bahagian lebih besar berbanding 3 bahagian." },
         { q: "Tuliskan pecahan bagi 'satu pertiga'.", options: ["A) 1/3", "B) 1/2", "C) 1/4", "D) 1/5"], answer: "A) 1/3", explanation: "Satu pertiga ditulis dalam angka sebagai 1/3." },
         { q: "Apakah pecahan setara bagi 1/2 dengan pengangka 2?", options: ["A) 2/4", "B) 2/3", "C) 2/5", "D) 2/6"], answer: "A) 2/4", explanation: "Pengangka dan penyebut darab dengan 2 menjadi 2/4." },
-        { q: "Ibu potong kek kepada 4 bahagian. Ali makan 1 bahagian. Berapakah pecahan kek Ali?", options: ["A) 1/4", "B) 1/2", "C) 3/4", "D) 4/1"], answer: "A) 1/4", explanation: "1 bahagian dimakan daripada 4 bahagian keseluruhan (1/4)." },
+        { q: "Ibu potong kek kepada 4 bahagian. Ali makan 1 bahagian. Berapakah pecahan kek Ali?", image: "background/Images/IMG_8681.jpeg", options: ["A) 3/4", "B) 1/2", "C) 1/4", "D) 4/1"], answer: "C) 1/4", explanation: "1 bahagian dimakan daripada 4 bahagian keseluruhan (1/4)." },
         { q: "Bandingkan 1/5 dan 1/10. Mana satukah lebih kecil?", options: ["A) 1/10", "B) 1/5", "C) Sama besar", "D) Tidak pasti"], answer: "A) 1/10", explanation: "1/10 lebih kecil kerana keseluruhan dibahagi kepada lebih banyak bahagian." },
         { q: "Tuliskan pecahan bagi 'satu persepuluh'.", options: ["A) 1/10", "B) 1/100", "C) 1/5", "D) 1/2"], answer: "A) 1/10", explanation: "Satu persepuluh ditulis sebagai 1/10." },
         { q: "Jika satu objek dibahagi kepada 3 bahagian sama besar dan diambil 1, apakah pecahan bahagian itu?", options: ["A) 1/3", "B) 1/2", "C) 1/4", "D) 2/3"], answer: "A) 1/3", explanation: "1 bahagian daripada 3 ialah 1/3." },
