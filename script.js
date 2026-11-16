@@ -42,6 +42,20 @@ function showLevelSelection() {
     document.getElementById('level-page').classList.remove('hidden');
 }
 
+function startPiawaianSilibus() {
+    isPiawaianMode = true;
+    isTahun2Mode = false;
+    currentLevelQuestions = piawaianQuestions; // Bank soalan di bawah
+    currentLevel = 1;
+    currentQuestionIndex = 0;
+    score = 0;
+    
+    // Sembunyikan menu utama, buka paparan kuiz (game-page)
+    document.getElementById('main-menu-page').classList.add('hidden');
+    document.getElementById('game-page').classList.remove('hidden');
+    
+    loadQuestion();
+}
 function showSilibusPage() {
     document.getElementById('main-menu-page').classList.add('hidden');
     document.getElementById('silibus-page').classList.remove('hidden');
@@ -208,7 +222,17 @@ function selectTahun2Level(lvl) {
 
 function loadQuestion() {
     let qData = currentLevelQuestions[currentQuestionIndex];
-    let modeTitle = isTahun2Mode ? `Tahun 2 - Level ${currentLevel}` : `Level ${currentLevel}`;
+    
+    // --- GANTIKAN BAHAGIAN INI ---
+    let modeTitle = "";
+    if (typeof isPiawaianMode !== 'undefined' && isPiawaianMode) {
+        modeTitle = `Kenalpasti Unit Piawaian`;
+    } else if (isTahun2Mode) {
+        modeTitle = `Tahun 2 - Level ${currentLevel}`;
+    } else {
+        modeTitle = `Level ${currentLevel}`;
+    }
+    // -----------------------------
     
     document.getElementById('current-stage-title').innerText = modeTitle;
     document.getElementById('question-counter').innerText = `Soalan ${currentQuestionIndex + 1}/${currentLevelQuestions.length}`;
@@ -787,3 +811,48 @@ const tahun2Questions = {
         { q: "Jika 1 simbol piktograf mewakili 2 orang murid, berapakah nilai untuk 4 simbol?", options: ["A) 8", "B) 6", "C) 10", "D) 4"], answer: "A) 8", explanation: "4 simbol × 2 orang = 8 orang murid." }
     ]
 };
+
+// ==========================================
+// BANK SOALAN KENALPASTI UNIT PIAWAIAN 30 SOALAN
+// ==========================================
+
+const piawaianQuestions = [
+    // BAHAGIAN A: Jisim (Gram & Kilogram)
+    { q: "Apakah kegunaan utama unit gram (g)?", options: ["A) Objek ringan", "B) Objek berat", "C) Jarak jauh", "D) Isipadu banyak"], answer: "A) Objek ringan", explanation: "Unit gram (g) digunakan untuk mengukur jisim objek yang ringan." },
+    { q: "Apakah simbol ringkas bagi perkataan 'gram'?", options: ["A) kg", "B) g", "C) mg", "D) m"], answer: "B) g", explanation: "Simbol ringkas bagi gram ialah g." },
+    { q: "Adakah jisim sebatang pensel diukur dalam unit gram?", options: ["A) Ya", "B) Tidak", "C) Mungkin", "D) Tidak pasti"], answer: "A) Ya", explanation: "Pensel adalah objek ringan, jadi jisimnya diukur dalam gram." },
+    { q: "Antara sehelai bulu pecut dengan sebuku oren, yang manakah jisimnya diukur dalam gram?", options: ["A) Sehelai bulu pecut", "B) Sebuku oren", "C) Kedua-duanya", "D) Tiada jawapan"], answer: "A) Sehelai bulu pecut", explanation: "Bulu pecut sangat ringan dan diukur dalam gram." },
+    { q: "Berikan contoh benda di dalam kotak pensel yang jisimnya diukur dalam gram.", options: ["A) Pemadam", "B) Beg sekolah", "C) Meja", "D) Kerusi"], answer: "A) Pemadam", explanation: "Pemadam adalah objek ringan di dalam kotak pensel." },
+    
+    { q: "Apakah kegunaan utama unit kilogram (kg)?", options: ["A) Objek ringan", "B) Objek berat", "C) Cecair sedikit", "D) Panjang objek"], answer: "B) Objek berat", explanation: "Unit kilogram (kg) digunakan untuk mengukur jisim objek yang berat." },
+    { q: "Apakah simbol ringkas bagi perkataan 'kilogram'?", options: ["A) g", "B) kg", "C) km", "D) ml"], answer: "B) kg", explanation: "Simbol ringkas bagi kilogram ialah kg." },
+    { q: "Adakah jisim seorang murid sekolah diukur dalam unit kilogram?", options: ["A) Ya", "B) Tidak", "C) Kadangkala", "D) Salah"], answer: "A) Ya", explanation: "Jisim manusia/murid diukur menggunakan unit kilogram (kg)." },
+    { q: "Antara sebutir gula-gula dengan sebiji tembikai besar, yang manakah diukur dalam kilogram?", options: ["A) Sebutir gula-gula", "B) Sebiji tembikai besar", "C) Kedua-duanya", "D) Tiada"], answer: "B) Sebiji tembikai besar", explanation: "Tembikai besar adalah objek berat yang diukur dalam kilogram." },
+    { q: "Barangan manakah di dapur rumah yang dibeli dalam pek ukuran kilogram (kg)?", options: ["A) Beras", "B) Air mineral kecil", "C) Sos tomato sudu", "D) Batang pensel"], answer: "A) Beras", explanation: "Beras dijual dalam pek berat kilogram (kg)." },
+
+    // BAHAGIAN B: Ukuran Panjang (Sentimeter, Meter, Kilometer)
+    { q: "Unit apakah yang paling sesuai untuk mengukur panjang sebatang pembaris tulis?", options: ["A) Sentimeter (cm)", "B) Meter (m)", "C) Kilometer (km)", "D) Mililiter (ml)"], answer: "A) Sentimeter (cm)", explanation: "Pembaris pendek diukur menggunakan unit sentimeter (cm)." },
+    { q: "Apakah simbol ringkas bagi unit 'sentimeter'?", options: ["A) m", "B) cm", "C) km", "D) g"], answer: "B) cm", explanation: "Simbol ringkas sentimeter ialah cm." },
+    { q: "Unit apakah yang paling sesuai untuk mengukur ketinggian pintu bilik darjah?", options: ["A) Sentimeter", "B) Meter", "C) Kilometer", "D) Gram"], answer: "B) Meter", explanation: "Ketinggian pintu atau bilik diukur dalam unit meter (m)." },
+    { q: "Apakah simbol ringkas bagi unit 'meter'?", options: ["A) cm", "B) m", "C) km", "D) kg"], answer: "B) m", explanation: "Simbol ringkas meter ialah m." },
+    { q: "Unit apakah untuk mengukur jarak perjalanan menaiki kereta dari KL ke Johor Bahru?", options: ["A) Sentimeter", "B) Meter", "C) Kilometer", "D) Mililiter"], answer: "C) Kilometer", explanation: "Jarak antara bandar/negeri diukur dalam kilometer (km)." },
+    { q: "Apakah simbol ringkas bagi unit 'kilometer'?", options: ["A) m", "B) cm", "C) km", "D) kg"], answer: "C) km", explanation: "Simbol ringkas kilometer ialah km." },
+    { q: "Antara lebar buku tulis dengan panjang padang sekolah, yang manakah diukur dalam sentimeter (cm)?", options: ["A) Lebar sebuah buku tulis", "B) Panjang padang sekolah", "C) Kedua-duanya", "D) Tiada"], answer: "A) Lebar sebuah buku tulis", explanation: "Buku tulis adalah objek kecil, lebarnya diukur dalam sentimeter." },
+    { q: "Antara panjang sehelai kain dengan panjang sebatang pensel, yang manakah diukur dalam meter (m)?", options: ["A) Panjang sehelai kain", "B) Panjang sebatang pensel", "C) Pemadam", "D) Buku nota"], answer: "A) Panjang sehelai kain", explanation: "Kain yang panjang diukur dalam unit meter." },
+    { q: "Adakah jarak antara dua buah negeri di Malaysia diukur dalam sentimeter, meter, atau kilometer?", options: ["A) Sentimeter", "B) Meter", "C) Kilometer", "D) Gram"], answer: "C) Kilometer", explanation: "Jarak antara negeri menggunakan unit kilometer." },
+    { q: "Berikan satu contoh objek di rumah yang panjangnya diukur menggunakan unit meter (m).", options: ["A) Permaidani ruang tamu", "B) Buku latihan", "C) Pemadam", "D) Batang pensel"], answer: "A) Permaidani ruang tamu", explanation: "Permaidani atau kain panjang diukur dalam meter." },
+
+    // BAHAGIAN C: Isipadu Cecair (Mililiter & Liter)
+    { q: "Apakah kegunaan unit mililiter (ml)?", options: ["A) Cecair sedikit", "B) Cecair banyak", "C) Objek berat", "D) Jarak jauh"], answer: "A) Cecair sedikit", explanation: "Unit mililiter (ml) digunakan untuk isipadu cecair yang sedikit." },
+    { q: "Apakah simbol ringkas bagi perkataan 'mililiter'?", options: ["A) l", "B) ml", "C) kg", "D) cm"], answer: "B) ml", explanation: "Simbol ringkas mililiter ialah ml." },
+    { q: "Adakah isipadu ubat cecair batuk di dalam sudu kecil diukur dalam unit mililiter?", options: ["A) Ya", "B) Tidak", "C) Mungkin", "D) Salah"], answer: "A) Ya", explanation: "Ubat dalam sudu kecil adalah sukatan cecair sedikit (ml)." },
+    { q: "Berikan contoh cawan atau botol kecil minuman harian yang isipadunya diukur dalam mililiter (ml).", options: ["A) Kotak susu kecil sekolah", "B) Tong air besar sekolah", "C) Kolam mandi", "D) Tangki air rumah"], answer: "A) Kotak susu kecil sekolah", explanation: "Kotak susu kecil disukat dalam mililiter." },
+    { q: "Antara setitis air sirap dengan sebotol besar air mineral, yang manakah isipadunya diukur dalam mililiter?", options: ["A) Setitis air sirap", "B) Sebotol besar air mineral", "C) Kedua-duanya", "D) Tiada"], answer: "A) Setitis air sirap", explanation: "Titisan air sangat sedikit, diukur dalam unit mililiter." },
+    
+    { q: "Apakah kegunaan unit liter (l)?", options: ["A) Cecair sedikit", "B) Cecair banyak", "C) Objek ringan", "D) Panjang pendek"], answer: "B) Cecair banyak", explanation: "Unit liter (l) digunakan untuk isipadu cecair yang banyak." },
+    { q: "Apakah simbol ringkas bagi perkataan 'liter'?", options: ["A) ml", "B) l", "C) kg", "D) m"], answer: "B) l", explanation: "Simbol ringkas liter ialah l." },
+    { q: "Adakah isipadu air di dalam sebuah tong besar atau kolam mandi diukur dalam unit liter?", options: ["A) Ya", "B) Tidak", "C) Mungkin", "D) Salah"], answer: "A) Ya", explanation: "Takungan air yang banyak seperti tong atau kolam diukur dalam liter." },
+    { q: "Berikan contoh botol minuman besar di kedai runcit yang isipadunya diukur dalam unit liter (l).", options: ["A) Botol minuman 1.5 liter besar", "B) Sudu ubat", "C) Penitis mata", "D) Cawan kecil"], answer: "A) Botol minuman 1.5 liter besar", explanation: "Botol minuman besar disukat menggunakan liter (l)." },
+    { q: "Antara secawan air teh dengan sebuah baldi penuh air, yang manakah diukur dalam unit liter?", options: ["A) Secawan air teh", "B) Sebuah baldi penuh air", "C) Setitis air", "D) Sudu sirap"], answer: "B) Sebuah baldi penuh air", explanation: "Baldi penuh air mengandungi cecair yang banyak dan disukat dalam liter." }
+];
+
