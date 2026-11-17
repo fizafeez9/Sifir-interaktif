@@ -82,7 +82,7 @@
 
                 <!-- Baris 3: Jalan Kira Tambah & Tolak | Jalan Kira Darab & Bahagi -->
                 <div style="display: flex; gap: 10px; width: 100%; justify-content: center;">
-                    <img src="background/buttons/IMG_8686.png" alt="Jalan Kira Operasi Tambah & Tolak" class="menu-img-btn" onclick="alert('Mod Jalan Kira Tambah & Tolak akan datang!')" style="width: 48%; max-height: 65px; object-fit: contain; border-radius: 16px; cursor: pointer;">
+                    <img src="background/buttons/IMG_8686.png" alt="Jalan Kira Operasi Tambah & Tolak" class="menu-img-btn" onclick="openTambahTolakMenu()" style="width: 48%; max-height: 65px; object-fit: contain; border-radius: 16px; cursor: pointer;">
                     <img src="background/buttons/IMG_8685.png" alt="Jalan Kira Operasi Darab & Bahagi" class="menu-img-btn" onclick="alert('Mod Jalan Kira Darab & Bahagi akan datang!')" style="width: 48%; max-height: 65px; object-fit: contain; border-radius: 16px; cursor: pointer;">
                 </div>
 
@@ -196,7 +196,79 @@
             <div id="history-list" style="max-height: 320px; overflow-y: auto; text-align: left; margin: 15px 0; padding: 5px; box-sizing: border-box;"></div>
             <button class="monster-btn btn-blue" onclick="closeHistoryPage()">⬅️ Kembali ke Menu Utama</button>
         </div>
-    </div>
+
+        <!-- 👇 TAMBAHKAN DUA HALAMAN BARU INI DI SINI 👇 -->
+
+        <!-- 6. PAGE PILIHAN KATEGORI TAMBAH & TOLAK -->
+        <div id="kategori-tambah-tolak-page" class="hidden form-card" style="text-align: left;">
+            <div style="text-align: center; margin-bottom: 20px;">
+                <h2 style="color: #4e54c8; margin-bottom: 5px;">Pilih Kategori Operasi</h2>
+                <p style="font-size: 13px; color: #555;">Sila pilih jenis latihan bentuk lazim yang anda ingin selesaikan.</p>
+            </div>
+
+            <!-- Kotak 1: Tanpa Mengumpul -->
+            <div onclick="bukaHalamanSoalan('tanpa-mengumpul')" style="background: #f8f9fa; border: 2px solid #4e54c8; padding: 15px; border-radius: 12px; margin-bottom: 12px; cursor: pointer; display: flex; align-items: center; justify-content: space-between;">
+                <div>
+                    <h3 style="color: #4e54c8; margin: 0 0 5px 0; font-size: 16px;">1. Bentuk Lazim Tambah (Tanpa Mengumpul Semula)</h3>
+                    <p style="font-size: 12px; color: #666; margin: 0;">5 Soalan • Panduan Gambar • Ruang Snap Jalan Kerja</p>
+                </div>
+                <span style="font-size: 20px;">➡️</span>
+            </div>
+
+            <!-- Kotak 2: Mengumpul Semula -->
+            <div onclick="bukaHalamanSoalan('mengumpul-semula')" style="background: #f8f9fa; border: 2px solid #4e54c8; padding: 15px; border-radius: 12px; margin-bottom: 12px; cursor: pointer; display: flex; align-items: center; justify-content: space-between;">
+                <div>
+                    <h3 style="color: #4e54c8; margin: 0 0 5px 0; font-size: 16px;">2. Bentuk Lazim Tambah (Mengumpul Semula)</h3>
+                    <p style="font-size: 12px; color: #666; margin: 0;">5 Soalan • Panduan Gambar • Ruang Snap Jalan Kerja</p>
+                </div>
+                <span style="font-size: 20px;">➡️</span>
+            </div>
+
+            <!-- Kotak 3: Tolak Tanpa Pinjaman (Akan Datang) -->
+            <div onclick="alert('Mod Tolak Tanpa Pinjaman akan datang!')" style="background: #f1f2f6; border: 2px dashed #cbd5e1; padding: 15px; border-radius: 12px; margin-bottom: 12px; cursor: pointer; display: flex; align-items: center; justify-content: space-between; opacity: 0.7;">
+                <div>
+                    <h3 style="color: #64748b; margin: 0 0 5px 0; font-size: 16px;">3. Bentuk Lazim Tolak (Tanpa Pinjaman)</h3>
+                    <p style="font-size: 12px; color: #94a3b8; margin: 0;">Akan Datang</p>
+                </div>
+                <span style="font-size: 16px;">🔒</span>
+            </div>
+
+            <!-- Kotak 4: Tolak Pinjaman Bersiri (Akan Datang) -->
+            <div onclick="alert('Mod Tolak Pinjaman Bersiri akan datang!')" style="background: #f1f2f6; border: 2px dashed #cbd5e1; padding: 15px; border-radius: 12px; margin-bottom: 20px; cursor: pointer; display: flex; align-items: center; justify-content: space-between; opacity: 0.7;">
+                <div>
+                    <h3 style="color: #64748b; margin: 0 0 5px 0; font-size: 16px;">4. Bentuk Lazim Tolak (Pinjaman Bersiri)</h3>
+                    <p style="font-size: 12px; color: #94a3b8; margin: 0;">Akan Datang</p>
+                </div>
+                <span style="font-size: 16px;">🔒</span>
+            </div>
+
+            <button class="monster-btn btn-blue" onclick="backToMainMenuFromKategori()">⬅️ Kembali ke Menu Utama</button>
+        </div>
+
+        <!-- 7. PAGE PAPARAN 5 SOALAN DALAM 1 HALAMAN MENGIKUT KATEGORI -->
+        <div id="single-category-page" class="hidden form-card" style="text-align: left;">
+            <div style="text-align: center; margin-bottom: 15px;">
+                <h2 id="category-title" style="color: #4e54c8; margin-bottom: 5px; font-size: 20px;">Kategori Soalan</h2>
+                <p style="font-size: 13px; color: #555;">Rujuk gambar di bawah, selesaikan 5 soalan dalam buku, dan snap jalan kerja anda.</p>
+            </div>
+
+            <!-- Gambar Contoh Rujukan Bentuk Lazim -->
+            <div style="background: #f8f9fa; padding: 12px; border-radius: 10px; margin-bottom: 15px; border: 2px dashed #4e54c8; text-align: center;">
+                <p style="font-weight: bold; color: #333; margin-bottom: 8px; font-size: 13px;">📌 Rujukan Bentuk Lazim:</p>
+                <img id="category-guide-img" src="" alt="Panduan Bentuk Lazim" style="max-width: 100%; max-height: 160px; object-fit: contain; border-radius: 8px; border: 1px solid #ccc;">
+            </div>
+
+            <!-- Senarai 5 Soalan -->
+            <div id="category-questions-list"></div>
+
+            <div style="margin-top: 25px;">
+                <button class="monster-btn btn-blue" onclick="backToKategoriMenu()">⬅️ Kembali ke Pilihan Kategori</button>
+            </div>
+        </div>
+        <!-- 👆 TAMAT BAHAGIAN TAMBAHAN 👆 -->
+
+    </div> <!-- Penutup bagi div class="container" -->
+
 
     <!-- MODAL POPUP KEPUTUSAN -->
     <div id="result-modal" class="modal hidden">
