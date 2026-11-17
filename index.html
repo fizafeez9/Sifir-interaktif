@@ -32,8 +32,12 @@
                 </div>
                 <button type="submit" class="monster-btn btn-green">🟢 Daftar Sekarang</button>
             </form>
-            <p style="margin-top: 15px; font-size: 14px;">Sudah ada akaun? <a href="#" onclick="showLoginPage(event)" style="color: #4e54c8; font-weight: bold;">Log Masuk di sini</a></p>
-        </div>
+            <p style="margin-top: 15px; font-size: 14px;">
+    Sudah ada akaun? 
+    <a href="#" onclick="document.getElementById('register-page').classList.add('hidden'); document.getElementById('login-page').classList.remove('hidden'); return false;" style="color: #4e54c8; font-weight: bold;">
+        Log Masuk di sini
+    </a>
+</p>
 
         <!-- 2. PAGE LOG MASUK (LOGIN) -->
         <div id="login-page" class="hidden form-card">
