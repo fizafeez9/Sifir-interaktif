@@ -794,8 +794,6 @@ const bankSoalanTambah = {
     }
 };
 
-let studentWorkingPhotos = {}; // Simpan sementara imej yang disnap
-
 // 2. Buka menu pilihan kategori tambah & tolak
 function openTambahTolakMenu() {
     document.getElementById('main-menu-page').classList.add('hidden');
