@@ -33,11 +33,10 @@ body.menu-active-bg {
     padding: 15px;
     box-sizing: border-box;
     position: relative; /* Menjadikan kontena sebagai rujukan utama absolute */
-    min-height: 100vh; /* [DIBETULKAN] Ditukar dari height ke min-height supaya fleksibel */
+    height: 100vh; /* Dikembalikan kepada height asal */
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center; /* [DIBETULKAN] Memastikan kad sentiasa berada di tengah melintang */
 }
 
 /* Wrapper Menu Utama */
@@ -145,7 +144,9 @@ body.menu-active-bg {
     box-shadow: 0 8px 25px rgba(0,0,0,0.2);
     text-align: center;
     box-sizing: border-box;
-    width: 100%; /* [DIBETULKAN] Memastikan lebar kad penuh mengikut kontena */
+    width: 100%; 
+    max-height: 90vh; /* Memastikan kad cukup besar tapi kemas */
+    overflow-y: auto;  /* Membolehkan skrol jika kandungan panjang */
 }
 
 .form-group {
@@ -162,3 +163,75 @@ body.menu-active-bg {
 
 .form-group input {
     width: 100%;
+    padding: 10px 12px;
+    border: 2px solid #ddd;
+    border-radius: 10px;
+    box-sizing: border-box;
+    font-size: 14px;
+}
+
+.info-modul {
+    background: #f8f9fa;
+    border-left: 4px solid #ff6b6b;
+    padding: 8px 12px;
+    border-radius: 6px;
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+.monster-btn {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 15px;
+    font-size: 16px;
+    font-weight: bold;
+    color: white;
+    cursor: pointer;
+    box-shadow: 0 4px 0 rgba(0,0,0,0.15);
+    margin-top: 10px;
+}
+
+.btn-green { background: #2ed573; }
+.btn-blue { background: #3498db; }
+
+.level-btn {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 8px;
+    background-color: #f8f9fa;
+    color: #333;
+    border: 2px solid #4e54c8;
+    border-radius: 8px;
+    font-size: 14px;
+    text-align: left;
+    cursor: pointer;
+}
+
+/* ==========================================
+   STYLE KHAS UNTUK POPUP KEPUTUSAN ("TAHNIAH!")
+   ================================---------- */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6); /* Menggelapkan latar belakang skrin */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999; /* Memastikan popup berada di lapisan paling atas sekali */
+}
+
+.modal-content {
+    background: #ffffff;
+    padding: 25px;
+    border-radius: 20px;
+    width: 90%;
+    max-width: 350px;
+    text-align: center;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+    box-sizing: border-box;
+}
