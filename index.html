@@ -245,11 +245,11 @@
             <button class="monster-btn btn-blue" onclick="backToMainMenuFromKategori()">⬅️ Kembali ke Menu Utama</button>
         </div>
 
-        <!-- 7. PAGE PAPARAN 5 SOALAN DALAM 1 HALAMAN MENGIKUT KATEGORI -->
+                <!-- 7. PAGE PAPARAN 5 SOALAN DALAM 1 HALAMAN MENGIKUT KATEGORI -->
         <div id="single-category-page" class="hidden form-card" style="text-align: left;">
             <div style="text-align: center; margin-bottom: 15px;">
                 <h2 id="category-title" style="color: #4e54c8; margin-bottom: 5px; font-size: 20px;">Kategori Soalan</h2>
-                <p style="font-size: 13px; color: #555;">Rujuk gambar di bawah, selesaikan 5 soalan dalam buku, dan snap jalan kerja anda.</p>
+                <p style="font-size: 13px; color: #555;">Rujuk gambar di bawah, isi jawapan, snap jalan kerja, dan hantar.</p>
             </div>
 
             <!-- Gambar Contoh Rujukan Bentuk Lazim -->
@@ -261,8 +261,14 @@
             <!-- Senarai 5 Soalan -->
             <div id="category-questions-list"></div>
 
-            <div style="margin-top: 25px;">
-                <button class="monster-btn btn-blue" onclick="backToKategoriMenu()">⬅️ Kembali ke Pilihan Kategori</button>
+            <!-- BUTANG HANTAR JAWAPAN & KEMBALI -->
+            <div style="margin-top: 25px; display: flex; flex-direction: column; gap: 10px;">
+                <button onclick="submitAllAnswers()" class="monster-btn btn-green" style="background-color: #2ed573; color: white; border: none; padding: 12px 20px; border-radius: 10px; font-size: 16px; font-weight: bold; cursor: pointer; width: 100%;">
+                    🚀 Hantar Semua Jawapan & Jalan Kerja
+                </button>
+                <button onclick="backToKategoriMenu()" style="background-color: #747d8c; color: white; border: none; padding: 10px 20px; border-radius: 10px; font-size: 14px; font-weight: bold; cursor: pointer; width: 100%;">
+                    ⬅️ Kembali ke Pilihan Kategori
+                </button>
             </div>
         </div>
         <!-- 👆 TAMAT BAHAGIAN TAMBAHAN 👆 -->
