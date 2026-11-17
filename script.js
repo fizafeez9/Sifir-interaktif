@@ -641,7 +641,7 @@ for (let i = 18; i <= 20; i++) {
 const bankSoalanTambah = {
     "tanpa-mengumpul": {
         title: "Bentuk Lazim Tambah (Tanpa Mengumpul Semula)",
-        image: "background/Images/IMG_8742.jpeg", //[span_2](start_span)[span_2](end_span)
+        image: "background/Images/IMG_8750.jpeg", //[span_2](start_span)[span_2](end_span)
         questions: [
             { id: 1, q: "1. 2,130 + 1,420 = ?", answer: "3,550" },
             { id: 2, q: "2. 3,214 + 2,341 = ?", answer: "5,555" },
