@@ -161,6 +161,43 @@ async function handleLogin(e) {
     }
 }
 
+// Fungsi untuk memproses gambar yang disnap pelajar menjadi Base64 & simpan ke Firestore
+async function handleWorkingPhotoUpload(event, questionId) {
+    let file = event.target.files[0];
+    if (!file) return;
+
+    // Paparkan status sedang memproses
+    alert("Sila tunggu sebentar, sedang memproses dan merekod gambar jalan kerja...");
+
+    let reader = new FileReader();
+    reader.onload = async function(uploadEvent) {
+        let base64ImageString = uploadEvent.target.result; // Kod teks imej
+        
+        try {
+            // Ambil nama pelajar semasa (atau guna default jika tiada)
+            let studentName = localStorage.getItem('currentStudentName') || 'Pelajar Fiza';
+            let categoryTitle = document.getElementById('category-title').innerText;
+
+            // Simpan terus ke dalam Firestore (koleksi "rekod_jalan_kerja")
+            await window.addDoc(window.collection(window.db, "rekod_jalan_kerja"), {
+                namaPelajar: studentName,
+                kategori: categoryTitle,
+                soalanId: questionId,
+                gambarJalanKerja: base64ImageString, // Simpan teks imej di sini
+                tarikhMasa: new Date().toLocaleString()
+            });
+
+            alert("✅ Berjaya! Gambar jalan kerja telah direkodkan ke dalam pangkalan data.");
+        } catch (error) {
+            console.error("Ralat menyimpan ke Firestore:", error);
+            alert("❌ Gagal menyimpan gambar. Sila cuba lagi.");
+        }
+    };
+    
+    // Baca fail imej sebagai Data URL (Base64)
+    reader.readAsDataURL(file);
+}
+
 function logout() {
     studentData = { name: '', email: '' };
     document.getElementById('main-menu-page').classList.add('hidden');
@@ -411,6 +448,34 @@ function playWrongSound() {
         sound.currentTime = 0;
         sound.play().catch(e => console.log("Audio disekat:", e));
     }
+}
+
+function bukaHalamanSoalan(kategoriKey) {
+    let data = bankSoalanTambah[kategoriKey];
+    
+    document.getElementById('category-title').innerText = data.title;
+    document.getElementById('category-guide-img').src = data.image;
+    
+    let listContainer = document.getElementById('category-questions-list');
+    listContainer.innerHTML = '';
+    
+    data.questions.forEach((item) => {
+        let card = document.createElement('div');
+        card.style.cssText = "background: #fff; padding: 12px; margin-bottom: 12px; border-radius: 8px; border: 1px solid #ddd;";
+        card.innerHTML = `
+            <p style="font-weight: bold; font-size: 15px; color: #333; margin-bottom: 8px;">${item.q}</p>
+            <div style="display: flex; gap: 8px; align-items: center; flex-wrap: wrap;">
+                <input type="text" placeholder="Masukkan jawapan..." style="padding: 7px; border: 1px solid #ccc; border-radius: 6px; flex: 1; font-size: 13px;">
+                <label style="background: #2ed573; color: white; padding: 7px 10px; border-radius: 6px; font-size: 12px; cursor: pointer; display: flex; align-items: center; gap: 4px;">
+                    📷 Snap Buku <input type="file" accept="image/*" capture="environment" style="display: none;" onchange="handleWorkingPhotoUpload(event, ${item.id})">
+                </label>
+            </div>
+        `;
+        listContainer.appendChild(card);
+    });
+    
+    document.getElementById('kategori-tambah-tolak-page').classList.add('hidden');
+    document.getElementById('single-category-page').classList.remove('hidden');
 }
 
 // ==========================================
