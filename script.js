@@ -450,34 +450,6 @@ function playWrongSound() {
     }
 }
 
-function bukaHalamanSoalan(kategoriKey) {
-    let data = bankSoalanTambah[kategoriKey];
-    
-    document.getElementById('category-title').innerText = data.title;
-    document.getElementById('category-guide-img').src = data.image;
-    
-    let listContainer = document.getElementById('category-questions-list');
-    listContainer.innerHTML = '';
-    
-    data.questions.forEach((item) => {
-        let card = document.createElement('div');
-        card.style.cssText = "background: #fff; padding: 12px; margin-bottom: 12px; border-radius: 8px; border: 1px solid #ddd;";
-        card.innerHTML = `
-            <p style="font-weight: bold; font-size: 15px; color: #333; margin-bottom: 8px;">${item.q}</p>
-            <div style="display: flex; gap: 8px; align-items: center; flex-wrap: wrap;">
-                <input type="text" placeholder="Masukkan jawapan..." style="padding: 7px; border: 1px solid #ccc; border-radius: 6px; flex: 1; font-size: 13px;">
-                <label style="background: #2ed573; color: white; padding: 7px 10px; border-radius: 6px; font-size: 12px; cursor: pointer; display: flex; align-items: center; gap: 4px;">
-                    📷 Snap Buku <input type="file" accept="image/*" capture="environment" style="display: none;" onchange="handleWorkingPhotoUpload(event, ${item.id})">
-                </label>
-            </div>
-        `;
-        listContainer.appendChild(card);
-    });
-    
-    document.getElementById('kategori-tambah-tolak-page').classList.add('hidden');
-    document.getElementById('single-category-page').classList.remove('hidden');
-}
-
 // ==========================================
 // BANK SOALAN DARJAH 3 (Level 1 hingga 20)
 // ==========================================
@@ -702,11 +674,15 @@ for (let i = 18; i <= 20; i++) {
     }
 }
 
-// Bank soalan dipecahkan mengikut kategori
+// ==========================================
+// MODUL JALAN KIRA TAMBAH & TOLAK (SNAP BUKU)
+// ==========================================
+
+// 1. Bank soalan dipecahkan mengikut kategori bentuk lazim tambah
 const bankSoalanTambah = {
     "tanpa-mengumpul": {
         title: "Bentuk Lazim Tambah (Tanpa Mengumpul Semula)",
-        image: "background/Images/IMG_8750.jpeg", //[span_2](start_span)[span_2](end_span)
+        image: "background/Images/IMG_8750.jpeg",
         questions: [
             { id: 1, q: "1. 2,130 + 1,420 = ?", answer: "3,550" },
             { id: 2, q: "2. 3,214 + 2,341 = ?", answer: "5,555" },
@@ -717,7 +693,7 @@ const bankSoalanTambah = {
     },
     "mengumpul-semula": {
         title: "Bentuk Lazim Tambah (Mengumpul Semula)",
-        image: "background/Images/IMG_8743.jpeg", //[span_3](start_span)[span_3](end_span)
+        image: "background/Images/IMG_8743.jpeg",
         questions: [
             { id: 6, q: "1. 485 + 327 = ?", answer: "812" },
             { id: 7, q: "2. 768 + 154 = ?", answer: "922" },
@@ -728,13 +704,13 @@ const bankSoalanTambah = {
     }
 };
 
-// Fungsi apabila klik butang utama di menu
+// 2. Buka menu pilihan kategori tambah & tolak
 function openTambahTolakMenu() {
     document.getElementById('main-menu-page').classList.add('hidden');
     document.getElementById('kategori-tambah-tolak-page').classList.remove('hidden');
 }
 
-// Fungsi membuka senarai 5 soalan mengikut kategori yang dipilih
+// 3. Paparkan 5 soalan dalam 1 halaman berserta gambar rujukan & butang snap
 function bukaHalamanSoalan(kategoriKey) {
     let data = bankSoalanTambah[kategoriKey];
     
@@ -750,11 +726,12 @@ function bukaHalamanSoalan(kategoriKey) {
         card.innerHTML = `
             <p style="font-weight: bold; font-size: 15px; color: #333; margin-bottom: 8px;">${item.q}</p>
             <div style="display: flex; gap: 8px; align-items: center; flex-wrap: wrap;">
-                <input type="text" placeholder="Masukkan jawapan..." style="padding: 7px; border: 1px solid #ccc; border-radius: 6px; flex: 1; font-size: 13px;">
+                <input type="text" id="ans-${item.id}" placeholder="Masukkan jawapan..." style="padding: 7px; border: 1px solid #ccc; border-radius: 6px; flex: 1; font-size: 13px;">
                 <label style="background: #2ed573; color: white; padding: 7px 10px; border-radius: 6px; font-size: 12px; cursor: pointer; display: flex; align-items: center; gap: 4px;">
-                    📷 Snap Buku <input type="file" accept="image/*" capture="environment" style="display: none;" onchange="alert('Gambar jalan kerja berjaya direkod!')">
+                    📷 Snap Buku <input type="file" accept="image/*" capture="environment" style="display: none;" onchange="handleWorkingPhotoUpload(event, ${item.id})">
                 </label>
             </div>
+            <div id="status-${item.id}" style="margin-top: 5px; font-size: 12px; color: #2e8b57; font-weight: bold;"></div>
         `;
         listContainer.appendChild(card);
     });
@@ -763,7 +740,45 @@ function bukaHalamanSoalan(kategoriKey) {
     document.getElementById('single-category-page').classList.remove('hidden');
 }
 
-// Fungsi navigasi kembali
+// 4. Proses gambar snap pelajar jadi Base64 dan simpan terus ke Firestore
+async function handleWorkingPhotoUpload(event, questionId) {
+    let file = event.target.files[0];
+    if (!file) return;
+
+    let statusDiv = document.getElementById(`status-${questionId}`);
+    if (statusDiv) statusDiv.innerHTML = "⏳ Sedang merekod gambar ke pangkalan data...";
+
+    let reader = new FileReader();
+    reader.onload = async function(uploadEvent) {
+        let base64ImageString = uploadEvent.target.result; 
+        
+        try {
+            let studentName = studentData.name || localStorage.getItem('currentStudentName') || 'Pelajar';
+            let categoryTitle = document.getElementById('category-title').innerText;
+            let inputField = document.getElementById(`ans-${questionId}`);
+            let userAnswer = inputField ? inputField.value : "";
+
+            // Simpan ke Firestore (koleksi "rekod_jalan_kerja")
+            await window.addDoc(window.collection(window.db, "rekod_jalan_kerja"), {
+                namaPelajar: studentName,
+                kategori: categoryTitle,
+                soalanId: questionId,
+                jawapanTeks: userAnswer,
+                gambarJalanKerja: base64ImageString, 
+                tarikhMasa: new Date().toLocaleString()
+            });
+
+            if (statusDiv) statusDiv.innerHTML = "✅ Gambar jalan kerja berjaya disimpan!";
+        } catch (error) {
+            console.error("Ralat menyimpan:", error);
+            if (statusDiv) statusDiv.innerHTML = "❌ Gagal menyimpan gambar. Sila cuba lagi.";
+        }
+    };
+    
+    reader.readAsDataURL(file);
+}
+
+// 5. Fungsi-fungsi navigasi butang kembali
 function backToKategoriMenu() {
     document.getElementById('single-category-page').classList.add('hidden');
     document.getElementById('kategori-tambah-tolak-page').classList.remove('hidden');
