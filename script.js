@@ -8,19 +8,32 @@ let isPiawaianMode = false;
 let currentPiawaianLevel = 1; // Kalau nak bahagikan kepada Bahagian A, B, C
 
 // ==========================================
-// FUNGSI NAVIGASI HALAMAN
+// FUNGSI NAVIGASI HALAMAN (DIKEMASKINI)
 // ==========================================
 
 function showLoginPage(e) {
     if (e) e.preventDefault();
-    document.getElementById('register-page').classList.add('hidden');
-    document.getElementById('login-page').classList.remove('hidden');
+    
+    let regPage = document.getElementById('register-page');
+    let loginPage = document.getElementById('login-page');
+    
+    if (regPage) regPage.classList.add('hidden');
+    if (loginPage) loginPage.classList.remove('hidden');
+    
+    // Pastikan skrin dinaikkan ke atas semula secara kemas
+    window.scrollTo(0, 0);
 }
 
 function showRegisterPage(e) {
     if (e) e.preventDefault();
-    document.getElementById('login-page').classList.add('hidden');
-    document.getElementById('register-page').classList.remove('hidden');
+    
+    let loginPage = document.getElementById('login-page');
+    let regPage = document.getElementById('register-page');
+    
+    if (loginPage) loginPage.classList.add('hidden');
+    if (regPage) regPage.classList.remove('hidden');
+    
+    window.scrollTo(0, 0);
 }
 
 function showMainMenu() {
