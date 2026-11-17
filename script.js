@@ -241,10 +241,6 @@ async function submitAllAnswers() {
         alert("❌ Gagal menghantar data. Sila semak sambungan internet anda.");
     }
 }
-    
-    // Baca fail imej sebagai Data URL (Base64)
-    reader.readAsDataURL(file);
-}
 
 function logout() {
     studentData = { name: '', email: '' };
