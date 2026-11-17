@@ -637,6 +637,78 @@ for (let i = 18; i <= 20; i++) {
     }
 }
 
+// Bank soalan dipecahkan mengikut kategori
+const bankSoalanTambah = {
+    "tanpa-mengumpul": {
+        title: "Bentuk Lazim Tambah (Tanpa Mengumpul Semula)",
+        image: "background/Images/IMG_8742.jpeg", //[span_2](start_span)[span_2](end_span)
+        questions: [
+            { id: 1, q: "1. 2,130 + 1,420 = ?", answer: "3,550" },
+            { id: 2, q: "2. 3,214 + 2,341 = ?", answer: "5,555" },
+            { id: 3, q: "3. 4,052 + 1,324 = ?", answer: "5,376" },
+            { id: 4, q: "4. 5,123 + 3,462 = ?", answer: "8,585" },
+            { id: 5, q: "5. 6,301 + 2,154 = ?", answer: "8,455" }
+        ]
+    },
+    "mengumpul-semula": {
+        title: "Bentuk Lazim Tambah (Mengumpul Semula)",
+        image: "background/Images/IMG_8743.jpeg", //[span_3](start_span)[span_3](end_span)
+        questions: [
+            { id: 6, q: "1. 485 + 327 = ?", answer: "812" },
+            { id: 7, q: "2. 768 + 154 = ?", answer: "922" },
+            { id: 8, q: "3. 2,456 + 1,278 = ?", answer: "3,734" },
+            { id: 9, q: "4. 3,892 + 1,234 = ?", answer: "5,126" },
+            { id: 10, q: "5. 5,679 + 2,345 = ?", answer: "8,024" }
+        ]
+    }
+};
+
+// Fungsi apabila klik butang utama di menu
+function openTambahTolakMenu() {
+    document.getElementById('main-menu-page').classList.add('hidden');
+    document.getElementById('kategori-tambah-tolak-page').classList.remove('hidden');
+}
+
+// Fungsi membuka senarai 5 soalan mengikut kategori yang dipilih
+function bukaHalamanSoalan(kategoriKey) {
+    let data = bankSoalanTambah[kategoriKey];
+    
+    document.getElementById('category-title').innerText = data.title;
+    document.getElementById('category-guide-img').src = data.image;
+    
+    let listContainer = document.getElementById('category-questions-list');
+    listContainer.innerHTML = '';
+    
+    data.questions.forEach((item) => {
+        let card = document.createElement('div');
+        card.style.cssText = "background: #fff; padding: 12px; margin-bottom: 12px; border-radius: 8px; border: 1px solid #ddd;";
+        card.innerHTML = `
+            <p style="font-weight: bold; font-size: 15px; color: #333; margin-bottom: 8px;">${item.q}</p>
+            <div style="display: flex; gap: 8px; align-items: center; flex-wrap: wrap;">
+                <input type="text" placeholder="Masukkan jawapan..." style="padding: 7px; border: 1px solid #ccc; border-radius: 6px; flex: 1; font-size: 13px;">
+                <label style="background: #2ed573; color: white; padding: 7px 10px; border-radius: 6px; font-size: 12px; cursor: pointer; display: flex; align-items: center; gap: 4px;">
+                    📷 Snap Buku <input type="file" accept="image/*" capture="environment" style="display: none;" onchange="alert('Gambar jalan kerja berjaya direkod!')">
+                </label>
+            </div>
+        `;
+        listContainer.appendChild(card);
+    });
+    
+    document.getElementById('kategori-tambah-tolak-page').classList.add('hidden');
+    document.getElementById('single-category-page').classList.remove('hidden');
+}
+
+// Fungsi navigasi kembali
+function backToKategoriMenu() {
+    document.getElementById('single-category-page').classList.add('hidden');
+    document.getElementById('kategori-tambah-tolak-page').classList.remove('hidden');
+}
+
+function backToMainMenuFromKategori() {
+    document.getElementById('kategori-tambah-tolak-page').classList.add('hidden');
+    document.getElementById('main-menu-page').classList.remove('hidden');
+}
+
 // ==========================================
 // BANK SOALAN SILIBUS MATEMATIK TAHUN 2 (Level 1 hingga 14)
 // ==========================================
