@@ -162,37 +162,85 @@ async function handleLogin(e) {
 }
 
 // Fungsi untuk memproses gambar yang disnap pelajar menjadi Base64 & simpan ke Firestore
-async function handleWorkingPhotoUpload(event, questionId) {
+let studentWorkingPhotos = {}; // Simpan sementara imej yang disnap
+
+// Fungsi mengecilkan saiz imej secara automatik sebelum disimpan
+function compressAndStorePhoto(event, questionId) {
     let file = event.target.files[0];
     if (!file) return;
 
-    // Paparkan status sedang memproses
-    alert("Sila tunggu sebentar, sedang memproses dan merekod gambar jalan kerja...");
+    let statusDiv = document.getElementById(`status-${questionId}`);
+    if (statusDiv) statusDiv.innerHTML = "⏳ Sedang memproses gambar...";
 
     let reader = new FileReader();
-    reader.onload = async function(uploadEvent) {
-        let base64ImageString = uploadEvent.target.result; // Kod teks imej
-        
-        try {
-            // Ambil nama pelajar semasa (atau guna default jika tiada)
-            let studentName = localStorage.getItem('currentStudentName') || 'Pelajar Fiza';
-            let categoryTitle = document.getElementById('category-title').innerText;
+    reader.onload = function(uploadEvent) {
+        let img = new Image();
+        img.onload = function() {
+            let canvas = document.createElement('canvas');
+            let ctx = canvas.getContext('2d');
 
-            // Simpan terus ke dalam Firestore (koleksi "rekod_jalan_kerja")
+            let maxWidth = 600;
+            let maxHeight = 600;
+            let width = img.width;
+            let height = img.height;
+
+            if (width > height) {
+                if (width > maxWidth) { height *= maxWidth / width; width = maxWidth; }
+            } else {
+                if (height > maxHeight) { width *= maxHeight / height; height = maxHeight; }
+            }
+
+            canvas.width = width;
+            canvas.height = height;
+            ctx.drawImage(img, 0, 0, width, height);
+
+            let compressedBase64 = canvas.toDataURL('image/jpeg', 0.6);
+            studentWorkingPhotos[questionId] = compressedBase64;
+            
+            if (statusDiv) {
+                statusDiv.style.color = "#2e8b57";
+                statusDiv.innerHTML = "✅ Gambar jalan kerja siap direkod!";
+            }
+        };
+        img.src = uploadEvent.target.result;
+    };
+    reader.readAsDataURL(file);
+}
+
+// Fungsi hantar semua jawapan & gambar serentak apabila tekan butang hantar
+async function submitAllAnswers() {
+    let studentName = studentData.name || localStorage.getItem('currentStudentName') || 'Pelajar';
+    let categoryTitle = document.getElementById('category-title').innerText;
+
+    alert("⏳ Sedang menghantar jawapan dan jalan kerja ke pangkalan data...");
+
+    try {
+        let activeQuestions = bankSoalanTambah[Object.keys(bankSoalanTambah).find(key => bankSoalanTambah[key].title === categoryTitle)]?.questions || [];
+
+        for (let item of activeQuestions) {
+            let inputField = document.getElementById(`ans-${item.id}`);
+            let userAnswer = inputField ? inputField.value.trim() : "";
+            let photoBase64 = studentWorkingPhotos[item.id] || "";
+
             await window.addDoc(window.collection(window.db, "rekod_jalan_kerja"), {
                 namaPelajar: studentName,
                 kategori: categoryTitle,
-                soalanId: questionId,
-                gambarJalanKerja: base64ImageString, // Simpan teks imej di sini
+                soalanId: item.id,
+                soalanTeks: item.q,
+                jawapanPelajar: userAnswer,
+                jawapanSebenar: item.answer,
+                gambarJalanKerja: photoBase64,
                 tarikhMasa: new Date().toLocaleString()
             });
-
-            alert("✅ Berjaya! Gambar jalan kerja telah direkodkan ke dalam pangkalan data.");
-        } catch (error) {
-            console.error("Ralat menyimpan ke Firestore:", error);
-            alert("❌ Gagal menyimpan gambar. Sila cuba lagi.");
         }
-    };
+
+        alert("🎉 Tahniah! Semua jawapan dan jalan kerja anda berjaya dihantar.");
+        backToKategoriMenu();
+    } catch (error) {
+        console.error("Ralat menghantar:", error);
+        alert("❌ Gagal menghantar data. Sila semak sambungan internet anda.");
+    }
+}
     
     // Baca fail imej sebagai Data URL (Base64)
     reader.readAsDataURL(file);
@@ -380,31 +428,64 @@ async function showHistoryModal() {
     document.getElementById('history-page').classList.remove('hidden');
 
     try {
-        const q = window.query(window.collection(window.db, "history"), window.where("email", "==", studentData.email));
-        const querySnapshot = await window.getDocs(q);
+        let studentName = studentData.name || localStorage.getItem('currentStudentName') || 'Pelajar';
+
+        // 1. Ambil sejarah kuiz biasa
+        const qHistory = window.query(window.collection(window.db, "history"), window.where("email", "==", studentData.email));
+        const historySnapshot = await window.getDocs(qHistory);
+
+        // 2. Ambil rekod jalan kerja tambah (berdasarkan nama pelajar)
+        const qJalanKerja = window.query(window.collection(window.db, "rekod_jalan_kerja"), window.where("namaPelajar", "==", studentName));
+        const jalanKerjaSnapshot = await window.getDocs(qJalanKerja);
 
         historyListDiv.innerHTML = '';
 
-        if (querySnapshot.empty) {
+        let totalRecords = historySnapshot.size + jalanKerjaSnapshot.size;
+        if (totalRecords === 0) {
             historyListDiv.innerHTML = '<p style="text-align: center; color: #666; padding: 20px 0;">Tiada rekod aktiviti lagi. Jom mula jawab soalan!</p>';
             return;
         }
 
-        let historyData = [];
-        querySnapshot.forEach((doc) => {
-            historyData.push(doc.data());
+        let combinedData = [];
+
+        // Masukkan data kuiz biasa
+        historySnapshot.forEach((doc) => {
+            let data = doc.data();
+            combinedData.push({
+                timestamp: data.timestamp || 0,
+                htmlContent: `
+                    <strong>🗓️ ${data.date}</strong><br>
+                    <span style="color: #2e7d32; font-weight: bold;">🏆 ${data.level}</span><br>
+                    <span style="color: #333; font-weight: 600;">${data.details}</span>
+                `
+            });
         });
 
-        historyData.sort((a, b) => b.timestamp - a.timestamp);
+        // Masukkan data jalan kerja bentuk lazim (beserta paparan gambar)
+        jalanKerjaSnapshot.forEach((doc) => {
+            let data = doc.data();
+            let imgTag = data.gambarJalanKerja ? `<br><img src="${data.gambarJalanKerja}" alt="Jalan Kerja" style="max-width: 100px; max-height: 100px; margin-top: 5px; border-radius: 6px; border: 1px solid #ccc;">` : '';
+            
+            combinedData.push({
+                timestamp: new Date(data.tarikhMasa).getTime() || 0,
+                htmlContent: `
+                    <strong>🗓️ ${data.tarikhMasa}</strong><br>
+                    <span style="color: #4e54c8; font-weight: bold;">📝 ${data.kategori}</span><br>
+                    <span style="color: #333;">Soalan ${data.soalanId}: ${data.soalanTeks || ''}</span><br>
+                    <span style="color: #009432; font-weight: bold;">Jawapan: ${data.jawapanPelajar || '-'} (Sebenar: ${data.jawapanSebenar})</span><br>
+                    <span style="font-size: 12px; color: #555;">📸 Jalan Kerja Buku:</span>${imgTag}
+                `
+            });
+        });
 
-        historyData.forEach((item) => {
+        // Susun ikut masa terkini ke terlama
+        combinedData.sort((a, b) => b.timestamp - a.timestamp);
+
+        // Paparkan ke dalam senarai
+        combinedData.forEach((item) => {
             let itemDiv = document.createElement('div');
             itemDiv.style.cssText = "background: #f8f9fa; border-left: 5px solid #4e54c8; padding: 12px 15px; margin-bottom: 10px; border-radius: 8px; font-size: 14px; box-shadow: 0 2px 4px rgba(0,0,0,0.05);";
-            itemDiv.innerHTML = `
-                <strong>🗓️ ${item.date}</strong><br>
-                <span style="color: #2e7d32; font-weight: bold;">🏆 ${item.level}</span><br>
-                <span style="color: #333; font-weight: 600;">${item.details}</span>
-            `;
+            itemDiv.innerHTML = item.htmlContent;
             historyListDiv.appendChild(itemDiv);
         });
 
@@ -704,6 +785,8 @@ const bankSoalanTambah = {
     }
 };
 
+let studentWorkingPhotos = {}; // Simpan sementara imej yang disnap
+
 // 2. Buka menu pilihan kategori tambah & tolak
 function openTambahTolakMenu() {
     document.getElementById('main-menu-page').classList.add('hidden');
@@ -713,6 +796,7 @@ function openTambahTolakMenu() {
 // 3. Paparkan 5 soalan dalam 1 halaman berserta gambar rujukan & butang snap
 function bukaHalamanSoalan(kategoriKey) {
     let data = bankSoalanTambah[kategoriKey];
+    studentWorkingPhotos = {}; // Reset memori gambar
     
     document.getElementById('category-title').innerText = data.title;
     document.getElementById('category-guide-img').src = data.image;
@@ -728,10 +812,10 @@ function bukaHalamanSoalan(kategoriKey) {
             <div style="display: flex; gap: 8px; align-items: center; flex-wrap: wrap;">
                 <input type="text" id="ans-${item.id}" placeholder="Masukkan jawapan..." style="padding: 7px; border: 1px solid #ccc; border-radius: 6px; flex: 1; font-size: 13px;">
                 <label style="background: #2ed573; color: white; padding: 7px 10px; border-radius: 6px; font-size: 12px; cursor: pointer; display: flex; align-items: center; gap: 4px;">
-                    📷 Snap Buku <input type="file" accept="image/*" capture="environment" style="display: none;" onchange="handleWorkingPhotoUpload(event, ${item.id})">
+                    📷 Snap Buku <input type="file" accept="image/*" capture="environment" style="display: none;" onchange="compressAndStorePhoto(event, ${item.id})">
                 </label>
             </div>
-            <div id="status-${item.id}" style="margin-top: 5px; font-size: 12px; color: #2e8b57; font-weight: bold;"></div>
+            <div id="status-${item.id}" style="margin-top: 5px; font-size: 12px; color: #666; font-weight: bold;">Belum ada gambar disnap.</div>
         `;
         listContainer.appendChild(card);
     });
@@ -740,45 +824,85 @@ function bukaHalamanSoalan(kategoriKey) {
     document.getElementById('single-category-page').classList.remove('hidden');
 }
 
-// 4. Proses gambar snap pelajar jadi Base64 dan simpan terus ke Firestore
-async function handleWorkingPhotoUpload(event, questionId) {
+// 4. Fungsi mengecilkan saiz imej secara automatik (Compress)
+function compressAndStorePhoto(event, questionId) {
     let file = event.target.files[0];
     if (!file) return;
 
     let statusDiv = document.getElementById(`status-${questionId}`);
-    if (statusDiv) statusDiv.innerHTML = "⏳ Sedang merekod gambar ke pangkalan data...";
+    if (statusDiv) statusDiv.innerHTML = "⏳ Sedang memproses gambar...";
 
     let reader = new FileReader();
-    reader.onload = async function(uploadEvent) {
-        let base64ImageString = uploadEvent.target.result; 
-        
-        try {
-            let studentName = studentData.name || localStorage.getItem('currentStudentName') || 'Pelajar';
-            let categoryTitle = document.getElementById('category-title').innerText;
-            let inputField = document.getElementById(`ans-${questionId}`);
-            let userAnswer = inputField ? inputField.value : "";
+    reader.onload = function(uploadEvent) {
+        let img = new Image();
+        img.onload = function() {
+            let canvas = document.createElement('canvas');
+            let ctx = canvas.getContext('2d');
 
-            // Simpan ke Firestore (koleksi "rekod_jalan_kerja")
-            await window.addDoc(window.collection(window.db, "rekod_jalan_kerja"), {
-                namaPelajar: studentName,
-                kategori: categoryTitle,
-                soalanId: questionId,
-                jawapanTeks: userAnswer,
-                gambarJalanKerja: base64ImageString, 
-                tarikhMasa: new Date().toLocaleString()
-            });
+            let maxWidth = 600;
+            let maxHeight = 600;
+            let width = img.width;
+            let height = img.height;
 
-            if (statusDiv) statusDiv.innerHTML = "✅ Gambar jalan kerja berjaya disimpan!";
-        } catch (error) {
-            console.error("Ralat menyimpan:", error);
-            if (statusDiv) statusDiv.innerHTML = "❌ Gagal menyimpan gambar. Sila cuba lagi.";
-        }
+            if (width > height) {
+                if (width > maxWidth) { height *= maxWidth / width; width = maxWidth; }
+            } else {
+                if (height > maxHeight) { width *= maxHeight / height; height = maxHeight; }
+            }
+
+            canvas.width = width;
+            canvas.height = height;
+            ctx.drawImage(img, 0, 0, width, height);
+
+            let compressedBase64 = canvas.toDataURL('image/jpeg', 0.6);
+            studentWorkingPhotos[questionId] = compressedBase64;
+            
+            if (statusDiv) {
+                statusDiv.style.color = "#2e8b57";
+                statusDiv.innerHTML = "✅ Gambar jalan kerja siap direkod!";
+            }
+        };
+        img.src = uploadEvent.target.result;
     };
-    
     reader.readAsDataURL(file);
 }
 
-// 5. Fungsi-fungsi navigasi butang kembali
+// 5. Fungsi hantar semua jawapan & gambar serentak apabila tekan butang hantar
+async function submitAllAnswers() {
+    let studentName = studentData.name || localStorage.getItem('currentStudentName') || 'Pelajar';
+    let categoryTitle = document.getElementById('category-title').innerText;
+
+    alert("⏳ Sedang menghantar jawapan dan jalan kerja ke pangkalan data...");
+
+    try {
+        let activeQuestions = bankSoalanTambah[Object.keys(bankSoalanTambah).find(key => bankSoalanTambah[key].title === categoryTitle)]?.questions || [];
+
+        for (let item of activeQuestions) {
+            let inputField = document.getElementById(`ans-${item.id}`);
+            let userAnswer = inputField ? inputField.value.trim() : "";
+            let photoBase64 = studentWorkingPhotos[item.id] || "";
+
+            await window.addDoc(window.collection(window.db, "rekod_jalan_kerja"), {
+                namaPelajar: studentName,
+                kategori: categoryTitle,
+                soalanId: item.id,
+                soalanTeks: item.q,
+                jawapanPelajar: userAnswer,
+                jawapanSebenar: item.answer,
+                gambarJalanKerja: photoBase64,
+                tarikhMasa: new Date().toLocaleString()
+            });
+        }
+
+        alert("🎉 Tahniah! Semua jawapan dan jalan kerja anda berjaya dihantar.");
+        backToKategoriMenu();
+    } catch (error) {
+        console.error("Ralat menghantar:", error);
+        alert("❌ Gagal menghantar data. Sila semak sambungan internet anda.");
+    }
+}
+
+// 6. Fungsi-fungsi navigasi butang kembali
 function backToKategoriMenu() {
     document.getElementById('single-category-page').classList.add('hidden');
     document.getElementById('kategori-tambah-tolak-page').classList.remove('hidden');
@@ -788,6 +912,7 @@ function backToMainMenuFromKategori() {
     document.getElementById('kategori-tambah-tolak-page').classList.add('hidden');
     document.getElementById('main-menu-page').classList.remove('hidden');
 }
+
 
 // ==========================================
 // BANK SOALAN SILIBUS MATEMATIK TAHUN 2 (Level 1 hingga 14)
