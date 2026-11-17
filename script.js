@@ -820,49 +820,6 @@ function bukaHalamanSoalan(kategoriKey) {
     document.getElementById('single-category-page').classList.remove('hidden');
 }
 
-// 4. Fungsi mengecilkan saiz imej secara automatik (Compress)
-function compressAndStorePhoto(event, questionId) {
-    let file = event.target.files[0];
-    if (!file) return;
-
-    let statusDiv = document.getElementById(`status-${questionId}`);
-    if (statusDiv) statusDiv.innerHTML = "⏳ Sedang memproses gambar...";
-
-    let reader = new FileReader();
-    reader.onload = function(uploadEvent) {
-        let img = new Image();
-        img.onload = function() {
-            let canvas = document.createElement('canvas');
-            let ctx = canvas.getContext('2d');
-
-            let maxWidth = 600;
-            let maxHeight = 600;
-            let width = img.width;
-            let height = img.height;
-
-            if (width > height) {
-                if (width > maxWidth) { height *= maxWidth / width; width = maxWidth; }
-            } else {
-                if (height > maxHeight) { width *= maxHeight / height; height = maxHeight; }
-            }
-
-            canvas.width = width;
-            canvas.height = height;
-            ctx.drawImage(img, 0, 0, width, height);
-
-            let compressedBase64 = canvas.toDataURL('image/jpeg', 0.6);
-            studentWorkingPhotos[questionId] = compressedBase64;
-            
-            if (statusDiv) {
-                statusDiv.style.color = "#2e8b57";
-                statusDiv.innerHTML = "✅ Gambar jalan kerja siap direkod!";
-            }
-        };
-        img.src = uploadEvent.target.result;
-    };
-    reader.readAsDataURL(file);
-}
-
 // 5. Fungsi hantar semua jawapan & gambar serentak apabila tekan butang hantar
 async function submitAllAnswers() {
     let studentName = studentData.name || localStorage.getItem('currentStudentName') || 'Pelajar';
