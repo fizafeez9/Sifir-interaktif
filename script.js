@@ -20,7 +20,6 @@ function showLoginPage(e) {
     if (regPage) regPage.classList.add('hidden');
     if (loginPage) loginPage.classList.remove('hidden');
     
-    // Pastikan skrin dinaikkan ke atas semula secara kemas
     window.scrollTo(0, 0);
 }
 
@@ -49,10 +48,28 @@ function showMainMenu() {
     document.body.classList.add('menu-active-bg');
 }
 
+// ---> 1. KOD DIUBAH DI SINI: Butang Latihan & Kefahaman dikosongkan (Akan Datang)
 function showLevelSelection() {
+    alert("🚀 Modul Latihan & Kefahaman akan datang!");
+}
+
+// ---> 2. KOD BARU DITAMBAH DI SINI: Untuk menyokong Silibus Tahun 3
+let isTahun3Mode = false; // Penanda mod Tahun 3
+
+function startTahun3Silibus() {
+    if (!studentData.name) {
+        alert("⚠️ Sila log masuk terlebih dahulu!");
+        logout();
+        return;
+    }
+
+    isTahun3Mode = true;
     isTahun2Mode = false;
-    document.getElementById('main-menu-page').classList.add('hidden');
-    document.getElementById('level-page').classList.remove('hidden');
+    isPiawaianMode = false;
+    
+    // Paparkan pilihan level bagi Tahun 3 (menggunakan levelsQuestions asal)
+    document.getElementById('silibus-page').classList.add('hidden');
+    document.getElementById('level-page').classList.remove('hidden'); // Papar senarai level (1-20) untuk Tahun 3
 }
 
 function startPiawaianSilibus() {
@@ -282,7 +299,11 @@ function selectLevel(lvl) {
         return;
     }
 
+    // ---> KOD DIUBAH DI SINI (Tetapkan mod Tahun 3 aktif)
+    isTahun3Mode = true;
     isTahun2Mode = false;
+    isPiawaianMode = false;
+    
     currentLevel = lvl;
     currentQuestionIndex = 0;
     scoreCount = 0;
@@ -290,6 +311,7 @@ function selectLevel(lvl) {
 
     document.getElementById('main-menu-page').classList.add('hidden');
     document.getElementById('level-page').classList.add('hidden');
+    document.getElementById('silibus-page').classList.add('hidden'); // Tambah baris ini supaya page sililibus tertutup kemas
     document.getElementById('game-page').classList.remove('hidden');
     
     loadQuestion();
@@ -317,33 +339,31 @@ function selectTahun2Level(lvl) {
 function loadQuestion() {
     let qData = currentLevelQuestions[currentQuestionIndex];
     
-    // --- GANTIKAN BAHAGIAN INI ---
     let modeTitle = "";
     if (typeof isPiawaianMode !== 'undefined' && isPiawaianMode) {
         modeTitle = `Kenalpasti Unit Piawaian`;
     } else if (isTahun2Mode) {
         modeTitle = `Tahun 2 - Level ${currentLevel}`;
+    } else if (isTahun3Mode) {
+        modeTitle = `Tahun 3 - Level ${currentLevel}`;
     } else {
         modeTitle = `Level ${currentLevel}`;
     }
-    // -----------------------------
     
     document.getElementById('current-stage-title').innerText = modeTitle;
     document.getElementById('question-counter').innerText = `Soalan ${currentQuestionIndex + 1}/${currentLevelQuestions.length}`;
     document.getElementById('question-text').innerText = qData.q;
     
-    // --- KOD UNTUK PAPAR ATAU SEMBUNYIKAN GAMBAR RAJAH ---
     let imgContainer = document.getElementById('question-image-container');
     let imgElement = document.getElementById('question-img');
     
     if (qData.image) {
         imgElement.src = qData.image;
-        imgContainer.classList.remove('hidden'); // Paparkan kotak gambar jika ada
+        imgContainer.classList.remove('hidden'); 
     } else {
-        imgContainer.classList.add('hidden'); // Sembunyikan jika tiada gambar
+        imgContainer.classList.add('hidden'); 
         imgElement.src = '';
     }
-    // ----------------------------------------------------
 
     let optionsContainer = document.getElementById('options-container');
     optionsContainer.innerHTML = '';
