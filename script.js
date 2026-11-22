@@ -811,8 +811,7 @@ const bankSoalanTambah = {
             { id: 9, q: "4. 3,892 + 1,234 = ?", answer: "5,126" },
             { id: 10, q: "5. 5,679 + 2,345 = ?", answer: "8,024" }
         ]
-    }
-};
+    },
 
     // ---> KOD BARU DITAMBAH DI SINI: BAHAGIAN A & BAHAGIAN B OPERASI TOLAK <---
     "tanpa-pinjaman": {
