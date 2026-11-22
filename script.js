@@ -814,6 +814,32 @@ const bankSoalanTambah = {
     }
 };
 
+    // ---> KOD BARU DITAMBAH DI SINI: BAHAGIAN A & BAHAGIAN B OPERASI TOLAK <---
+    "tanpa-pinjaman": {
+        title: "Bentuk Lazim Tolak (Tanpa Pinjaman)",
+        image: "background/Images/IMG_8984.jpeg", //[span_3](start_span)[span_3](end_span)
+        questions: [
+            { id: 11, q: "1. 5,896 - 2,341 = ?", answer: "3,555" }, //[span_4](start_span)[span_4](end_span)
+            { id: 12, q: "2. 7,645 - 4,120 = ?", answer: "3,525" }, //[span_5](start_span)[span_5](end_span)
+            { id: 13, q: "3. 8,973 - 3,521 = ?", answer: "5,452" }, //[span_6](start_span)[span_6](end_span)
+            { id: 14, q: "4. 14,689 - 11,234 = ?", answer: "3,455" }, //[span_7](start_span)[span_7](end_span)
+            { id: 15, q: "5. 29,854 - 16,423 = ?", answer: "13,431" } //[span_8](start_span)[span_8](end_span)
+        ]
+    },
+    "pinjaman-bersiri": {
+        title: "Bentuk Lazim Tolak (Pinjaman Bersiri)",
+        image: "background/Images/IMG_8986.jpeg", //[span_9](start_span)[span_9](end_span)
+        questions: [
+            { id: 16, q: "1. 400 - 156 = ?", answer: "244" }, //[span_10](start_span)[span_10](end_span)
+            { id: 17, q: "2. 800 - 347 = ?", answer: "453" }, //[span_11](start_span)[span_11](end_span)
+            { id: 18, q: "3. 3,000 - 1,245 = ?", answer: "1,755" }, //[span_12](start_span)[span_12](end_span)
+            { id: 19, q: "4. 7,000 - 2,683 = ?", answer: "4,317" }, //[span_13](start_span)[span_13](end_span)
+            { id: 20, q: "5. 20,000 - 4,568 = ?", answer: "15,432" } //[span_14](start_span)[span_14](end_span)
+        ]
+    } 
+};
+
+
 // 2. Buka menu pilihan kategori tambah & tolak
 function openTambahTolakMenu() {
     document.getElementById('main-menu-page').classList.add('hidden');
